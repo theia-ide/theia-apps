@@ -1,0 +1,13 @@
+{
+    "private": true,
+    "dependencies": {
+        "@theia/typescript": "next",
+        "@theia/navigator": "next",
+        "@theia/terminal": "next",
+        "@theia/outline-view": "next",
+        "@theia/preferences": "next"
+    },
+    "devDependencies": {
+        "@theia/cli": "next"
+    }
+}
