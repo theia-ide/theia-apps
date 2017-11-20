@@ -31,3 +31,4 @@ deploy:
     - docker push typefox/theia
   on:
     branch: master
+  skip_cleanup: true
