@@ -1,0 +1,33 @@
+sudo: required
+
+services:
+  - docker
+
+git:
+  depth: 1
+
+branches:
+  only:
+  - master
+
+language: generic
+
+env:
+  - NPM_TAG=latest
+  - NPM_TAG=next
+
+install:
+  - cd theia-docker
+  - IMAGE_TAG=typefox/theia:$(npm view "@theia/core@$NPM_TAG" version)
+  - echo $IMAGE_TAG
+  - docker pull "$IMAGE_TAG" || true
+  - docker build --build-arg "version=$NPM_TAG" . -t "$IMAGE_TAG" --cache-from "$IMAGE_TAG"
+  - docker tag "$IMAGE_TAG" "typefox/theia:$NPM_TAG"
+
+deploy:
+  provider: script
+  script:
+    - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+    - docker push typefox/theia
+  on:
+    branch: master
