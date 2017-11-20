@@ -24,11 +24,11 @@ install:
   - docker build --build-arg "version=$NPM_TAG" . -t "$IMAGE_TAG" --cache-from "$IMAGE_TAG"
   - docker tag "$IMAGE_TAG" "typefox/theia:$NPM_TAG"
 
+before_deploy:
+  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
 deploy:
   provider: script
-  script:
-    - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
-    - docker push typefox/theia
+  script: docker push typefox/theia
   on:
     branch: master
   skip_cleanup: true
