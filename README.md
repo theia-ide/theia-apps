@@ -1,4 +1,5 @@
 # Theia applications
+[![Build Status](https://travis-ci.org/theia-ide/theia-apps.svg?branch=master)](https://travis-ci.org/theia-ide/theia-apps)
 
 ## Theia Docker
 
