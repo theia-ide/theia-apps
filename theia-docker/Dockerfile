@@ -6,4 +6,4 @@ RUN yarn
 RUN npx theia build
 EXPOSE 3000
 ENTRYPOINT [ "npx" ]
-CMD theia start .
+CMD theia start . --hostname=0.0.0.0
