@@ -11,7 +11,7 @@ Building the image for Theia tag:
 
 Running the image:
 
-    docker run -it -p 3000:3000 typefox/theia:v0.2.1
+    docker run -it -p 3000:3000 -v /myproject:/home/project typefox/theia:v0.2.1
 
 Building the next image:
 
