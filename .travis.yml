@@ -23,7 +23,7 @@ install:
   - docker pull "$IMAGE_TAG" || true
   - docker build --build-arg "version=$NPM_TAG" . -t "$IMAGE_TAG" --cache-from "$IMAGE_TAG"
   - docker tag "$IMAGE_TAG" "typefox/theia:$NPM_TAG"
-  - cd ../theia-docker-java
+  - cd ../theia-java-docker
   - IMAGE_TAG=typefox/theia-java:$(npm view "@theia/core@$NPM_TAG" version)
   - echo $IMAGE_TAG
   - docker pull "$IMAGE_TAG" || true
