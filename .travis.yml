@@ -2,6 +2,10 @@ sudo: required
 
 services:
   - docker
+  
+before_install:
+  - sudo apt-get update
+  - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
 
 git:
   depth: 1
