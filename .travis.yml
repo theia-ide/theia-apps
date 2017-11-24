@@ -38,7 +38,7 @@ before_deploy:
   - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
 deploy:
   provider: script
-  script: docker push typefox/theia
+  script: docker push typefox/theia && docker push typefox/theia-java
   on:
     branch: master
   skip_cleanup: true
