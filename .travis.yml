@@ -17,28 +17,25 @@ branches:
 language: generic
 
 env:
-  - NPM_TAG=latest
-  - NPM_TAG=next
+  - NPM_TAG=latest IMAGE_NAME=theia
+  - NPM_TAG=next IMAGE_NAME=theia
+  - NPM_TAG=latest IMAGE_NAME=theia-java
+  - NPM_TAG=next IMAGE_NAME=theia-java
 
 install:
-  - cd theia-docker
-  - IMAGE_TAG=typefox/theia:$(npm view "@theia/core@$NPM_TAG" version)
+  - cd "$IMAGE_NAME-docker"
+  - IMAGE="typefox/$IMAGE_NAME"
+  - IMAGE_TAG="$IMAGE":$(npm view "@theia/core@$NPM_TAG" version)
   - echo $IMAGE_TAG
   - docker pull "$IMAGE_TAG" || true
   - docker build --build-arg "version=$NPM_TAG" . -t "$IMAGE_TAG" --cache-from "$IMAGE_TAG"
-  - docker tag "$IMAGE_TAG" "typefox/theia:$NPM_TAG"
-  - cd ../theia-java-docker
-  - IMAGE_TAG=typefox/theia-java:$(npm view "@theia/core@$NPM_TAG" version)
-  - echo $IMAGE_TAG
-  - docker pull "$IMAGE_TAG" || true
-  - docker build --build-arg "version=$NPM_TAG" . -t "$IMAGE_TAG" --cache-from "$IMAGE_TAG"
-  - docker tag "$IMAGE_TAG" "typefox/theia-java:$NPM_TAG"
+  - docker tag "$IMAGE_TAG" "$IMAGE:$NPM_TAG"
 
 before_deploy:
   - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
 deploy:
   provider: script
-  script: docker push typefox/theia && docker push typefox/theia-java
+  script: docker push "$IMAGE"
   on:
     branch: master
   skip_cleanup: true
