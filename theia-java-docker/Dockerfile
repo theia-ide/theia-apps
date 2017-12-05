@@ -23,5 +23,5 @@ ADD $version.package.json ./package.json
 RUN yarn
 RUN npx theia build
 EXPOSE 3000
-ENTRYPOINT [ "npx" ]
-CMD theia start /home/project --hostname=0.0.0.0 
+ENV SHELL /bin/bash
+ENTRYPOINT [ "npx", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]
