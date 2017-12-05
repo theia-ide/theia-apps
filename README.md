@@ -6,46 +6,46 @@
 This repo contains example Theia applications based on published Theia extension packages.
 
 - [Theia Docker](#theia-docker)
-  - [How to use `typefox/theia` image?](#how-to-use-typefoxtheia-image)
+  - [How to use `theiaide/theia` image?](#how-to-use-typefoxtheia-image)
   - [Image Variants](#image-variants)
-    - [`typefox/theia:latest`](#typefoxtheialatest)
-    - [`typefox/theia:<version>`](#typefoxtheiaversion)
-    - [`typefox/theia:next`](#typefoxtheianext)
-    - [`typefox/theia:<version>-next.<commit hash>`](#typefoxtheiaversion-nextcommit-hash)
+    - [`theiaide/theia:latest`](#typefoxtheialatest)
+    - [`theiaide/theia:<version>`](#typefoxtheiaversion)
+    - [`theiaide/theia:next`](#typefoxtheianext)
+    - [`theiaide/theia:<version>-next.<commit hash>`](#typefoxtheiaversion-nextcommit-hash)
 - [Theia Desktop](#theia-desktop)
 - [Contributing](CONTRIBUTING.md)
 - [License](#license)
 
 ## Theia Docker
 
-[![dockeri.co](http://dockeri.co/image/typefox/theia)](https://hub.docker.com/r/typefox/theia/)
+[![dockeri.co](http://dockeri.co/image/theiaide/theia)](https://hub.docker.com/r/theiaide/theia/)
 
-`typefox/theia` image contains an example of Theia based IDE for Web Developers.
+`theiaide/theia` image contains an example of Theia based IDE for Web Developers.
 
-### How to use `typefox/theia` image?
+### How to use `theiaide/theia` image?
 
-At the moment Theia is still in [the active development](https://github.com/theia-ide/theia#roadmap). It is recomended to use [`typefox/theia:next`](#typefoxtheianext) image to have a look at the current state.
+At the moment Theia is still in [the active development](https://github.com/theia-ide/theia#roadmap). It is recomended to use [`theiaide/theia:next`](#typefoxtheianext) image to have a look at the current state.
 
 This script pulls the image and runs Theia IDE on http://localhost:3000 with the current directory as a workspace.
 
-    docker pull typefox/theia:next
-    docker run -it -p 3000:3000 -v "$(pwd):/home/project" typefox/theia:next
+    docker pull theiaide/theia:next
+    docker run -it -p 3000:3000 -v "$(pwd):/home/project:cached" theiaide/theia:next
 
 ### Image Variants
 
-#### `typefox/theia:latest`
+#### `theiaide/theia:latest`
 
 This image is based on the latest stable released version.
 
-#### `typefox/theia:<version>`
+#### `theiaide/theia:<version>`
 
 This image is based on the given stable released version.
 
-#### `typefox/theia:next`
+#### `theiaide/theia:next`
 
 This image is based on the nightly published version.
 
-#### `typefox/theia:<version>-next.<commit hash>`
+#### `theiaide/theia:<version>-next.<commit hash>`
 
 This image is based on the given nightly published version.
 
