@@ -24,7 +24,7 @@ env:
 
 install:
   - cd "$IMAGE_NAME-docker"
-  - IMAGE="typefox/$IMAGE_NAME"
+  - IMAGE="theiaide/$IMAGE_NAME"
   - IMAGE_TAG="$IMAGE":$(npm view "@theia/core@$NPM_TAG" version)
   - echo $IMAGE_TAG
   - docker pull "$IMAGE_TAG" || true
