@@ -31,6 +31,10 @@ This script pulls the image and runs Theia IDE on http://localhost:3000 with the
     docker pull theiaide/theia:next
     docker run -it -p 3000:3000 -v "$(pwd):/home/project:cached" theiaide/theia:next
 
+You can pass additional arguments to Theia after the image name, for example to enable debugging:
+
+    docker run -it -p 3000:3000 --expose 9229 -p 9229:9229 -v "$(pwd):/home/project:cached" theiaide/theia:next --inspect=0.0.0.0:9229
+
 ### Image Variants
 
 #### `theiaide/theia:latest`
