@@ -21,6 +21,8 @@ env:
   - NPM_TAG=next IMAGE_NAME=theia
   - NPM_TAG=latest IMAGE_NAME=theia-java
   - NPM_TAG=next IMAGE_NAME=theia-java
+  - NPM_TAG=latest IMAGE_NAME=theia-go
+  - NPM_TAG=next IMAGE_NAME=theia-go
 
 install:
   - cd "$IMAGE_NAME-docker"
