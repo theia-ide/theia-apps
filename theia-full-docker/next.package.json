@@ -1,0 +1,31 @@
+{
+    "private": true,
+    "dependencies": {
+        "@theia/core": "next",
+        "@theia/cpp": "next",
+        "@theia/editor": "next",
+        "@theia/extension-manager": "next",
+        "@theia/file-search": "next",
+        "@theia/filesystem": "next",
+        "@theia/git": "next",
+        "@theia/go": "next",
+        "@theia/java": "next",
+        "@theia/languages": "next",
+        "@theia/markers": "next",
+        "@theia/messages": "next",
+        "@theia/metrics": "next",
+        "@theia/monaco": "next",
+        "@theia/navigator": "next",
+        "@theia/outline-view": "next",
+        "@theia/preferences": "next",
+        "@theia/process": "next",
+        "@theia/python": "next",
+        "@theia/terminal": "next",
+        "@theia/typescript": "next",
+        "@theia/userstorage": "next",
+        "theia-yang-extension": "latest"
+    },
+    "devDependencies": {
+        "@theia/cli": "next"
+    }
+}
