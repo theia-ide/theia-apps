@@ -25,4 +25,7 @@ RUN yarn
 RUN npx theia build
 EXPOSE 3000
 ENV SHELL /bin/bash
+RUN mkdir /root/.go
+RUN echo '{"toolsGopath":"/root/go"}' > /root/.go/go.json
+ENV GOPATH /home/project
 ENTRYPOINT [ "npx", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]
