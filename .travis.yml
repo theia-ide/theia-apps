@@ -30,7 +30,7 @@ install:
   - IMAGE_TAG="$IMAGE":$(npm view "@theia/core@$NPM_TAG" version)
   - echo $IMAGE_TAG
   - docker pull "$IMAGE_TAG" || true
-  - docker build --build-arg "version=$NPM_TAG" . -t "$IMAGE_TAG" --no-cache
+  - travis_wait docker build --build-arg "version=$NPM_TAG" . -t "$IMAGE_TAG" --no-cache
   - docker tag "$IMAGE_TAG" "$IMAGE:$NPM_TAG"
 
 before_deploy:
