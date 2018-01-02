@@ -1,0 +1,21 @@
+{
+    "private": true,
+    "dependencies": {
+        "@theia/core": "latest",
+        "@theia/editor": "latest",
+        "@theia/filesystem": "latest",        "@theia/git": "latest",
+        "@theia/languages": "latest",
+        "@theia/markers": "latest",
+        "@theia/monaco": "latest",
+        "@theia/navigator": "latest",
+        "@theia/preferences": "latest",
+        "@theia/process": "latest",
+        "@theia/terminal": "latest",
+        "@theia/typescript": "latest",
+        "@theia/workspace": "latest",
+        "theia-yang-extension": "latest"
+    },
+    "devDependencies": {
+        "@theia/cli": "latest"
+	}
+}
