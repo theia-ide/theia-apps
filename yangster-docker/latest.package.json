@@ -3,7 +3,8 @@
     "dependencies": {
         "@theia/core": "latest",
         "@theia/editor": "latest",
-        "@theia/filesystem": "latest",        "@theia/git": "latest",
+		"@theia/filesystem": "latest",        
+		"@theia/git": "latest",
         "@theia/languages": "latest",
         "@theia/markers": "latest",
         "@theia/monaco": "latest",
