@@ -20,8 +20,9 @@ USER theia
 
 ARG version=latest
 ADD $version.package.json ./package.json
-RUN yarn
-RUN npx theia build
+RUN yarn --cache-folder ./ycache
+RUN rm -rf ./ycache
+RUN yarn theia build
 EXPOSE 3000
 ENV SHELL /bin/bash
-ENTRYPOINT [ "npx", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]
+ENTRYPOINT [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]
