@@ -116,8 +116,7 @@ RUN apt-get update && apt-get install -y python build-essential
 ARG version=latest
 WORKDIR /home/theia
 ADD $version.package.json ./package.json
-RUN yarn --cache-folder ./ycache
-RUN rm -rf ./ycache
+RUN yarn --cache-folder ./ycache && rm -rf ./ycache
 RUN yarn theia build
 EXPOSE 3000
 ENV SHELL /bin/bash
