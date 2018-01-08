@@ -1,17 +1,18 @@
-FROM node:8
-RUN echo 'deb http://httpredir.debian.org/debian/ jessie-backports main' >> /etc/apt/sources.list \
-  && apt-get update \
-  && apt-get install -y --no-install-recommends -t jessie-backports \
-  openjdk-8-jre-headless \
-  ca-certificates-java \
-  openjdk-8-jdk \
-  unzip \
-  && update-java-alternatives -s java-1.8.0-openjdk-amd64
+FROM node:8-alpine
+RUN apk add --no-cache make gcc g++ python
 ARG version=latest
 WORKDIR /home/theia
 ADD $version.package.json ./package.json
-RUN yarn --cache-folder ./ycache && rm -rf ./ycache
-RUN yarn theia build
+RUN yarn && \
+    yarn theia build && \
+    rm -rf ./node_modules/electron && \
+    yarn cache clean
+
+FROM node:8-alpine
+RUN apk add --no-cache git openssh bash openjdk8 unzip
+WORKDIR /home/theia
+COPY --from=0 /home/theia /home/theia
 EXPOSE 3000
 ENV SHELL /bin/bash
+ENV USE_LOCAL_GIT true
 ENTRYPOINT [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]
