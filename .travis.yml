@@ -22,6 +22,7 @@ env:
   - NPM_TAG=latest IMAGE_NAME=theia-java
   - NPM_TAG=next IMAGE_NAME=theia-java
   - NPM_TAG=latest IMAGE_NAME=theia-go
+  - NPM_TAG=next IMAGE_NAME=theia-go
   - NPM_TAG=latest IMAGE_NAME=yangster
 
 install:
