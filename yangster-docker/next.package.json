@@ -10,6 +10,7 @@
         "@theia/monaco": "next",
         "@theia/navigator": "next",
         "@theia/preferences": "next",
+        "@theia/messages": "next",
         "@theia/process": "next",
         "@theia/terminal": "next",
         "@theia/typescript": "next",
