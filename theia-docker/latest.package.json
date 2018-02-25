@@ -6,9 +6,13 @@
         "@theia/terminal": "latest",
         "@theia/outline-view": "latest",
         "@theia/preferences": "latest",
+        "@theia/messages": "latest",
         "@theia/git": "latest",
         "@theia/file-search": "latest",
-        "@theia/markers": "latest"
+        "@theia/markers": "latest",
+        "@theia/preview": "latest",
+        "@theia/callhierarchy": "latest",
+        "@theia/merge-conflicts": "latest"
     },
     "devDependencies": {
         "@theia/cli": "latest"
