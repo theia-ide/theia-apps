@@ -1,6 +1,8 @@
 FROM node:8-alpine
 RUN apk add --no-cache make gcc g++ python
 ARG version=latest
+RUN useradd -m theia
+USER theia
 WORKDIR /home/theia
 ADD $version.package.json ./package.json
 RUN yarn && \
