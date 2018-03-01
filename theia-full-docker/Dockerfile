@@ -91,6 +91,7 @@ RUN go get -u -v github.com/cweill/gotests/...
 RUN go get -u -v golang.org/x/tools/cmd/guru
 RUN go get -u -v github.com/josharian/impl
 RUN go get -u -v github.com/haya14busa/goplay/cmd/goplay
+RUN go get -u -v github.com/davidrjenni/reftools/cmd/fillstruct
 
 #Java
 RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
