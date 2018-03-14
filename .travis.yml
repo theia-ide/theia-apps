@@ -13,6 +13,7 @@ git:
 branches:
   only:
   - master
+  - chinodesuuu-repo
 
 language: generic
 
