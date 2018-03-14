@@ -123,6 +123,7 @@ EXPOSE 3000
 ENV SHELL /bin/bash
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 ENTRYPOINT [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]
 =======
 USER user
@@ -131,3 +132,6 @@ CMD [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]
 =======
 ENTRYPOINT [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]
 >>>>>>> e2ac289... revert prototype fixes
+=======
+ENTRYPOINT [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]
+>>>>>>> f293bd0... # This is a combination of 5 commits.

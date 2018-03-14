@@ -27,6 +27,7 @@ RUN yarn theia build
 # See : https://github.com/theia-ide/theia-apps/issues/34
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 RUN adduser --disabled-password --gecos '' theia
 =======
 RUN addgroup theia && \ 
@@ -35,6 +36,9 @@ RUN addgroup theia && \
 =======
 RUN adduser --disabled-password --gecos '' theia
 >>>>>>> 754fd5f... fix adduser for go image
+=======
+RUN adduser --disabled-password --gecos '' theia
+>>>>>>> f293bd0... # This is a combination of 5 commits.
 RUN chmod g+rw /home
 EXPOSE 3000
 ENV SHELL /bin/bash
