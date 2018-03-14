@@ -10,11 +10,6 @@ before_install:
 git:
   depth: 1
 
-branches:
-  only:
-  - master
-  - chinodesuuu-repo
-
 language: generic
 
 env:
