@@ -1,6 +1,7 @@
 {
     "private": true,
     "dependencies": {
+        "typescript": "latest",
         "@theia/typescript": "latest",
         "@theia/navigator": "latest",
         "@theia/terminal": "latest",
@@ -12,7 +13,8 @@
         "@theia/markers": "latest",
         "@theia/preview": "latest",
         "@theia/callhierarchy": "latest",
-        "@theia/merge-conflicts": "latest"
+        "@theia/merge-conflicts": "latest",
+        "@theia/search-in-workspace": "latest"
     },
     "devDependencies": {
         "@theia/cli": "latest"

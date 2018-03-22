@@ -1,6 +1,7 @@
 {
     "private": true,
     "dependencies": {
+        "typescript": "latest",
         "@theia/typescript": "next",
         "@theia/navigator": "next",
         "@theia/terminal": "next",
