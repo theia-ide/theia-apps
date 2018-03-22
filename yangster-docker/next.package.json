@@ -16,7 +16,8 @@
         "@theia/terminal": "next",
         "@theia/typescript": "next",
         "@theia/workspace": "next",
-        "theia-yang-extension": "next"
+        "theia-yang-extension": "next",
+        "@theia/search-in-workspace": "next"
     },
     "devDependencies": {
         "@theia/cli": "next"
