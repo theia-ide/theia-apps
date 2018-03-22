@@ -9,7 +9,8 @@
         "@theia/preferences": "next",
         "@theia/git": "next",
         "@theia/file-search": "next",
-        "@theia/markers": "next"
+        "@theia/markers": "next",
+        "@theia/search-in-workspace": "next"
     },
     "devDependencies": {
         "@theia/cli": "next"
