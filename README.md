@@ -28,7 +28,6 @@ At the moment Theia is still in [the active development](https://github.com/thei
 
 This script pulls the image and runs Theia IDE on http://localhost:3000 with the current directory as a workspace.
 
-    docker pull theiaide/theia:next
     docker run -it -p 3000:3000 -v "$(pwd):/home/project:cached" theiaide/theia:next
 
 You can pass additional arguments to Theia after the image name, for example to enable debugging:
