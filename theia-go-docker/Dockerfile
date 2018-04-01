@@ -19,6 +19,7 @@ RUN go get -u -v github.com/cweill/gotests/...
 RUN go get -u -v golang.org/x/tools/cmd/guru
 RUN go get -u -v github.com/josharian/impl
 RUN go get -u -v github.com/haya14busa/goplay/cmd/goplay
+RUN go get -u -v github.com/davidrjenni/reftools/cmd/fillstruct
 WORKDIR /home/theia
 ADD $version.package.json ./package.json
 RUN yarn --cache-folder ./ycache && rm -rf ./ycache

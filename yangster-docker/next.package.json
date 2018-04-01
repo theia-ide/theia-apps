@@ -1,6 +1,7 @@
 {
     "private": true,
     "dependencies": {
+        "typescript": "latest",
         "@theia/core": "next",
         "@theia/editor": "next",
 		"@theia/filesystem": "next",        
@@ -15,7 +16,8 @@
         "@theia/terminal": "next",
         "@theia/typescript": "next",
         "@theia/workspace": "next",
-        "theia-yang-extension": "next"
+        "theia-yang-extension": "next",
+        "@theia/search-in-workspace": "next"
     },
     "devDependencies": {
         "@theia/cli": "next"
