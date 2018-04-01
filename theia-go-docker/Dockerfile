@@ -24,9 +24,14 @@ WORKDIR /home/theia
 ADD $version.package.json ./package.json
 RUN yarn --cache-folder ./ycache && rm -rf ./ycache
 RUN yarn theia build
+# See : https://github.com/theia-ide/theia-apps/issues/34
+RUN addgroup theia && \ 
+    adduser -G theia -s /bin/sh -D theia;
+RUN chmod g+rw /home
 EXPOSE 3000
 ENV SHELL /bin/bash
 RUN mkdir /root/.go
 RUN echo '{"toolsGopath":"/root/go"}' > /root/.go/go.json
 ENV GOPATH /home/project
+USER theia
 ENTRYPOINT [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]
