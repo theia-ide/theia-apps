@@ -26,11 +26,15 @@ RUN yarn --cache-folder ./ycache && rm -rf ./ycache
 RUN yarn theia build
 # See : https://github.com/theia-ide/theia-apps/issues/34
 <<<<<<< HEAD
+<<<<<<< HEAD
 RUN adduser --disabled-password --gecos '' theia
 =======
 RUN addgroup theia && \ 
     adduser -G theia -s /bin/sh -D theia;
 >>>>>>> 9db6cb2... run theia as user
+=======
+RUN adduser --disabled-password --gecos '' theia
+>>>>>>> 754fd5f... fix adduser for go image
 RUN chmod g+rw /home
 EXPOSE 3000
 ENV SHELL /bin/bash
