@@ -106,24 +106,9 @@ RUN echo "deb http://apt.llvm.org/xenial/ llvm-toolchain-xenial main" > /etc/apt
 RUN apt-get update && apt-get install -y clang-tools-6.0
 RUN ln -s /usr/bin/clangd-6.0 /usr/bin/clangd
 
-#Python 2
-RUN apt-get update && apt-get install -y python python-pip && \
- pip install python-language-server;
- 
-#Python 3
-RUN add-apt-repository ppa:jonathonf/python-3.6 && \
-    apt-get install -y python3.6
-    
-#Developer tools
-
-## Git and sudo (sudo needed for user override)
-RUN sudo apt-get -y install git sudo
-
-#OpenShift compatibility
-## User account
-RUN adduser --disabled-password --gecos '' user && \
-    adduser user sudo && \
-    echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers;
+#Python
+RUN apt-get update && apt-get install -y python python-pip
+RUN pip install python-language-server
 
 #Theia
 ##Needed for node-gyp, nsfw build
@@ -137,8 +122,12 @@ RUN yarn theia build
 EXPOSE 3000
 ENV SHELL /bin/bash
 <<<<<<< HEAD
+<<<<<<< HEAD
 ENTRYPOINT [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]
 =======
 USER user
 CMD [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]
 >>>>>>> 1801a33... made some user overrides and added more stuff
+=======
+ENTRYPOINT [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]
+>>>>>>> e2ac289... revert prototype fixes
