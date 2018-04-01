@@ -14,6 +14,8 @@ RUN addgroup theia && \
     adduser -G theia -s /bin/sh -D theia;
 RUN chmod g+rw /home
 RUN apk add --no-cache git openssh bash
+# See : https://github.com/theia-ide/theia-apps/issues/29
+RUN npm i -g typescript
 WORKDIR /home/theia
 COPY --from=0 /home/theia /home/theia
 EXPOSE 3000
