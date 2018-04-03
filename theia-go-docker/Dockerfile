@@ -25,8 +25,7 @@ ADD $version.package.json ./package.json
 RUN yarn --cache-folder ./ycache && rm -rf ./ycache
 RUN yarn theia build
 # See : https://github.com/theia-ide/theia-apps/issues/34
-RUN addgroup theia && \ 
-    adduser -G theia -s /bin/sh -D theia;
+RUN adduser --disabled-password --gecos '' theia
 RUN chmod g+rw /home
 EXPOSE 3000
 ENV SHELL /bin/bash
