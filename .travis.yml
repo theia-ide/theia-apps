@@ -10,10 +10,6 @@ before_install:
 git:
   depth: 1
 
-branches:
-  only:
-  - master
-
 language: generic
 
 env:

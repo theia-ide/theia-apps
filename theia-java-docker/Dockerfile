@@ -13,7 +13,8 @@ RUN apt-get update && \
   echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
   apt-get update && apt-get install -y yarn && \
   rm -rf /var/lib/apt/lists/*
-
+# See : https://github.com/theia-ide/theia-apps/issues/34
+RUN chmod g+rw /home
 RUN useradd --create-home theia
 WORKDIR /home/theia
 USER theia

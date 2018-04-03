@@ -114,6 +114,10 @@ RUN pip install python-language-server
 ##Needed for node-gyp, nsfw build
 RUN apt-get update && apt-get install -y python build-essential
 
+## Needed for JavaScript/TypeScript support
+## See : https://github.com/theia-ide/theia-apps/issues/29
+RUN npm i -g typescript
+
 ARG version=latest
 WORKDIR /home/theia
 ADD $version.package.json ./package.json
