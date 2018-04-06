@@ -29,6 +29,7 @@ RUN yarn theia build
 <<<<<<< HEAD
 <<<<<<< HEAD
 RUN adduser --disabled-password --gecos '' theia
+<<<<<<< HEAD
 =======
 RUN addgroup theia && \ 
     adduser -G theia -s /bin/sh -D theia;
@@ -40,10 +41,15 @@ RUN adduser --disabled-password --gecos '' theia
 RUN adduser --disabled-password --gecos '' theia
 >>>>>>> f293bd0... # This is a combination of 5 commits.
 RUN chmod g+rw /home
+=======
+RUN chmod g+rw /home && \
+    mkdir -p /home/theia/project && \
+    chown -R theia:theia /home/theia-project;
+>>>>>>> b98a915... Update Dockerfile
 EXPOSE 3000
 ENV SHELL /bin/bash
 RUN mkdir /root/.go
 RUN echo '{"toolsGopath":"/root/go"}' > /root/.go/go.json
 ENV GOPATH /home/project
 USER theia
-ENTRYPOINT [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]
+ENTRYPOINT [ "yarn", "theia", "start", "/home/theia/project", "--hostname=0.0.0.0" ]
