@@ -44,8 +44,12 @@ RUN chmod g+rw /home
 =======
 RUN chmod g+rw /home && \
     mkdir -p /home/theia/project && \
+<<<<<<< HEAD
     chown -R theia:theia /home/theia-project;
 >>>>>>> b98a915... Update Dockerfile
+=======
+    chown -R theia:theia /home/theia/project;
+>>>>>>> e247444... I kinda hate my keyboard now
 EXPOSE 3000
 ENV SHELL /bin/bash
 RUN mkdir /root/.go
