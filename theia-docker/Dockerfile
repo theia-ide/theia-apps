@@ -14,10 +14,10 @@ RUN addgroup theia && \
     adduser -G theia -s /bin/sh -D theia;
 RUN chmod g+rw /home
 RUN apk add --no-cache git openssh bash
-WORKDIR /home/theia
+WORKDIR /home/theia/project
 COPY --from=0 /home/theia /home/theia
 EXPOSE 3000
 ENV SHELL /bin/bash
 ENV USE_LOCAL_GIT true
 USER theia
-ENTRYPOINT [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]
+ENTRYPOINT [ "yarn", "theia", "start", "/home/theia/project", "--hostname=0.0.0.0" ]
