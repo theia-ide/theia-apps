@@ -12,7 +12,9 @@ FROM node:8-alpine
 # See : https://github.com/theia-ide/theia-apps/issues/34
 RUN addgroup theia && \ 
     adduser -G theia -s /bin/sh -D theia;
-RUN chmod g+rw /home
+RUN chmod g+rw /home && \
+    mkdir /home/theia/project && \
+    chown theia:theia /home/theia/project;    
 RUN apk add --no-cache git openssh bash
 WORKDIR /home/theia/project
 COPY --from=0 /home/theia /home/theia
