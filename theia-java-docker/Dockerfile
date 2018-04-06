@@ -15,7 +15,9 @@ RUN apt-get update && \
   rm -rf /var/lib/apt/lists/*
 # See : https://github.com/theia-ide/theia-apps/issues/34
 RUN chmod g+rw /home
-RUN useradd --create-home theia
+RUN useradd --create-home theia && \
+    mkdir -p /home/theia/project && \
+    chown -R theia:theia /home/theia/project
 WORKDIR /home/theia
 USER theia
 
@@ -25,4 +27,4 @@ RUN yarn --cache-folder ./ycache && rm -rf ./ycache
 RUN yarn theia build
 EXPOSE 3000
 ENV SHELL /bin/bash
-ENTRYPOINT [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]
+ENTRYPOINT [ "yarn", "theia", "start", "/home/theia/project", "--hostname=0.0.0.0" ]
