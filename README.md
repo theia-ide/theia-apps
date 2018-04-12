@@ -6,12 +6,12 @@
 This repo contains example Theia applications based on published Theia extension packages.
 
 - [Theia Docker](#theia-docker)
-  - [How to use `theiaide/theia` image?](#how-to-use-typefoxtheia-image)
+  - [How to use `theiaide/theia` image?](#how-to-use-theiaidetheia-image)
   - [Image Variants](#image-variants)
-    - [`theiaide/theia:latest`](#typefoxtheialatest)
-    - [`theiaide/theia:<version>`](#typefoxtheiaversion)
-    - [`theiaide/theia:next`](#typefoxtheianext)
-    - [`theiaide/theia:<version>-next.<commit hash>`](#typefoxtheiaversion-nextcommit-hash)
+    - [`theiaide/theia:latest`](#theiaidetheialatest)
+    - [`theiaide/theia:<version>`](#theiaidetheiaversion)
+    - [`theiaide/theia:next`](#theiaidetheianext)
+    - [`theiaide/theia:<version>-next.<commit hash>`](#theiaidetheiaversion-nextcommit-hash)
 - [Theia Desktop](#theia-desktop)
 - [Contributing](CONTRIBUTING.md)
 - [License](#license)
