@@ -35,7 +35,7 @@ install:
   - docker tag "$IMAGE_TAG" "$IMAGE:$NPM_TAG"
 
 before_deploy:
-  - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 deploy:
   provider: script
   script: docker push "$IMAGE"
