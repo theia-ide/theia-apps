@@ -1,0 +1,8 @@
+#!/bin/bash 
+export HOME=/home/theia
+export USER_ID=$(id -u)
+export GROUP_ID=$(id -g)
+if [ -w /etc/passwd ]; then
+  echo "default:x:$(id -u):$(id -g):default user:${HOME}:/sbin/nologin" >> /etc/passwd
+fi
+exec "$@"
