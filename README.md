@@ -3,7 +3,7 @@
 
 [Theia](https://github.com/theia-ide/theia) is a platform to develop Cloud & Desktop IDEs with modern web technologies.
 
-This repo contains example Theia applications based on published Theia extension packages.
+This repository contains example Theia applications based on published Theia extension packages.
 
 - [Theia Docker](#theia-docker)
   - [How to use `theiaide/theia` image?](#how-to-use-theiaidetheia-image)
@@ -24,7 +24,7 @@ This repo contains example Theia applications based on published Theia extension
 
 ### How to use `theiaide/theia` image?
 
-At the moment Theia is still in [the active development](https://github.com/theia-ide/theia#roadmap). It is recomended to use [`theiaide/theia:next`](#typefoxtheianext) image to have a look at the current state.
+At the moment Theia is still in [the active development](https://github.com/theia-ide/theia#roadmap). It is recommended to use [`theiaide/theia:next`](#typefoxtheianext) image to have a look at the current state.
 
 This script pulls the image and runs Theia IDE on http://localhost:3000 with the current directory as a workspace.
 
