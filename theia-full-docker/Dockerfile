@@ -110,6 +110,13 @@ RUN ln -s /usr/bin/clangd-6.0 /usr/bin/clangd
 RUN apt-get update && apt-get install -y python python-pip
 RUN pip install python-language-server
 
+#Rust
+RUN curl https://sh.rustup.rs -sSf > /tmp/rustup.sh
+RUN chmod +x /tmp/rustup.sh && /tmp/rustup.sh -y
+ENV PATH=$PATH:/root/.cargo/bin
+RUN rustup update
+RUN rustup component add rls-preview rust-analysis rust-src
+
 #Theia
 ##Needed for node-gyp, nsfw build
 RUN apt-get update && apt-get install -y python build-essential

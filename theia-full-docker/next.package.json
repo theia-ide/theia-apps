@@ -21,6 +21,7 @@
         "@theia/preferences": "next",
         "@theia/process": "next",
         "@theia/python": "next",
+        "@theia/rust": "next",
         "@theia/terminal": "next",
         "@theia/typescript": "next",
         "@theia/userstorage": "next",
