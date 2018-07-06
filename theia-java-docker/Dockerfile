@@ -16,7 +16,7 @@ RUN apt-get update && \
 # See : https://github.com/theia-ide/theia-apps/issues/34
 RUN chmod g+rw /home
 RUN useradd --create-home theia && \
-    mkdir -p /home/theia/project && \
+    mkdir -p /home/project && \
     chown -R theia:theia /home/project
 WORKDIR /home/project
 USER theia
