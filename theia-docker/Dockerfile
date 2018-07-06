@@ -14,7 +14,7 @@ RUN addgroup theia && \
     adduser -G theia -s /bin/sh -D theia;
 RUN chmod g+rw /home && \
     mkdir -p /home/project && \
-    chown theia:theia /home/theia/project;    
+    chown theia:theia /home/project;    
 RUN apk add --no-cache git openssh bash
 WORKDIR /home/project
 COPY --from=0 /home/theia /home/theia
