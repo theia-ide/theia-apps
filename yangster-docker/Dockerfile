@@ -14,12 +14,12 @@ RUN apk add --no-cache git openssh bash openjdk8 unzip
 RUN addgroup theia && \ 
     adduser -G theia -s /bin/sh -D theia;
 RUN chmod g+rw /home && \
-    mkdir -p /home/theia/project && \
-    chown -R theia:theia /home/theia/project;
-WORKDIR /home/theia
+    mkdir -p /home/project && \
+    chown -R theia:theia /home/project;
+WORKDIR /home/project
 COPY --from=0 /home/theia /home/theia
 EXPOSE 3000
 ENV SHELL /bin/bash
 ENV USE_LOCAL_GIT true
 USER theia
-ENTRYPOINT [ "yarn", "theia", "start", "/home/theia/project", "--hostname=0.0.0.0" ]
+ENTRYPOINT [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]

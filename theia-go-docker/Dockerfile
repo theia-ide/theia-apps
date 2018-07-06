@@ -20,7 +20,7 @@ RUN go get -u -v golang.org/x/tools/cmd/guru
 RUN go get -u -v github.com/josharian/impl
 RUN go get -u -v github.com/haya14busa/goplay/cmd/goplay
 RUN go get -u -v github.com/davidrjenni/reftools/cmd/fillstruct
-WORKDIR /home/theia
+WORKDIR /home/project
 ADD $version.package.json ./package.json
 RUN yarn --cache-folder ./ycache && rm -rf ./ycache
 RUN yarn theia build
@@ -43,6 +43,7 @@ RUN adduser --disabled-password --gecos '' theia
 RUN chmod g+rw /home
 =======
 RUN chmod g+rw /home && \
+<<<<<<< HEAD
     mkdir -p /home/theia/project && \
 <<<<<<< HEAD
     chown -R theia:theia /home/theia-project;
@@ -50,10 +51,14 @@ RUN chmod g+rw /home && \
 =======
     chown -R theia:theia /home/theia/project;
 >>>>>>> e247444... I kinda hate my keyboard now
+=======
+    mkdir -p /home/project && \
+    chown -R theia:theia /home/project;
+>>>>>>> 4636a6f... apply fixes suggested by @akosyakov
 EXPOSE 3000
 ENV SHELL /bin/bash
 RUN mkdir /root/.go
 RUN echo '{"toolsGopath":"/root/go"}' > /root/.go/go.json
 ENV GOPATH /home/project
 USER theia
-ENTRYPOINT [ "yarn", "theia", "start", "/home/theia/project", "--hostname=0.0.0.0" ]
+ENTRYPOINT [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]

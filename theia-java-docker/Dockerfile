@@ -17,8 +17,8 @@ RUN apt-get update && \
 RUN chmod g+rw /home
 RUN useradd --create-home theia && \
     mkdir -p /home/theia/project && \
-    chown -R theia:theia /home/theia/project
-WORKDIR /home/theia
+    chown -R theia:theia /home/project
+WORKDIR /home/project
 USER theia
 
 ARG version=latest
@@ -27,4 +27,4 @@ RUN yarn --cache-folder ./ycache && rm -rf ./ycache
 RUN yarn theia build
 EXPOSE 3000
 ENV SHELL /bin/bash
-ENTRYPOINT [ "yarn", "theia", "start", "/home/theia/project", "--hostname=0.0.0.0" ]
+ENTRYPOINT [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]
