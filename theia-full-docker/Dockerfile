@@ -106,10 +106,22 @@ RUN echo "deb http://apt.llvm.org/xenial/ llvm-toolchain-xenial-6.0 main" > /etc
 RUN apt-get update && apt-get install -y clang-tools-6.0
 RUN ln -s /usr/bin/clangd-6.0 /usr/bin/clangd
 
-#Python
-RUN apt-get update && apt-get install -y python python-pip
-RUN pip install python-language-server
+#Python 2
+RUN apt-get update && apt-get install -y python python-pip && \
+ pip install python-language-server;
+    
+#Developer tools
 
+## Git and sudo (sudo needed for user override)
+RUN sudo apt-get -y install git sudo
+
+## User account
+RUN adduser --disabled-password --gecos '' user && \
+    adduser user sudo && \
+    echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers;
+RUN mkdir -p /home/user/project && \
+    chmod g+rw /home && \
+    chown -R user:user /home/user/project;
 #Theia
 ##Needed for node-gyp, nsfw build
 RUN apt-get update && apt-get install -y python build-essential
@@ -121,4 +133,27 @@ RUN yarn --cache-folder ./ycache && rm -rf ./ycache
 RUN yarn theia build
 EXPOSE 3000
 ENV SHELL /bin/bash
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 0ff8410... fix conflicts
 ENTRYPOINT [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]
+=======
+USER user
+<<<<<<< HEAD
+CMD [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]
+>>>>>>> 1801a33... made some user overrides and added more stuff
+<<<<<<< HEAD
+=======
+ENTRYPOINT [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]
+>>>>>>> e2ac289... revert prototype fixes
+=======
+ENTRYPOINT [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]
+>>>>>>> f293bd0... # This is a combination of 5 commits.
+=======
+>>>>>>> 0ff8410... fix conflicts
+=======
+CMD [ "yarn", "theia", "start", "/home/user/project", "--hostname=0.0.0.0" ]
+>>>>>>> 34eed16... fix full docker
