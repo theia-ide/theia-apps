@@ -14,7 +14,10 @@
         "@theia/preview": "next",
         "@theia/callhierarchy": "next",
         "@theia/merge-conflicts": "next",
-        "@theia/search-in-workspace": "next"
+        "@theia/search-in-workspace": "next",
+        "@theia/json": "next",
+        "@theia/textmate-grammars": "next",
+        "@theia/mini-browser": "next"
     },
     "devDependencies": {
         "@theia/cli": "next"
