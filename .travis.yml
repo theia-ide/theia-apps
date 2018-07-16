@@ -19,6 +19,12 @@ language: generic
 env:
   - NPM_TAG=latest IMAGE_NAME=theia
   - NPM_TAG=next IMAGE_NAME=theia
+  - NPM_TAG=latest IMAGE_NAME=theia-java
+  - NPM_TAG=next IMAGE_NAME=theia-java
+  - NPM_TAG=latest IMAGE_NAME=theia-go
+  - NPM_TAG=next IMAGE_NAME=theia-go
+  - NPM_TAG=latest IMAGE_NAME=yangster
+  - NPM_TAG=next IMAGE_NAME=yangster
 
 install:
   - cd "$IMAGE_NAME-docker"
@@ -41,24 +47,3 @@ notifications:
   on_success: change
   on_failure: always
   on_start: never
-
-jobs:
-  include:
-    - stage: java
-      env:
-        - NPM_TAG=latest IMAGE_NAME=theia-java
-    - stage: java
-      env:
-        - NPM_TAG=next IMAGE_NAME=theia-java
-    - stage: go
-      env:
-        - NPM_TAG=latest IMAGE_NAME=theia-go
-    - stage: go
-      env:
-        - NPM_TAG=next IMAGE_NAME=theia-go
-    - stage: yangster
-      env:
-        - NPM_TAG=latest IMAGE_NAME=yangster
-    - stage: yangster
-      env:
-        - NPM_TAG=next IMAGE_NAME=yangster
