@@ -3,6 +3,7 @@ RUN apk add --no-cache make gcc g++ python
 ARG version=latest
 WORKDIR /home/theia
 ADD $version.package.json ./package.json
+ARG GITHUB_TOKEN
 RUN yarn && \
     yarn theia build && \
     rm -rf ./node_modules/electron && \

@@ -20,6 +20,7 @@ USER theia
 
 ARG version=latest
 ADD $version.package.json ./package.json
+ARG GITHUB_TOKEN
 RUN yarn --cache-folder ./ycache && rm -rf ./ycache
 RUN yarn theia build
 EXPOSE 3000
