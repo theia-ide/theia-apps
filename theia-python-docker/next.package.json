@@ -11,7 +11,7 @@
         "@theia/git": "next",
         "@theia/file-search": "next",
         "@theia/markers": "next",
-        "@theia/textmate-grammars": "latest",
+        "@theia/textmate-grammars": "next",
         "@theia/search-in-workspace": "next"
     },
     "devDependencies": {
