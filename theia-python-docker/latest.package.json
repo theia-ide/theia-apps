@@ -10,6 +10,7 @@
         "@theia/git": "latest",
         "@theia/file-search": "latest",
         "@theia/markers": "latest",
+        "@theia/textmate-grammars": "latest",
         "@theia/search-in-workspace": "latest"
     },
     "devDependencies": {

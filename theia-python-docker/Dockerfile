@@ -1,7 +1,7 @@
 FROM node:8-stretch
 
 RUN apt-get update \
-    && apt-get install -y python python-dev py-pip \ 
+    && apt-get install -y python python-dev python-pip \ 
     && apt-get clean && rm -rf /var/cache/apt/* && rm -rf /var/lib/apt/lists/* && rm -rf /tmp/*
 
 RUN pip install \

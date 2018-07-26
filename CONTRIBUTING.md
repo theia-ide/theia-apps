@@ -35,4 +35,3 @@ Pulling images from Docker Hub:
     docker pull theiaide/theia
     docker pull theiaide/theia:v0.2.1
     docker pull theiaide/theia:next
-    
