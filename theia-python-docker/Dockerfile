@@ -6,10 +6,8 @@ RUN apt-get update \
 
 RUN pip install \
     python-language-server \
-    autopep8 \
-    pyflakes \
-    yapf \
-    mccabe
+    flake8 \
+    autopep8
 
 ARG version=latest
 
