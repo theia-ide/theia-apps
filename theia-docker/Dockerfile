@@ -4,7 +4,7 @@ ARG version=latest
 WORKDIR /home/theia
 ADD $version.package.json ./package.json
 ARG GITHUB_TOKEN
-RUN yarn && \
+RUN GITHUB_TOKEN=$GITHUB_TOKEN yarn && \
     yarn theia build && \
     rm -rf ./node_modules/electron && \
     yarn cache clean

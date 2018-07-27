@@ -118,7 +118,7 @@ ARG version=latest
 WORKDIR /home/theia
 ADD $version.package.json ./package.json
 ARG GITHUB_TOKEN
-RUN yarn --cache-folder ./ycache && rm -rf ./ycache
+RUN GITHUB_TOKEN=$GITHUB_TOKEN yarn --cache-folder ./ycache && rm -rf ./ycache
 RUN yarn theia build
 EXPOSE 3000
 ENV SHELL /bin/bash
