@@ -1,6 +1,7 @@
 {
     "private": true,
     "dependencies": {
+        "@theia/json": "latest",
         "@theia/python": "latest",
         "@theia/messages": "latest",
         "@theia/navigator": "latest",
