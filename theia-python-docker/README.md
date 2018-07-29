@@ -3,30 +3,17 @@
 ### Build latest
 
 ```bash
-docker build . -t theiaide/theia-python:latest
+docker build . -t theia-python:latest
 ```
 
 ### Build next
 
 ```bash
-docker build --build-arg version=next . -t theiaide/theia-python:next
+docker build --build-arg version=next . -t theia-python:next
 ```
 
 ### Run locally on Linux or OS X
 
 ```bash
-docker run -it -p 3000:3000 -v "$(pwd):/home/project" theiaide/theia-python:latest
-```
-
-### Push to Docker Hub
-
-```bash
-docker login
-docker push theiaide/theia-python:${VERSION}
-```
-
-### Pull the image from Docker Hub
-
-```
-docker pull theiaide/theia-python:${VERSION}
+docker run -it -p 3000:3000 -v "$(pwd):/home/project" theia-python:latest
 ```
