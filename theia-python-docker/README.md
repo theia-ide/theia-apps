@@ -3,7 +3,6 @@
 ### Build latest
 
 ```bash
-docker build . -t theiaide/theia-python:0.3.12
 docker build . -t theiaide/theia-python:latest
 ```
 
