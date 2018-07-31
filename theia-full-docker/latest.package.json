@@ -21,7 +21,6 @@
         "@theia/preferences": "latest",
         "@theia/process": "latest",
         "@theia/python": "latest",
-        "@theia/rust": "latest",
         "@theia/terminal": "latest",
         "@theia/typescript": "latest",
         "@theia/userstorage": "latest",
