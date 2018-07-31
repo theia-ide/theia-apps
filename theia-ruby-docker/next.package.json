@@ -1,0 +1,19 @@
+{
+    "private": true,
+    "dependencies": {
+        "@theia/ruby": "next",
+        "@theia/messages": "next",
+        "@theia/navigator": "next",
+        "@theia/terminal": "next",
+        "@theia/outline-view": "next",
+        "@theia/preferences": "next",
+        "@theia/monaco": "next",
+        "@theia/git": "next",
+        "@theia/file-search": "next",
+        "@theia/markers": "next",
+        "@theia/search-in-workspace": "next"
+    },
+    "devDependencies": {
+        "@theia/cli": "next"
+    }
+}

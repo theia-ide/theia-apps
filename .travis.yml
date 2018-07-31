@@ -25,6 +25,10 @@ env:
   - NPM_TAG=next IMAGE_NAME=theia-go
   - NPM_TAG=latest IMAGE_NAME=yangster
   - NPM_TAG=next IMAGE_NAME=yangster
+  - NPM_TAG=latest IMAGE_NAME=theia-python
+  - NPM_TAG=next IMAGE_NAME=theia-python
+  - NPM_TAG=latest IMAGE_NAME=theia-full
+  - NPM_TAG=next IMAGE_NAME=theia-full
 
 install:
   - cd "$IMAGE_NAME-docker"
@@ -47,3 +51,4 @@ notifications:
   on_success: change
   on_failure: always
   on_start: never
+  
