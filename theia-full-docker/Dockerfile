@@ -108,24 +108,28 @@ RUN ln -s /usr/bin/clangd-6.0 /usr/bin/clangd
 
 #Python 2
 RUN apt-get update && apt-get install -y python python-pip && \
- pip install python-language-server;
-    
+pip install python-language-server;
+
 #Developer tools
 
 ## Git and sudo (sudo needed for user override)
 RUN apt-get -y install git sudo
 
 ## User account
-RUN adduser --disabled-password --gecos '' user && \
-    adduser user sudo && \
-    echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers;
-RUN mkdir -p /home/user/project && \
-    chmod g+rw /home && \
-    chown -R user:user /home/user/project;
+RUN adduser --disabled-password --gecos '' theia && \
+  adduser theia sudo && \
+  echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers;
+
+RUN chmod g+rw /home && \
+  mkdir -p /home/project && \
+  chown -R theia:theia /home/theia && \
+  chown -R theia:theia /home/project;
+
 #Theia
 ##Needed for node-gyp, nsfw build
 RUN apt-get update && apt-get install -y python build-essential
 
+USER theia
 ARG version=latest
 WORKDIR /home/theia
 ADD $version.package.json ./package.json
@@ -134,5 +138,5 @@ RUN yarn --cache-folder ./ycache && rm -rf ./ycache
 RUN yarn theia build
 EXPOSE 3000
 ENV SHELL /bin/bash
-USER user
-CMD [ "yarn", "theia", "start", "/home/user/project", "--hostname=0.0.0.0" ]
+
+CMD [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]
