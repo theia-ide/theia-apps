@@ -24,7 +24,7 @@ This repository contains example Theia applications based on published Theia ext
 
 ### How to use `theiaide/theia` image?
 
-At the moment Theia is still in [the active development](https://github.com/theia-ide/theia#roadmap). It is recommended to use [`theiaide/theia:next`](#typefoxtheianext) image to have a look at the current state.
+At the moment Theia is still in [active development](https://github.com/theia-ide/theia#roadmap). It is recommended to use [`theiaide/theia:next`](#typefoxtheianext) image to have a look at the current state.
 
 This script pulls the image and runs Theia IDE on http://localhost:3000 with the current directory as a workspace.
 
