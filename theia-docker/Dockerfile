@@ -6,6 +6,8 @@ ADD $version.package.json ./package.json
 ARG GITHUB_TOKEN
 RUN yarn && \
     yarn theia build && \
+    rm -rf ./node_modules && \
+    yarn --production=true && \
     rm -rf ./node_modules/electron && \
     yarn cache clean
 
@@ -24,4 +26,4 @@ EXPOSE 3000
 ENV SHELL /bin/bash
 ENV USE_LOCAL_GIT true
 USER theia
-ENTRYPOINT [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]
+ENTRYPOINT [ "node", "./src-gen/backend/main.js", "/home/project", "--hostname=0.0.0.0" ]
