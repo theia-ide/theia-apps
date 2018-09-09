@@ -62,6 +62,11 @@ RUN set -ex \
   && ln -s /opt/yarn/bin/yarn /usr/local/bin/yarnpkg \
   && rm yarn-v$YARN_VERSION.tar.gz.asc yarn-v$YARN_VERSION.tar.gz
 
+#Developer tools
+
+## Git and sudo (sudo needed for user override)
+RUN apt-get -y install git sudo
+
 #LSPs
 
 ##GO
@@ -110,10 +115,19 @@ RUN ln -s /usr/bin/clangd-6.0 /usr/bin/clangd
 RUN apt-get update && apt-get install -y python python-pip && \
 pip install python-language-server;
 
-#Developer tools
+#PHP
+RUN apt-get -y install php curl php-cli php-mbstring unzip
 
-## Git and sudo (sudo needed for user override)
-RUN apt-get -y install git sudo
+# https://getcomposer.org/doc/faqs/how-to-install-composer-programmatically.md
+# https://linuxconfig.org/how-to-install-php-composer-on-debian-linux
+RUN curl -s -o composer-setup.php https://getcomposer.org/installer \
+    && php composer-setup.php --install-dir=/usr/local/bin --filename=composer \
+    && rm composer-setup.php
+
+#Ruby
+RUN apt-get -y install ruby ruby-dev zlib1g-dev
+RUN gem install solargraph
+
 
 ## User account
 RUN adduser --disabled-password --gecos '' theia && \
