@@ -74,7 +74,7 @@ RUN apt-get -y install git sudo
 #Required to use go get with git source
 RUN apt-get update && apt-get install -y git
 
-ENV GO_VERSION 1.9.2
+ENV GO_VERSION 1.9.4
 ENV GOPATH=/usr/local/go-packages
 ENV GO_ROOT=/usr/local/go
 ENV PATH $PATH:/usr/local/go/bin
