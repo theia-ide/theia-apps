@@ -13,7 +13,8 @@
         "@theia/file-search": "next",
         "@theia/markers": "next",
         "@theia/java": "next"   ,
-        "@theia/search-in-workspace": "next"     
+        "@theia/search-in-workspace": "next",
+        "@theia/json": "next"   
     },
     "devDependencies": {
         "@theia/cli": "next"

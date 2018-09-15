@@ -10,7 +10,8 @@
         "@theia/git": "next",
         "@theia/file-search": "next",
         "@theia/markers": "next",
-        "@theia/search-in-workspace": "next"
+        "@theia/search-in-workspace": "next",
+        "@theia/json": "next"
     },
     "devDependencies": {
         "@theia/cli": "next"

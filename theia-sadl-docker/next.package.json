@@ -6,6 +6,7 @@
         "@theia/file-search": "next",
         "@theia/filesystem": "next",
         "@theia/git": "next",
+        "@theia/json": "next",
         "@theia/languages": "next",
         "@theia/markers": "next",
         "@theia/merge-conflicts": "next",
