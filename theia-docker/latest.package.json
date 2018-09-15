@@ -15,6 +15,7 @@
         "@theia/callhierarchy": "latest",
         "@theia/merge-conflicts": "latest",
         "@theia/search-in-workspace": "latest",
+        "@theia/json": "latest",
         "@theia/textmate-grammars": "latest",
         "@theia/mini-browser": "latest"
     },

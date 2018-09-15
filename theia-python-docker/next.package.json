@@ -12,7 +12,8 @@
         "@theia/file-search": "next",
         "@theia/markers": "next",
         "@theia/textmate-grammars": "next",
-        "@theia/search-in-workspace": "next"
+        "@theia/search-in-workspace": "next",
+        "@theia/json": "next"
     },
     "devDependencies": {
         "@theia/cli": "next"

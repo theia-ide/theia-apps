@@ -11,7 +11,8 @@
         "@theia/file-search": "latest",
         "@theia/markers": "latest",
         "@theia/java": "latest",
-        "@theia/search-in-workspace": "latest"
+        "@theia/search-in-workspace": "latest",
+        "@theia/json": "latest"
     },
     "devDependencies": {
         "@theia/cli": "latest"
