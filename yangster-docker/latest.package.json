@@ -14,6 +14,7 @@
         "@theia/preferences": "latest",
         "@theia/process": "latest",
         "@theia/terminal": "latest",
+        "@theia/textmate-grammars": "latest",
         "@theia/typescript": "latest",
         "@theia/workspace": "latest",
         "theia-yang-extension": "latest",

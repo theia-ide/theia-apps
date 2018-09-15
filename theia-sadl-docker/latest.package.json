@@ -21,9 +21,9 @@
         "@theia/process": "latest",
         "@theia/search-in-workspace": "latest",
         "@theia/terminal": "latest",
+        "@theia/textmate-grammars": "latest",
         "@theia/userstorage": "latest",
         "@theia/workspace": "latest",
-        "@theia/json": "latest",
         "sadl-extension": "latest",
         "typescript": "latest"
     },

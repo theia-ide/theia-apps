@@ -12,7 +12,8 @@
         "@theia/markers": "latest",
         "@theia/java": "latest",
         "@theia/search-in-workspace": "latest",
-        "@theia/json": "latest"
+        "@theia/json": "latest",
+        "@theia/textmate-grammars": "latest"
     },
     "devDependencies": {
         "@theia/cli": "latest"
