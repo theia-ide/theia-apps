@@ -14,6 +14,7 @@
         "@theia/messages": "next",
         "@theia/process": "next",
         "@theia/terminal": "next",
+        "@theia/tslint": "next",
         "@theia/typescript": "next",
         "@theia/workspace": "next",
         "theia-yang-extension": "next",

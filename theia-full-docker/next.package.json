@@ -38,6 +38,7 @@
         "@theia/task": "next",
         "@theia/terminal": "next",
         "@theia/textmate-grammars": "next",
+        "@theia/tslint": "next",
         "@theia/typescript": "next",
         "@theia/userstorage": "next",
         "@theia/variable-resolver": "next",
