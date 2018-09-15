@@ -21,6 +21,7 @@
         "@theia/process": "next",
         "@theia/search-in-workspace": "next",
         "@theia/terminal": "next",
+        "@theia/textmate-grammars": "next",
         "@theia/userstorage": "next",
         "@theia/workspace": "next",
         "sadl-extension": "next",
