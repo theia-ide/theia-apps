@@ -30,7 +30,6 @@
         "@theia/preview": "latest",
         "@theia/process": "latest",
         "@theia/python": "latest",
-        "@theia/ruby": "latest",
         "@theia/rust": "latest",
         "@theia/search-in-workspace": "latest",
         "@theia/task": "latest",
