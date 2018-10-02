@@ -4,6 +4,8 @@
         "@theia/callhierarchy": "next",
         "@theia/core": "next",
         "@theia/cpp": "next",
+        "@theia/debug": "next",
+        "@theia/debug-nodejs": "next",
         "@theia/docker": "next",
         "@theia/editor": "next",
         "@theia/editorconfig": "next",

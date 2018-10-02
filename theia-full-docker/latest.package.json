@@ -4,6 +4,8 @@
         "@theia/callhierarchy": "latest",
         "@theia/core": "latest",
         "@theia/cpp": "latest",
+        "@theia/debug": "latest",
+        "@theia/debug-nodejs": "latest",
         "@theia/editor": "latest",
         "@theia/editorconfig": "latest",
         "@theia/file-search": "latest",
