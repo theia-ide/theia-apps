@@ -87,7 +87,7 @@ RUN go get -u -v github.com/nsf/gocode
 RUN go get -u -v github.com/rogpeppe/godef
 RUN go get -u -v golang.org/x/tools/cmd/godoc
 RUN go get -u -v github.com/zmb3/gogetdoc
-RUN go get -u -v github.com/golang/lint/golint
+RUN go get -u -v golang.org/x/lint/golint
 RUN go get -u -v github.com/fatih/gomodifytags
 RUN go get -u -v github.com/uudashr/gopkgs/cmd/gopkgs
 RUN go get -u -v golang.org/x/tools/cmd/gorename
