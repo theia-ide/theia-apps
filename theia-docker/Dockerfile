@@ -21,6 +21,7 @@ RUN chmod g+rw /home && \
     chown -R theia:theia /home/theia && \
     chown -R theia:theia /home/project;
 RUN apk add --no-cache git openssh bash
+ENV HOME /home/theia
 WORKDIR /home/theia
 COPY --from=0 /home/theia /home/theia
 EXPOSE 3000
