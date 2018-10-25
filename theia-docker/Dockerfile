@@ -19,11 +19,11 @@ RUN addgroup theia && \
 RUN chmod g+rw /home && \
     mkdir -p /home/project && \
     chown -R theia:theia /home/theia && \
-    chown -R theia:theia /home/project;
+    chown -R theia:theia /home/project;    
 RUN apk add --no-cache git openssh bash
 ENV HOME /home/theia
 WORKDIR /home/theia
-COPY --from=0 /home/theia /home/theia
+COPY --from=0 --chown=theia:theia /home/theia /home/theia
 EXPOSE 3000
 ENV SHELL /bin/bash
 ENV USE_LOCAL_GIT true
