@@ -28,4 +28,4 @@ EXPOSE 3000
 ENV SHELL /bin/bash
 ENV USE_LOCAL_GIT true
 USER theia
-ENTRYPOINT [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]
+CMD [ "node", "/home/theia/src-gen/backend/main.js", "/home/project", "--hostname=0.0.0.0" ]
