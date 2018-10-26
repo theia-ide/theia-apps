@@ -19,7 +19,7 @@ RUN addgroup theia && \
 RUN chmod g+rw /home && \
     mkdir -p /home/project && \
     chown -R theia:theia /home/theia && \
-    chown -R theia:theia /home/project;    
+    chown -R theia:theia /home/project;
 RUN apk add --no-cache git openssh bash
 ENV HOME /home/theia
 WORKDIR /home/theia
@@ -28,4 +28,4 @@ EXPOSE 3000
 ENV SHELL /bin/bash
 ENV USE_LOCAL_GIT true
 USER theia
-CMD [ "node", "/home/theia/src-gen/backend/main.js", "/home/project", "--hostname=0.0.0.0" ]
+ENTRYPOINT [ "node", "/home/theia/src-gen/backend/main.js", "/home/project", "--hostname=0.0.0.0" ]
