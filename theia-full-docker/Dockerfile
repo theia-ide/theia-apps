@@ -154,4 +154,4 @@ RUN yarn theia build
 EXPOSE 3000
 ENV SHELL /bin/bash
 
-CMD [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]
+ENTRYPOINT [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]
