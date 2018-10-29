@@ -156,4 +156,4 @@ RUN NODE_OPTIONS="--max_old_space_size=4096" yarn theia build
 EXPOSE 3000
 ENV SHELL /bin/bash
 
-CMD [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]
+ENTRYPOINT [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]
