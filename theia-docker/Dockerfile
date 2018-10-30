@@ -8,6 +8,9 @@ RUN yarn --pure-lockfile && \
     yarn theia build && \
     yarn --production && \
     yarn autoclean --init && \
+    echo *.ts >> .yarnclean && \
+    echo *.ts.map >> .yarnclean && \
+    echo *.spec.* >> .yarnclean && \
     yarn autoclean --force && \
     rm -rf ./node_modules/electron && \
     yarn cache clean
