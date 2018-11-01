@@ -1,0 +1,77 @@
+# test directories
+__tests__
+test
+tests
+powered-test
+
+# asset directories
+docs
+doc
+website
+images
+assets
+
+# examples
+example
+examples
+
+# code coverage directories
+coverage
+.nyc_output
+
+# build scripts
+Makefile
+Gulpfile.js
+Gruntfile.js
+
+# configs
+appveyor.yml
+circle.yml
+codeship-services.yml
+codeship-steps.yml
+wercker.yml
+.tern-project
+.gitattributes
+.editorconfig
+.*ignore
+.eslintrc
+.jshintrc
+.flowconfig
+.documentup.json
+.yarn-metadata.json
+.travis.yml
+tsconfig.json
+
+# md ts ts.map spec and theia src folders
+*.md
+*.ts
+*.tsx
+*.ts.map
+*.js.map
+*.spec.*
+@theia/**/src
+
+
+# files that are already on bundle.js
+electron*
+@theia/**/lib/browser
+@phosphor
+react*
+onigasm
+oniguruma
+@theia/monaco
+monaco-html
+monaco-css
+font-awesome
+@typefox/monaco-editor-core
+@theia/terminal/node_modules/xterm/dist/xterm.js
+
+# licenses
+LICENSE
+LICENSE.txt
+ThirdPartyNotices.txt
+
+# yarn/npm files
+.yarn-integrity
+yarn.lock
+package-lock.json
