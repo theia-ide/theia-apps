@@ -8,11 +8,13 @@
         "@theia/docker": "next",
         "@theia/editor": "next",
         "@theia/editorconfig": "next",
+        "@theia/editor-preview": "next",
         "@theia/extension-manager": "next",
         "@theia/file-search": "next",
         "@theia/filesystem": "next",
         "@theia/git": "next",
         "@theia/go": "next",
+        "@theia/getting-started": "next",
         "@theia/java": "next",
         "@theia/json": "next",
         "@theia/keymaps": "next",
@@ -50,5 +52,5 @@
     },
     "devDependencies": {
         "@theia/cli": "next"
-    } 
+    }
 }
