@@ -8,12 +8,14 @@
         "@theia/outline-view": "next",
         "@theia/preferences": "next",
         "@theia/monaco": "next",
+        "@theia/getting-started": "next",
         "@theia/git": "next",
         "@theia/file-search": "next",
         "@theia/markers": "next",
         "@theia/textmate-grammars": "next",
         "@theia/search-in-workspace": "next",
-        "@theia/json": "next"
+        "@theia/json": "next",
+        "@theia/editor-preview": "next"
     },
     "devDependencies": {
         "@theia/cli": "next"

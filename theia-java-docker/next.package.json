@@ -9,13 +9,15 @@
         "@theia/outline-view": "next",
         "@theia/preferences": "next",
         "@theia/messages": "next",
+        "@theia/getting-started": "next",
         "@theia/git": "next",
         "@theia/file-search": "next",
         "@theia/markers": "next",
         "@theia/java": "next"   ,
         "@theia/search-in-workspace": "next",
         "@theia/json": "next",
-        "@theia/textmate-grammars": "next"
+        "@theia/textmate-grammars": "next",
+        "@theia/editor-preview": "next"
     },
     "devDependencies": {
         "@theia/cli": "next"

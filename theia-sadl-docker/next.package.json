@@ -3,8 +3,10 @@
     "dependencies": {
         "@theia/core": "next",
         "@theia/editor": "next",
+        "@theia/editor-preview": "next",
         "@theia/file-search": "next",
         "@theia/filesystem": "next",
+        "@theia/getting-started": "next",
         "@theia/git": "next",
         "@theia/json": "next",
         "@theia/languages": "next",
