@@ -6,7 +6,7 @@ RUN apt-get update && apt-get -y install curl xz-utils
 #Install node and yarn
 #From: https://github.com/nodejs/docker-node/blob/6b8d86d6ad59e0d1e7a94cec2e909cad137a028f/8/Dockerfile
 
-# gpg keys listed at https://github.com/nodejs/node#release-team
+# gpg keys listed at https://github.com/nodejs/node#release-keys
 RUN set -ex \
   && for key in \
   94AE36675C464D64BAFA68DD7434390BDBE9B9C5 \
@@ -18,10 +18,12 @@ RUN set -ex \
   56730D5401028683275BD23C23EFEFE93C4CFFFE \
   77984A986EBC2AA786BC0F66B01FBB92821C587A \
   ; do \
+  gpg --keyserver pool.sks-keyservers.net --recv-keys "$key" || \
   gpg --keyserver pgp.mit.edu --recv-keys "$key" || \
   gpg --keyserver keyserver.pgp.com --recv-keys "$key" || \
   gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$key" ; \
   done
+  
 
 ENV NODE_VERSION 8.12.0
 
@@ -49,6 +51,7 @@ RUN set -ex \
   && for key in \
   6A010C5166006599AA17F08146C2130DFD2497F5 \
   ; do \
+  gpg --keyserver pool.sks-keyservers.net --recv-keys "$key" || \
   gpg --keyserver pgp.mit.edu --recv-keys "$key" || \
   gpg --keyserver keyserver.pgp.com --recv-keys "$key" || \
   gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$key" ; \
