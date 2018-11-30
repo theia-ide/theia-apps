@@ -1,0 +1,29 @@
+{
+  "private": true,
+  "name": "tests_for_theia-apps",
+  "version": "0.0.1",
+  "scripts": {
+    "test": "wdio wdio.conf.js --theia-port 4000",
+    "test-app-theia": "wdio wdio.theia-docker.conf.js --theia-port 4000",
+    "test-app-theia-full": "yarn test",
+    "test-app-theia-go": "yarn test",
+    "test-app-theia-java": "yarn test",
+    "test-app-theia-python": "yarn test",
+    "test-app-yangster": "yarn test"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.0.1",
+    "@types/mocha": "^2.2.41",
+    "@types/webdriverio": "^4.7.0",
+    "chai": "^4.1.0",
+    "chai-string": "^1.4.0",
+    "reflect-metadata": "^0.1.10",
+    "temp": "^0.8.3",
+    "ts-node": "<7.0.0",
+    "typescript": "3.1.6",
+    "wdio-spec-reporter": "0.1.0",
+    "wdio-mocha-framework": "0.5.9",
+    "wdio-selenium-standalone-service": "0.0.8",
+    "webdriverio": "4.9.2"
+  }
+}
