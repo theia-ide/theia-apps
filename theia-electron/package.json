@@ -1,0 +1,69 @@
+{
+    "private": true,
+    "name": "theia-electron",
+    "version": "0.3.17",
+    "description": "Theia",
+    "main": "src-gen/frontend/electron-main.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/theia-ide/theia.git"
+    },
+    "theia": {
+        "target": "electron",
+        "backend": {
+            "config": {
+                "startupTimeout": -1
+            }
+        }
+    },
+    "scripts": {
+        "prepare": "yarn run build",
+        "build": "theia build",
+        "package": "electron-builder",
+        "package:preview": "electron-builder --dir"
+    },
+    "keywords": [],
+    "author": "typefox <npm@typefox.io>",
+    "license": "Apache-2.0",
+    "bugs": {
+        "url": "https://github.com/theia-ide/theia/issues"
+    },
+    "homepage": "https://github.com/theia-ide/theia#readme",
+    "dependencies": {
+        "@theia/callhierarchy": "next",
+        "@theia/core": "next",
+        "@theia/editor": "next",
+        "@theia/file-search": "next",
+        "@theia/filesystem": "next",
+        "@theia/git": "next",
+        "@theia/java": "next",
+        "@theia/json": "next",
+        "@theia/keymaps": "next",
+        "@theia/languages": "next",
+        "@theia/markers": "next",
+        "@theia/merge-conflicts": "next",
+        "@theia/messages": "next",
+        "@theia/mini-browser": "next",
+        "@theia/monaco": "next",
+        "@theia/navigator": "next",
+        "@theia/outline-view": "next",
+        "@theia/output": "next",
+        "@theia/preferences": "next",
+        "@theia/preview": "next",
+        "@theia/process": "next",
+        "@theia/search-in-workspace": "next",
+        "@theia/task": "next",
+        "@theia/terminal": "next",
+        "@theia/typescript": "next",
+        "@theia/userstorage": "next",
+        "@theia/workspace": "next",
+        "typescript": "latest"
+    },
+    "devDependencies": {
+        "@theia/cli": "next",
+        "electron-builder": "^20.36.2"
+    },
+    "engines": {
+        "node": ">=8.12.0"
+    }
+}

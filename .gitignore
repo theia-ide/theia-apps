@@ -1,0 +1,8 @@
+/**/.DS_Store
+/**/node_modules
+/**/build
+/**/lib
+/**/dist
+/**/src-gen
+/**/yarn.lock
+/**/webpack.config.js
