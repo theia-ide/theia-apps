@@ -2,8 +2,11 @@ FROM node:8
 ARG version=latest
 RUN apt-get update && \
     apt-get install -y curl
-RUN curl -sS https://storage.googleapis.com/golang/go1.9.2.linux-amd64.tar.gz | tar -C /usr/local -xzf -
+ENV GO_VERSION 1.11.4
+RUN curl -sS https://dl.google.com/go/go$GO_VERSION.linux-amd64.tar.gz | tar -C /usr/local -xzf -
 ENV PATH $PATH:/usr/local/go/bin
+ENV GOPATH=/home/theia/go
+ENV PATH $PATH:${GOPATH}/bin
 WORKDIR /home/theia
 ADD $version.package.json ./package.json
 ARG GITHUB_TOKEN
@@ -36,5 +39,4 @@ RUN go get -u -v github.com/ramya-rao-a/go-outline && \
     go get -u -v github.com/davidrjenni/reftools/cmd/fillstruct
 RUN mkdir -p /home/theia/.go
 RUN echo '{"toolsGopath":"/home/theia/go"}' > /home/theia/.go/go.json
-ENV GOPATH /home/project    
 ENTRYPOINT [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]

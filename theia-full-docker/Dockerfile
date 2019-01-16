@@ -77,13 +77,12 @@ RUN apt-get -y install git sudo
 #Required to use go get with git source
 RUN apt-get update && apt-get install -y git
 
-ENV GO_VERSION 1.9.4
-ENV GOPATH=/usr/local/go-packages
-ENV GO_ROOT=/usr/local/go
+ENV GO_VERSION 1.11.4
+ENV GOPATH=/home/theia/go
 ENV PATH $PATH:/usr/local/go/bin
 ENV PATH $PATH:${GOPATH}/bin
 
-RUN curl -sS https://storage.googleapis.com/golang/go$GO_VERSION.linux-amd64.tar.gz | tar -C /usr/local -xzf -
+RUN curl -sS https://dl.google.com/go/go$GO_VERSION.linux-amd64.tar.gz | tar -C /usr/local -xzf -
 RUN go get -u -v github.com/ramya-rao-a/go-outline
 RUN go get -u -v github.com/acroca/go-symbols
 RUN go get -u -v github.com/nsf/gocode
