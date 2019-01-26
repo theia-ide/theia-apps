@@ -1,7 +1,7 @@
 FROM ubuntu:16.04
 
 #Common deps
-RUN apt-get update && apt-get -y install curl xz-utils
+RUN apt-get update && apt-get -y install curl xz-utils wget
 
 #Install node and yarn
 #From: https://github.com/nodejs/docker-node/blob/6b8d86d6ad59e0d1e7a94cec2e909cad137a028f/8/Dockerfile
@@ -102,17 +102,15 @@ RUN go get -u -v github.com/davidrjenni/reftools/cmd/fillstruct
 
 #Java
 RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
-RUN apt-get update && apt-get -y install software-properties-common
-RUN add-apt-repository ppa:webupd8team/java \
-  && apt-get update \
-  && apt-get install -y oracle-java8-installer
+RUN apt-get update && apt-get -y install openjdk-8-jdk
+
 
 #C/C++
 RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add -
 # public LLVM PPA, development version of LLVM
 RUN echo "deb http://apt.llvm.org/xenial/ llvm-toolchain-xenial main" > /etc/apt/sources.list.d/llvm.list
-RUN apt-get update && apt-get install -y clang-tools-8
-RUN ln -s /usr/bin/clangd-8 /usr/bin/clangd
+RUN apt-get update && apt-get install -y clang-tools-9
+RUN ln -s /usr/bin/clangd-9 /usr/bin/clangd
 
 #Python 2
 RUN apt-get update && apt-get install -y python python-pip && \
@@ -152,8 +150,9 @@ WORKDIR /home/theia
 ADD $version.package.json ./package.json
 ARG GITHUB_TOKEN
 RUN yarn --cache-folder ./ycache && rm -rf ./ycache
-RUN yarn theia build
+# using "NODE_OPTIONS=..." to avoid out-of-memory problem in CI
+RUN NODE_OPTIONS="--max_old_space_size=4096" yarn theia build
 EXPOSE 3000
 ENV SHELL /bin/bash
 
-CMD [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]
+ENTRYPOINT [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]
