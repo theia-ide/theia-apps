@@ -1,7 +1,9 @@
-FROM ubuntu:16.04
+FROM ubuntu:18.04
+
+ENV DEBIAN_FRONTEND noninteractive
 
 #Common deps
-RUN apt-get update && apt-get -y install curl xz-utils wget
+RUN apt-get update && apt-get -y install curl xz-utils wget gpg
 
 #Install node and yarn
 #From: https://github.com/nodejs/docker-node/blob/6b8d86d6ad59e0d1e7a94cec2e909cad137a028f/8/Dockerfile
@@ -9,14 +11,17 @@ RUN apt-get update && apt-get -y install curl xz-utils wget
 # gpg keys listed at https://github.com/nodejs/node#release-keys
 RUN set -ex \
     && for key in \
+    4ED778F539E3634C779C87C6D7062848A1AB005C \
+    B9E2F5981AA6E0CD28160D9FF13993A75599653C \
     94AE36675C464D64BAFA68DD7434390BDBE9B9C5 \
-    FD3A5288F042B6850C66B31F09FE44734EB7990E \
-    71DCFD284A79C3B38668286BC97EC7A07EDE3FC1 \
-    DD8F2338BAE7501E3DD5AC78C273792F7D83545D \
-    C4F0DFFF4E8C1A8236409D08E73BC641CC11F4C8 \
     B9AE9905FFD7803F25714661B63B535A4C206CA9 \
-    56730D5401028683275BD23C23EFEFE93C4CFFFE \
     77984A986EBC2AA786BC0F66B01FBB92821C587A \
+    71DCFD284A79C3B38668286BC97EC7A07EDE3FC1 \
+    FD3A5288F042B6850C66B31F09FE44734EB7990E \
+    8FCCA13FEF1D0C2E91008E09770F7A9A5AE15600 \
+    C4F0DFFF4E8C1A8236409D08E73BC641CC11F4C8 \
+    DD8F2338BAE7501E3DD5AC78C273792F7D83545D \
+    A48C2BEE680E841632CD4E44F07496B3EB3C1762 \
     ; do \
     gpg --keyserver pool.sks-keyservers.net --recv-keys "$key" || \
     gpg --keyserver pgp.mit.edu --recv-keys "$key" || \
@@ -25,7 +30,7 @@ RUN set -ex \
     done
 
 
-ENV NODE_VERSION 8.12.0
+ENV NODE_VERSION 8.14.1
 
 RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
     && case "${dpkgArch##*-}" in \
@@ -45,7 +50,7 @@ RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
     && rm "node-v$NODE_VERSION-linux-$ARCH.tar.xz" SHASUMS256.txt.asc SHASUMS256.txt \
     && ln -s /usr/local/bin/node /usr/local/bin/nodejs
 
-ENV YARN_VERSION 1.9.4
+ENV YARN_VERSION 1.13.0
 
 RUN set -ex \
     && for key in \
@@ -73,28 +78,34 @@ RUN apt-get -y install git sudo
 #LSPs
 
 ##GO
-ENV GO_VERSION 1.9.4
+ENV GO_VERSION 1.11.4
 ENV GOPATH=/usr/local/go-packages
 ENV GO_ROOT=/usr/local/go
 ENV PATH $PATH:/usr/local/go/bin
 ENV PATH $PATH:${GOPATH}/bin
 
 RUN curl -sS https://storage.googleapis.com/golang/go$GO_VERSION.linux-amd64.tar.gz | tar -C /usr/local -xzf - && \
+    go get -u -v github.com/nsf/gocode && \
+    go get -u -v github.com/uudashr/gopkgs/cmd/gopkgs && \
     go get -u -v github.com/ramya-rao-a/go-outline && \
     go get -u -v github.com/acroca/go-symbols && \
-    go get -u -v github.com/nsf/gocode && \
+    go get -u -v golang.org/x/tools/cmd/guru && \
+    go get -u -v golang.org/x/tools/cmd/gorename && \
+    go get -u -v github.com/fatih/gomodifytags && \
+    go get -u -v github.com/haya14busa/goplay/cmd/goplay && \
+    go get -u -v github.com/josharian/impl && \
+    go get -u -v github.com/tylerb/gotype-live && \
     go get -u -v github.com/rogpeppe/godef && \
     go get -u -v golang.org/x/tools/cmd/godoc && \
     go get -u -v github.com/zmb3/gogetdoc && \
-    go get -u -v golang.org/x/lint/golint && \
-    go get -u -v github.com/fatih/gomodifytags && \
-    go get -u -v github.com/uudashr/gopkgs/cmd/gopkgs && \
-    go get -u -v golang.org/x/tools/cmd/gorename && \
+    go get -u -v golang.org/x/tools/cmd/goimports && \
     go get -u -v sourcegraph.com/sqs/goreturns && \
+    go get -u -v github.com/golang/lint/golint && \
     go get -u -v github.com/cweill/gotests/... && \
-    go get -u -v golang.org/x/tools/cmd/guru && \
-    go get -u -v github.com/josharian/impl && \
-    go get -u -v github.com/haya14busa/goplay/cmd/goplay && \
+    go get -u -v github.com/alecthomas/gometalinter && \
+    go get -u -v honnef.co/go/tools/... && \
+    go get -u -v github.com/sourcegraph/go-langserver && \
+    go get -u -v github.com/derekparker/delve/cmd/dlv && \
     go get -u -v github.com/davidrjenni/reftools/cmd/fillstruct
 
 #Java
@@ -105,7 +116,7 @@ RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true 
 #C/C++
 # public LLVM PPA, development version of LLVM
 RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - && \
-    echo "deb http://apt.llvm.org/xenial/ llvm-toolchain-xenial main" > /etc/apt/sources.list.d/llvm.list && \
+    echo "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic main" > /etc/apt/sources.list.d/llvm.list && \
     apt-get update && apt-get install -y clang-tools-9 && \
     ln -s /usr/bin/clangd-9 /usr/bin/clangd
 
