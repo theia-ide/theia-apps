@@ -1,17 +1,18 @@
 FROM node:8
 ARG version=latest
+ENV GO_VERSION 1.12
 RUN apt-get update && \
-    apt-get install -y curl
-RUN curl -sS https://storage.googleapis.com/golang/go1.9.2.linux-amd64.tar.gz | tar -C /usr/local -xzf -
+    apt-get install -y curl && \
+    curl -sS https://storage.googleapis.com/golang/go$GO_VERSION.linux-amd64.tar.gz | tar -C /usr/local -xzf -
 ENV PATH $PATH:/usr/local/go/bin
 WORKDIR /home/theia
 ADD $version.package.json ./package.json
 ARG GITHUB_TOKEN
-RUN yarn --cache-folder ./ycache && rm -rf ./ycache
-RUN yarn theia build
+RUN yarn --cache-folder ./ycache && rm -rf ./ycache && \
+    yarn theia build
 # See : https://github.com/theia-ide/theia-apps/issues/34
-RUN adduser --disabled-password --gecos '' theia
-RUN chmod g+rw /home && \
+RUN adduser --disabled-password --gecos '' theia && \
+    chmod g+rw /home && \
     mkdir -p /home/project && \
     chown -R theia:theia /home/theia && \
     chown -R theia:theia /home/project;
@@ -33,8 +34,8 @@ RUN go get -u -v github.com/ramya-rao-a/go-outline && \
     go get -u -v golang.org/x/tools/cmd/guru && \
     go get -u -v github.com/josharian/impl && \
     go get -u -v github.com/haya14busa/goplay/cmd/goplay && \
-    go get -u -v github.com/davidrjenni/reftools/cmd/fillstruct
-RUN mkdir -p /home/theia/.go
-RUN echo '{"toolsGopath":"/home/theia/go"}' > /home/theia/.go/go.json
-ENV GOPATH /home/project    
+    go get -u -v github.com/davidrjenni/reftools/cmd/fillstruct && \
+    mkdir -p /home/theia/.go && \
+    echo '{"toolsGopath":"/home/theia/go"}' > /home/theia/.go/go.json
+ENV GOPATH /home/project
 ENTRYPOINT [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]
