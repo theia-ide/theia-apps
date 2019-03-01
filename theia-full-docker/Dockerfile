@@ -5,6 +5,10 @@ ENV DEBIAN_FRONTEND noninteractive
 #Common deps
 RUN apt-get update && apt-get -y install curl xz-utils wget gpg
 
+# W-A for GPG-related issues during CI
+# https://github.com/inversepath/usbarmory-debian-base_image/issues/9#issuecomment-466594168
+RUN mkdir /root/.gnupg && chmod 700 /root/.gnupg  && echo "disable-ipv6" >> /root/.gnupg/dirmngr.conf
+
 #Install node and yarn
 #From: https://github.com/nodejs/docker-node/blob/6b8d86d6ad59e0d1e7a94cec2e909cad137a028f/8/Dockerfile
 
