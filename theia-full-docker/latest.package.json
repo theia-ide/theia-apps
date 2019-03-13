@@ -41,8 +41,7 @@
         "@theia/typescript": "latest",
         "@theia/userstorage": "latest",
         "@theia/variable-resolver": "latest",
-        "@theia/workspace": "latest",
-        "theia-yang-extension": "latest"
+        "@theia/workspace": "latest"
     },
     "devDependencies": {
         "@theia/cli": "latest"
