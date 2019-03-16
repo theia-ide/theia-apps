@@ -112,7 +112,7 @@ RUN curl -sS https://storage.googleapis.com/golang/go$GO_VERSION.linux-amd64.tar
 
 #Java
 RUN echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections && \
-    apt-get update && apt-get -y install openjdk-8-jdk
+    apt-get update && apt-get -y install openjdk-8-jdk maven gradle
 
 
 #C/C++
