@@ -1,0 +1,29 @@
+{
+    "private": true,
+    "dependencies": {
+        "typescript": "latest",
+        "@theia/tslint": "next",
+        "@theia/typescript": "next",
+        "@theia/navigator": "next",
+        "@theia/terminal": "next",
+        "@theia/outline-view": "next",
+        "@theia/preferences": "next",
+        "@theia/messages": "next",
+        "@theia/getting-started": "next",
+        "@theia/git": "next",
+        "@theia/file-search": "next",
+        "@theia/markers": "next",
+        "@theia/preview": "next",
+        "@theia/callhierarchy": "next",
+        "@theia/merge-conflicts": "next",
+        "@theia/search-in-workspace": "next",
+        "@theia/json": "next",
+        "@theia/textmate-grammars": "next",
+        "@theia/mini-browser": "next",
+        "@theia/editor-preview": "next",
+        "@theia/plugin-ext-vscode": "next"
+    },
+    "devDependencies": {
+        "@theia/cli": "next"
+    }
+}
