@@ -9,7 +9,8 @@
     "test-app-theia-go": "yarn test",
     "test-app-theia-java": "yarn test",
     "test-app-theia-python": "yarn test",
-    "test-app-yangster": "yarn test"
+    "test-app-yangster": "yarn test",
+    "test-app-theia-swift": "yarn test"
   },
   "devDependencies": {
     "@types/chai": "^4.0.1",
