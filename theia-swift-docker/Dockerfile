@@ -1,8 +1,9 @@
-FROM node:8 as extension-builder
+ARG NODE_VERSION=10
+FROM node:$NODE_VERSION as extension-builder
 
 RUN npm install -g vsce
 
-RUN git clone --depth 1 https://github.com/apple/sourcekit-lsp 
+RUN git clone --depth 1 https://github.com/apple/sourcekit-lsp
 
 WORKDIR /sourcekit-lsp/Editors/vscode
 RUN npm install
@@ -19,7 +20,7 @@ RUN apt-get -q update && \
     libblocksruntime-dev
 
 # Download and Build Sourcekit-LSP
-RUN git clone --depth 1 https://github.com/apple/sourcekit-lsp 
+RUN git clone --depth 1 https://github.com/apple/sourcekit-lsp
 WORKDIR /sourcekit-lsp
 RUN swift build -Xcxx -I/usr/lib/swift && mv `swift build --show-bin-path`/sourcekit-lsp /usr/bin/
 RUN chmod -R o+r /usr/bin/sourcekit-lsp
