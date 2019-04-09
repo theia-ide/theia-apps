@@ -11,20 +11,20 @@ branches:
 language: generic
 
 env:
-  - NPM_TAG=latest IMAGE_NAME=theia-full
-  - NPM_TAG=next IMAGE_NAME=theia-full
-  - NPM_TAG=latest IMAGE_NAME=theia
-  - NPM_TAG=next IMAGE_NAME=theia
-  - NPM_TAG=latest IMAGE_NAME=theia-java
-  - NPM_TAG=next IMAGE_NAME=theia-java
-  - NPM_TAG=latest IMAGE_NAME=theia-go
-  - NPM_TAG=next IMAGE_NAME=theia-go
-  - NPM_TAG=latest IMAGE_NAME=yangster
-  - NPM_TAG=next IMAGE_NAME=yangster
-  - NPM_TAG=latest IMAGE_NAME=theia-python
-  - NPM_TAG=next IMAGE_NAME=theia-python
-  - NPM_TAG=latest IMAGE_NAME=theia-swift
-  - NPM_TAG=next IMAGE_NAME=theia-swift
+  - NPM_TAG=latest IMAGE_NAME=theia-full NODE_VERSION=8.14.1
+  - NPM_TAG=next IMAGE_NAME=theia-full NODE_VERSION=10.15.3
+  - NPM_TAG=latest IMAGE_NAME=theia NODE_VERSION=8
+  - NPM_TAG=next IMAGE_NAME=theia NODE_VERSION=10
+  - NPM_TAG=latest IMAGE_NAME=theia-java NODE_VERSION=8
+  - NPM_TAG=next IMAGE_NAME=theia-java NODE_VERSION=10
+  - NPM_TAG=latest IMAGE_NAME=theia-go NODE_VERSION=8
+  - NPM_TAG=next IMAGE_NAME=theia-go NODE_VERSION=10
+  - NPM_TAG=latest IMAGE_NAME=yangster NODE_VERSION=8
+  - NPM_TAG=next IMAGE_NAME=yangster NODE_VERSION=10
+  - NPM_TAG=latest IMAGE_NAME=theia-python NODE_VERSION=8
+  - NPM_TAG=next IMAGE_NAME=theia-python NODE_VERSION=10
+  - NPM_TAG=latest IMAGE_NAME=theia-swift NODE_VERSION=8
+  - NPM_TAG=next IMAGE_NAME=theia-swift NODE_VERSION=10
 
 install:
   - cd "$IMAGE_NAME-docker"
@@ -34,7 +34,7 @@ install:
   # this makes it possible to see output of the docker build as it unfolds:
   # from https://stackoverflow.com/questions/43918874/how-to-increase-no-activity-wait-time-in-travis-ci
   - "travis_wait 30 sleep 1800 &"
-  - docker build --build-arg "version=$NPM_TAG" --build-arg "GITHUB_TOKEN=$GITHUB_TOKEN" . -t "$IMAGE_TAG" --no-cache
+  - docker build --build-arg "version=$NPM_TAG" --build-arg "NODE_VERSION=$NODE_VERSION" --build-arg "GITHUB_TOKEN=$GITHUB_TOKEN" . -t "$IMAGE_TAG" --no-cache
   - docker tag "$IMAGE_TAG" "$IMAGE:$NPM_TAG"
   - docker run -d -p 0.0.0.0:4000:3000 "$IMAGE_TAG"
 
@@ -53,4 +53,3 @@ notifications:
   on_success: change
   on_failure: always
   on_start: never
-  

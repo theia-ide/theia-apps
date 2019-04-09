@@ -1,4 +1,5 @@
-FROM node:8-alpine
+ARG NODE_VERSION=10
+FROM node:${NODE_VERSION}-alpine
 RUN apk add --no-cache make gcc g++ python
 ARG version=latest
 WORKDIR /home/theia
@@ -9,10 +10,10 @@ RUN yarn && \
     rm -rf ./node_modules/electron && \
     yarn cache clean
 
-FROM node:8-alpine
+FROM node:${NODE_VERSION}-alpine
 RUN apk add --no-cache git openssh bash openjdk8 unzip
 # See : https://github.com/theia-ide/theia-apps/issues/34
-RUN addgroup theia && \ 
+RUN addgroup theia && \
     adduser -G theia -s /bin/sh -D theia;
 RUN chmod g+rw /home && \
     mkdir -p /home/project && \

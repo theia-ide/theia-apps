@@ -1,4 +1,5 @@
-FROM node:8
+ARG NODE_VERSION=10
+FROM node:$NODE_VERSION
 ARG version=latest
 WORKDIR /home/theia
 ADD $version.package.json ./package.json
@@ -65,7 +66,7 @@ RUN curl -fsSL https://storage.googleapis.com/golang/go$GO_VERSION.$GOOS-$GOARCH
     go get -u -v -d github.com/stamblerre/gocode && \
     go build -o $GOPATH/bin/gocode-gomod github.com/stamblerre/gocode && \
     rm -rf $GOPATH/src && \
-    rm -rf $GOPATH/pkg 
+    rm -rf $GOPATH/pkg
 
 # configure Theia
 ENV SHELL=/bin/bash \

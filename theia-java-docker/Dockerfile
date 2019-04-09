@@ -1,7 +1,7 @@
-
+ARG NODE_VERSION=10
 FROM ibmcom/ibmjava:8-sdk as java-base
 
-FROM ibmcom/ibmnode:8
+FROM ibmcom/ibmnode:$NODE_VERSION
 COPY --from=java-base /opt/ibm/java /opt/ibm/java
 
 ENV JAVA_HOME=/opt/ibm/java/jre \

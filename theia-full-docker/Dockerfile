@@ -30,8 +30,8 @@ RUN set -ex \
     gpg --batch --keyserver ha.pool.sks-keyservers.net --recv-keys "$key" ; \
     done
 
-
-ENV NODE_VERSION 8.14.1
+ARG NODE_VERSION=10.15.3
+ENV NODE_VERSION $NODE_VERSION
 
 RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
     && case "${dpkgArch##*-}" in \
