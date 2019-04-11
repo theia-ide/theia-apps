@@ -7,7 +7,6 @@ ADD $version.package.json ./package.json
 ARG GITHUB_TOKEN
 RUN yarn && \
     NODE_OPTIONS="--max_old_space_size=4096" yarn theia build && \
-    rm -rf ./node_modules/electron && \
     yarn cache clean
 
 FROM node:${NODE_VERSION}-alpine

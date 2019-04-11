@@ -13,7 +13,6 @@ RUN yarn --pure-lockfile && \
     echo *.ts.map >> .yarnclean && \
     echo *.spec.* >> .yarnclean && \
     yarn autoclean --force && \
-    rm -rf ./node_modules/electron && \
     yarn cache clean
 
 FROM node:${NODE_VERSION}-alpine
