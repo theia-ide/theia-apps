@@ -1,7 +1,6 @@
 {
     "private": true,
     "dependencies": {
-        "typescript": "latest",
         "@theia/callhierarchy": "next",
         "@theia/core": "next",
         "@theia/cpp": "next",
@@ -48,7 +47,8 @@
         "@theia/userstorage": "next",
         "@theia/variable-resolver": "next",
         "@theia/workspace": "next",
-        "theia-yang-extension": "next"
+        "theia-yang-extension": "next",
+        "typescript": "latest"
     },
     "devDependencies": {
         "@theia/cli": "next"
