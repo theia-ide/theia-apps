@@ -22,7 +22,7 @@
         "@theia/typescript": "next",
         "@theia/workspace": "next",
         "theia-yang-extension": "next",
-        "typescript": "latest",
+        "typescript": "latest"
     },
     "devDependencies": {
         "@theia/cli": "next"
