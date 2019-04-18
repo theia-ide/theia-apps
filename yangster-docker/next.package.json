@@ -1,7 +1,6 @@
 {
     "private": true,
     "dependencies": {
-        "typescript": "latest",
         "@theia/core": "next",
         "@theia/editor": "next",
         "@theia/editor-preview": "next",
@@ -11,18 +10,19 @@
         "@theia/json": "next",
         "@theia/languages": "next",
         "@theia/markers": "next",
+        "@theia/messages": "next",
         "@theia/monaco": "next",
         "@theia/navigator": "next",
         "@theia/preferences": "next",
-        "@theia/messages": "next",
         "@theia/process": "next",
+        "@theia/search-in-workspace": "next",
         "@theia/terminal": "next",
         "@theia/textmate-grammars": "next",
         "@theia/tslint": "next",
         "@theia/typescript": "next",
         "@theia/workspace": "next",
         "theia-yang-extension": "next",
-        "@theia/search-in-workspace": "next"
+        "typescript": "latest",
     },
     "devDependencies": {
         "@theia/cli": "next"

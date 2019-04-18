@@ -1,7 +1,6 @@
 {
     "private": true,
     "dependencies": {
-        "typescript": "latest",
         "@theia/core": "latest",
         "@theia/editor": "latest",
 		"@theia/filesystem": "latest",        
@@ -13,12 +12,13 @@
         "@theia/navigator": "latest",
         "@theia/preferences": "latest",
         "@theia/process": "latest",
+        "@theia/search-in-workspace": "latest",
         "@theia/terminal": "latest",
         "@theia/textmate-grammars": "latest",
         "@theia/typescript": "latest",
         "@theia/workspace": "latest",
         "theia-yang-extension": "latest",
-        "@theia/search-in-workspace": "latest"
+        "typescript": "latest"
     },
     "devDependencies": {
         "@theia/cli": "latest"

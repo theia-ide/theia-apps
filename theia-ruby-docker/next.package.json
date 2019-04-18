@@ -1,21 +1,21 @@
 {
     "private": true,
     "dependencies": {
-        "@theia/ruby": "next",
-        "@theia/messages": "next",
-        "@theia/navigator": "next",
-        "@theia/terminal": "next",
-        "@theia/outline-view": "next",
-        "@theia/preferences": "next",
-        "@theia/monaco": "next",
+        "@theia/editor-preview": "next",
+        "@theia/file-search": "next",
         "@theia/getting-started": "next",
         "@theia/git": "next",
-        "@theia/file-search": "next",
-        "@theia/markers": "next",
-        "@theia/search-in-workspace": "next",
         "@theia/json": "next",
-        "@theia/textmate-grammars": "next",
-        "@theia/editor-preview": "next"
+        "@theia/markers": "next",
+        "@theia/messages": "next",
+        "@theia/monaco": "next",
+        "@theia/navigator": "next",
+        "@theia/outline-view": "next",
+        "@theia/preferences": "next",
+        "@theia/ruby": "next",
+        "@theia/search-in-workspace": "next",
+        "@theia/terminal": "next",
+        "@theia/textmate-grammars": "next"
     },
     "devDependencies": {
         "@theia/cli": "next"
