@@ -17,7 +17,7 @@
         "@theia/textmate-grammars": "next",
         "@theia/tslint": "next",
         "@theia/typescript": "next",
-        "typescript": "latest",
+        "typescript": "latest"
     },
     "devDependencies": {
         "@theia/cli": "next"
