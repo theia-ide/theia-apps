@@ -33,6 +33,7 @@
         "@theia/callhierarchy": "next",
         "@theia/core": "next",
         "@theia/editor": "next",
+        "@theia/electron": "next",
         "@theia/file-search": "next",
         "@theia/filesystem": "next",
         "@theia/git": "next",
