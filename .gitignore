@@ -2,6 +2,7 @@
 /**/node_modules
 /**/build
 /**/lib
+/**/out
 /**/dist
 /**/src-gen
 /**/yarn.lock
