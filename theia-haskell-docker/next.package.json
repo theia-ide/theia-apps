@@ -1,0 +1,31 @@
+{
+    "private": true,
+    "dependencies": {
+        "@theia/editor-preview": "next",
+        "@theia/file-search": "next",
+        "@theia/getting-started": "next",
+        "@theia/git": "next",
+        "@theia/json": "next",
+        "@theia/messages": "next",
+        "@theia/markers": "next",
+        "@theia/monaco": "next",
+        "@theia/navigator": "next",
+        "@theia/outline-view": "next",
+        "@theia/preferences": "next",
+        "@theia/search-in-workspace": "next",
+        "@theia/terminal": "next",
+        "@theia/textmate-grammars": "next"
+    },
+    "devDependencies": {
+        "@theia/cli": "next",
+        "@theia/debug": "next"
+    },
+    "scripts": {
+        "postinstall": "download-debug-adapters"
+    },
+    "adapterDir": "plugins",
+    "adapters": {
+        "language-haskell": "https://justusadam.gallery.vsassets.io/_apis/public/gallery/publisher/justusadam/extension/language-haskell/2.6.0/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage",
+        "vscode-hie-server": "https://alanz.gallery.vsassets.io/_apis/public/gallery/publisher/alanz/extension/vscode-hie-server/0.0.27/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+    }
+}

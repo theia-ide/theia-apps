@@ -11,6 +11,8 @@ branches:
 language: generic
 
 env:
+  - NPM_TAG=latest IMAGE_NAME=theia-haskell NODE_VERSION=10
+  - NPM_TAG=next IMAGE_NAME=theia-haskell NODE_VERSION=10
   - NPM_TAG=latest IMAGE_NAME=theia-full NODE_VERSION=10.15.3
   - NPM_TAG=next IMAGE_NAME=theia-full NODE_VERSION=10.15.3
   - NPM_TAG=latest IMAGE_NAME=theia NODE_VERSION=10
