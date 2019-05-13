@@ -55,6 +55,7 @@
         "@theia/search-in-workspace": "next",
         "@theia/task": "next",
         "@theia/terminal": "next",
+        "@theia/textmate-grammars": "next",
         "@theia/typescript": "next",
         "@theia/userstorage": "next",
         "@theia/workspace": "next",
@@ -62,9 +63,9 @@
     },
     "devDependencies": {
         "@theia/cli": "next",
-        "electron-builder": "^20.36.2"
+        "electron-builder": "^20.40.2"
     },
     "engines": {
-        "node": ">=8.12.0"
+        "node": ">=10.2.0"
     }
 }
