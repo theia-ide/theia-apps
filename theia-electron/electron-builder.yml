@@ -1,3 +1,4 @@
+electronDist: node_modules/electron/dist
 productName: Theia
 appId: theia
 
