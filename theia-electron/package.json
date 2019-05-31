@@ -67,5 +67,8 @@
     },
     "engines": {
         "node": ">=10.2.0"
+    },
+    "resolutions": {
+        "vscode-uri": "<=1.0.6"
     }
 }

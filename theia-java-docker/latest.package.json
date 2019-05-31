@@ -17,5 +17,8 @@
     },
     "devDependencies": {
         "@theia/cli": "latest"
+    },
+    "resolutions": {
+        "vscode-uri": "<=1.0.6"
     }
 }
