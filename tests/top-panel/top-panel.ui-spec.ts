@@ -114,21 +114,6 @@ describe('theia top panel (menubar)', () => {
         });
     });
 
-    describe('extensions view UI', () => {
-        it('should start with extensions view not visible', () => {
-            expect(leftPanel.isExtensionsContainerVisible()).to.be.false;
-        });
-        it('extensions view should toggle-on then toggle-off', () => {
-            if (!leftPanel.isExtensionsContainerVisible()) {
-                topPanel.toggleExtensionsView();
-                leftPanel.waitForExtensionsViewVisible();
-            }
-            expect(leftPanel.isExtensionsContainerVisible()).to.be.true;
-            topPanel.toggleExtensionsView();
-            expect(leftPanel.isExtensionsContainerVisible()).to.be.false;
-        });
-    });
-
     describe('files view UI', () => {
         it('should start with files view not visible', () => {
             expect(leftPanel.isFileTreeVisible()).to.be.false;
@@ -144,19 +129,19 @@ describe('theia top panel (menubar)', () => {
         });
     });
 
-    describe('git view UI', () => {
+    describe('scm view UI', () => {
         // re-enable if/when we reset workbench layout between tests
-        // it('should start with git view not visible', () => {
-        //     expect(leftPanel.isGitContainerVisible()).to.be.false;
+        // it('should start with scm view not visible', () => {
+        //     expect(leftPanel.isScmContainerVisible()).to.be.false;
         // });
-        it('git view should toggle-on then toggle-off', () => {
-            if (!leftPanel.isGitContainerVisible()) {
-                topPanel.toggleGitView();
-                leftPanel.waitForGitViewVisible();
+        it('scm view should toggle-on then toggle-off', () => {
+            if (!leftPanel.isScmContainerVisible()) {
+                topPanel.toggleScmView();
+                leftPanel.waitForScmViewVisible();
             }
-            expect(leftPanel.isGitContainerVisible()).to.be.true;
-            topPanel.toggleGitView();
-            expect(leftPanel.isGitContainerVisible()).to.be.false;
+            expect(leftPanel.isScmContainerVisible()).to.be.true;
+            topPanel.toggleScmView();
+            expect(leftPanel.isScmContainerVisible()).to.be.false;
         });
     });
 
@@ -164,10 +149,7 @@ describe('theia top panel (menubar)', () => {
         it('should start with git history view not visible', () => {
             expect(leftPanel.isGitHistoryContainerVisible()).to.be.false;
         });
-
-        // note: skipping since git history view does not toggle ATM
-        // see: https://github.com/theia-ide/theia/issues/1727
-        it.skip('git history view should toggle-on then toggle-off', () => {
+        it('git history view should toggle-on then toggle-off', () => {
             if (!leftPanel.isGitHistoryContainerVisible()) {
                 topPanel.toggleGitHistoryView();
                 leftPanel.waitForGitHistoryViewVisible();
