@@ -18,5 +18,8 @@
     "adapterDir": "plugins",
     "adapters": {
         "vscode-go": "https://ms-vscode.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode/extension/Go/0.9.2/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+    },
+    "resolutions": {
+        "vscode-uri": "<=1.0.6"
     }
 }
