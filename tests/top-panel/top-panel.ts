@@ -34,19 +34,14 @@ export class TopPanel {
         this.clickSubMenu('Call Hierarchy');
     }
 
-    toggleExtensionsView() {
-        this.clickMenuTab('View');
-        this.clickSubMenu('Extensions');
-    }
-
     toggleFilesView() {
         this.clickMenuTab('View');
-        this.clickSubMenu('Files');
+        this.clickSubMenu('Explorer');
     }
 
-    toggleGitView() {
+    toggleScmView() {
         this.clickMenuTab('View');
-        this.clickSubMenu('Git');
+        this.clickSubMenu('Scm');
     }
 
     toggleGitHistoryView() {
