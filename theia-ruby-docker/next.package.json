@@ -16,8 +16,5 @@
         "@theia/search-in-workspace": "next",
         "@theia/terminal": "next",
         "@theia/textmate-grammars": "next"
-    },
-    "devDependencies": {
-        "@theia/cli": "next"
     }
 }
