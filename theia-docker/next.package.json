@@ -24,8 +24,5 @@
     },
     "devDependencies": {
         "@theia/cli": "next"
-    },
-    "resolutions": {
-        "vscode-uri": "<=1.0.6"
     }
 }
