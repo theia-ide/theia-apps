@@ -56,7 +56,6 @@ ENV THEIA_DEFAULT_PLUGINS=local-dir:/home/theia/plugins
 
 EXPOSE 3000
 ENV SHELL /bin/bash
-ENV USE_LOCAL_GIT true
 
 USER theia
 ENTRYPOINT [ "node", "/home/theia/src-gen/backend/main.js", "/home/project", "--hostname=0.0.0.0" ]
