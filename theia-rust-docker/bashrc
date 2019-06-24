@@ -1,0 +1,19 @@
+#CONTAINER_START_PATH is passed as an env var when the container is created it is passed to the current user via the root environment (see sudoers)
+
+if [ -z "$CONTAINER_START_PATH" ]; then
+    echo "Using default start path"
+    export CONTAINER_START_PATH="/root"
+fi  
+
+if [ -z "$HOME" ]; then
+    export HOME="/root"
+fi
+
+echo "HOME: $HOME"
+echo "CONTAINER_START_PATH: $CONTAINER_START_PATH"
+cd "$CONTAINER_START_PATH"
+source $HOME/.bashrc
+source /root/nvm_setup.sh
+export RUSTUP_HOME=/root/rust/rustup
+export CARGO_HOME=/root/rust/cargo
+source /root/rust/cargo/env
