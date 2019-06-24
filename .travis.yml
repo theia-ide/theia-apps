@@ -27,6 +27,7 @@ env:
   - NPM_TAG=next IMAGE_NAME=theia-swift NODE_VERSION=10
   - NPM_TAG=latest IMAGE_NAME=theia-cpp NODE_VERSION=10.15.3
   - NPM_TAG=next IMAGE_NAME=theia-cpp NODE_VERSION=10.15.3
+  - NPM_TAG=next IMAGE_NAME=theia-rust NODE_VERSION=10.15.3
 
 install:
   - cd "$IMAGE_NAME-docker"
@@ -42,8 +43,12 @@ install:
 
 script: cd ../tests; yarn; yarn test-app-$IMAGE_NAME
 
+after_failure:
+  script: cd $TRAVIS_BUILD_DIR && ./commit_screenshots.sh
+
 before_deploy:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
 deploy:
   provider: script
   script: docker push "$IMAGE"
