@@ -11,7 +11,8 @@
     "test-app-theia-python": "yarn test",
     "test-app-yangster": "yarn test",
     "test-app-theia-swift": "yarn test",
-    "test-app-theia-cpp": "yarn test"
+    "test-app-theia-cpp": "yarn test",
+    "test-app-theia-rust": "yarn test"
   },
   "devDependencies": {
     "@types/chai": "^4.0.1",
