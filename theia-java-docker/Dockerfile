@@ -5,7 +5,7 @@ FROM node:$NODE_VERSION
 COPY --from=java-base /opt/ibm/java /opt/ibm/java
 
 ENV JAVA_HOME=/opt/ibm/java/jre \
-    PATH=/opt/ibm/java/jre/bin:$PATH
+    PATH=/opt/ibm/java/jre/bin:/opt/ibm/java/bin/:$PATH
 
 RUN apt-get update && \
   apt-get install -y curl apt-transport-https maven gradle && \
