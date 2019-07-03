@@ -16,7 +16,7 @@ docker build --build-arg version=next . -t theiaide/theia-python:next
 ### Run locally on Linux or OS X
 
 ```bash
-docker run -it -p 3000:3000 -v "$(pwd):/home/project" theiaide/theia-python:latest
+docker run -it --init -p 3000:3000 -v "$(pwd):/home/project" theiaide/theia-python:latest
 ```
 
 ### Push to Docker Hub

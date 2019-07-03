@@ -36,7 +36,7 @@ install:
   - "travis_wait 30 sleep 1800 &"
   - docker build --build-arg "version=$NPM_TAG" --build-arg "NODE_VERSION=$NODE_VERSION" --build-arg "GITHUB_TOKEN=$GITHUB_TOKEN" . -t "$IMAGE_TAG" --no-cache
   - docker tag "$IMAGE_TAG" "$IMAGE:$NPM_TAG"
-  - docker run -d -p 0.0.0.0:4000:3000 "$IMAGE_TAG"
+  - docker run --init -d -p 0.0.0.0:4000:3000 "$IMAGE_TAG"
 
 script: cd ../tests; yarn; yarn test-app-$IMAGE_NAME
 
