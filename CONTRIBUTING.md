@@ -10,7 +10,7 @@ Building the image for Theia tag:
 
 Running the image:
 
-    docker run -it -p 3000:3000 -v /myproject:/home/project theiaide/theia:v0.2.1
+    docker run -it --init -p 3000:3000 -v /myproject:/home/project theiaide/theia:v0.2.1
 
 Building the next image:
 
@@ -22,7 +22,7 @@ Tag the image as latest:
 
 Running the latest image:
 
-    docker run -p 3000:3000 theiaide/theia
+    docker run --init -p 3000:3000 theiaide/theia
 
 Pushing images to Docker Hub:
 

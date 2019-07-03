@@ -26,13 +26,13 @@ This repository contains example Theia applications based on published Theia ext
 
 At the moment Theia is still in [the active development](https://github.com/theia-ide/theia#roadmap). It is recommended to use [`theiaide/theia:next`](#typefoxtheianext) image to have a look at the current state.
 
-This script pulls the image and runs Theia IDE on http://localhost:3000 with the current directory as a workspace.
+This script pulls the image and runs Theia IDE on http://localhost:3000 with the current directory as a workspace. The option of `--init` is added to fix the [defunct process problem](https://github.com/theia-ide/theia-apps/issues/195).
 
-    docker run -it -p 3000:3000 -v "$(pwd):/home/project:cached" theiaide/theia:next
+    docker run -it --init -p 3000:3000 -v "$(pwd):/home/project:cached" theiaide/theia:next
 
 You can pass additional arguments to Theia after the image name, for example to enable debugging:
 
-    docker run -it -p 3000:3000 --expose 9229 -p 9229:9229 -v "$(pwd):/home/project:cached" theiaide/theia:next --inspect=0.0.0.0:9229
+    docker run -it --init -p 3000:3000 --expose 9229 -p 9229:9229 -v "$(pwd):/home/project:cached" theiaide/theia:next --inspect=0.0.0.0:9229
 
 ### Image Variants
 

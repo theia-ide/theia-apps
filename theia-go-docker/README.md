@@ -3,7 +3,7 @@
 Run on http://localhost:3000 with the current directory as a workspace:
 
 ```bash
-docker run --security-opt seccomp=unconfined -e GO111MODULE=auto -it -p 3000:3000 -v "$(pwd):/home/project:cached" theiaide/theia-go:next
+docker run --security-opt seccomp=unconfined -e GO111MODULE=auto -it --init -p 3000:3000 -v "$(pwd):/home/project:cached" theiaide/theia-go:next
 ```
 **IMPORTANT**: if your host OS is different from image OS (linux-amd64) then don't mount but pull (`go get`) the project from the container to install dependencies against image OS, otherwise Go tooling won't work properly
 
