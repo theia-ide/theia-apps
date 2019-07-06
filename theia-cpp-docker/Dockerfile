@@ -6,9 +6,14 @@ ARG GITHUB_TOKEN
 ARG NODE_VERSION=10.15.3
 ENV NODE_VERSION $NODE_VERSION
 ENV YARN_VERSION 1.13.0
+
 # use "latest" or "next" version for Theia packages
 ARG version=latest
 
+# Optionally build a striped Theia application with no map file or .ts sources.
+# Makes image ~150MB smaller when enabled
+ARG strip=false
+ENV strip=$strip
 
 #Common deps
 RUN apt-get update && \
@@ -114,10 +119,23 @@ USER theia
 WORKDIR /home/theia
 ADD $version.package.json ./package.json
 
-# using "NODE_OPTIONS=..." to avoid out-of-memory problem in CI
-RUN yarn --cache-folder ./ycache && rm -rf ./ycache && \
-    NODE_OPTIONS="--max_old_space_size=4096" yarn theia build
+RUN if [ "$strip" = "true" ]; then \
+yarn --pure-lockfile && \
+    NODE_OPTIONS="--max_old_space_size=4096" yarn theia build && \
+    yarn --production && \
+    yarn autoclean --init && \
+    echo *.ts >> .yarnclean && \
+    echo *.ts.map >> .yarnclean && \
+    echo *.spec.* >> .yarnclean && \
+    yarn autoclean --force && \
+    yarn cache clean \
+;else \
+yarn --cache-folder ./ycache && rm -rf ./ycache && \
+     NODE_OPTIONS="--max_old_space_size=4096" yarn theia build \
+;fi
+
 EXPOSE 3000
 ENV SHELL /bin/bash
 
-ENTRYPOINT [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]
+ENTRYPOINT [ "node", "/home/theia/src-gen/backend/main.js", "/home/project", "--hostname=0.0.0.0" ]
+# ENTRYPOINT [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ] 

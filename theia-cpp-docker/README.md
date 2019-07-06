@@ -21,3 +21,15 @@ docker run --security-opt seccomp=unconfined --init -it -p 3000:3000 -v "$(pwd):
 Options:
 - `--security-opt seccomp=unconfined` enables running without [the default seccomp profile](https://docs.docker.com/engine/security/seccomp/) to allow cpp debugging
 - `--init` injects an instance of [tini](https://github.com/krallin/tini) in the container, that will wait-for and reap terminated processes, to avoid leaking PIDs.
+
+### How to build
+
+Build image using `next` Theia packages and strip the Theia application to save space (with reduced debuggability) 
+```bash
+docker build --no-cache --build-arg version=next --build-arg strip=true  -t theia-cpp:next .
+```
+
+Build image using `latest` theia packages (Theia app not stripped)
+```bash
+docker build --no-cache --build-arg version=latest --build-arg -t theia-cpp:latest .
+```
