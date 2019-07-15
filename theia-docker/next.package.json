@@ -2,6 +2,8 @@
     "private": true,
     "dependencies": {
         "@theia/callhierarchy": "next",
+        "@theia/debug": "next",
+        "@theia/debug-nodejs": "next",
         "@theia/editor-preview": "next",
         "@theia/file-search": "next",
         "@theia/getting-started": "next",

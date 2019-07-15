@@ -2,6 +2,8 @@
     "private": true,
     "dependencies": {
         "@theia/callhierarchy": "latest",
+        "@theia/debug": "latest",
+        "@theia/debug-nodejs": "latest",
         "@theia/file-search": "latest",
         "@theia/git": "latest",
         "@theia/json": "latest",
