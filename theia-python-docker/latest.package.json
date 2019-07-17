@@ -1,5 +1,15 @@
 {
     "private": true,
+    "theia": {
+        "frontend": {
+            "config": {
+                "applicationName": "Theia Python Example",
+                "preferences": {
+                    "files.enableTrash": false
+                }
+            }
+        }
+    },
     "dependencies": {
         "@theia/file-search": "latest",
         "@theia/git": "latest",
