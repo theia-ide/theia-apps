@@ -6,7 +6,7 @@
     "theia": {
       "frontend": {
         "config": {
-          "applicationName": "Theia cpp Example",
+          "applicationName": "Theia C/C++ Example",
           "preferences": {
             "files.enableTrash": false
           }
