@@ -17,6 +17,7 @@
         "@theia/search-in-workspace": "latest",
         "@theia/terminal": "latest",
         "@theia/textmate-grammars": "latest",
+        "@theia/tslint": "latest",
         "@theia/typescript": "latest",
         "typescript": "latest"
     },

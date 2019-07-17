@@ -38,6 +38,7 @@
         "@theia/task": "latest",
         "@theia/terminal": "latest",
         "@theia/textmate-grammars": "latest",
+        "@theia/tslint": "latest",
         "@theia/typescript": "latest",
         "@theia/userstorage": "latest",
         "@theia/variable-resolver": "latest",
