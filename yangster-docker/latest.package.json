@@ -3,7 +3,7 @@
     "dependencies": {
         "@theia/core": "latest",
         "@theia/editor": "latest",
-		"@theia/filesystem": "latest",        
+        "@theia/filesystem": "latest",
         "@theia/git": "latest",
         "@theia/json": "latest",
         "@theia/languages": "latest",
@@ -15,6 +15,7 @@
         "@theia/search-in-workspace": "latest",
         "@theia/terminal": "latest",
         "@theia/textmate-grammars": "latest",
+        "@theia/tslint": "latest",
         "@theia/typescript": "latest",
         "@theia/workspace": "latest",
         "theia-yang-extension": "latest",
@@ -22,5 +23,5 @@
     },
     "devDependencies": {
         "@theia/cli": "latest"
-	}
+    }
 }
