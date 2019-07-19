@@ -139,6 +139,17 @@ RUN apt-get -y install ruby ruby-dev zlib1g-dev && \
     gem install solargraph
 
 
+# Rust
+ENV RUSTUP_HOME=/usr/local/rustup \
+    CARGO_HOME=/usr/local/cargo \
+    PATH=/usr/local/cargo/bin:$PATH \
+    USER=$USER
+
+RUN curl -fsSL https://sh.rustup.rs | sh -s -- -y \
+    && rustup update \
+    && rustup component add rls rust-src rust-analysis
+    
+
 ## User account
 RUN adduser --disabled-password --gecos '' theia && \
     adduser theia sudo && \
