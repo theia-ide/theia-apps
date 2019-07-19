@@ -1,0 +1,42 @@
+{
+    "name": "theia-example",
+    "version": "0.0.1",
+    "license": "EPL-2.0",
+    "description": "A custom Theia debian package",
+    "engines" : {
+	"node":"10.x"
+    },
+    "dependencies": {
+	"@theia/callhierarchy": "latest",
+	"@theia/file-search": "latest",
+	"@theia/json": "latest",
+	"@theia/markers": "latest",
+	"@theia/merge-conflicts": "latest",
+	"@theia/messages": "latest",
+	"@theia/mini-browser": "latest",
+	"@theia/navigator": "latest",
+	"@theia/outline-view": "latest",
+	"@theia/preferences": "latest",
+	"@theia/preview": "latest",
+	"@theia/search-in-workspace": "latest",
+	"@theia/terminal": "latest",
+	"@theia/textmate-grammars": "latest",
+	"typescript": "latest"
+    },
+    "devDependencies": {
+	"@theia/cli": "latest"
+    },
+    "scripts": {
+	"prebuild-deb": "npm install -g node-deb",
+	"build-deb": "node-deb -- ."
+    },
+    "node_deb": {
+	"init":"none",
+	"dependencies": "nodejs (>= 10.0.0)",
+	"install_strategy":"copy",
+	"executable_name": "theia",
+	"entrypoints": {
+	    "cli": "run_theia.sh"
+	}
+    }
+}
