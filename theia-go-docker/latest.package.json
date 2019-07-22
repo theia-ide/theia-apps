@@ -11,20 +11,31 @@
         }
     },
     "dependencies": {
+        "@theia/editor-preview": "latest",
         "@theia/file-search": "latest",
+        "@theia/getting-started": "latest",
         "@theia/git": "latest",
-        "@theia/go": "latest",
         "@theia/json": "latest",
         "@theia/markers": "latest",
         "@theia/messages": "latest",
         "@theia/navigator": "latest",
         "@theia/outline-view": "latest",
+        "@theia/plugin-ext-vscode": "latest",
         "@theia/preferences": "latest",
+        "@theia/preview": "latest",
         "@theia/search-in-workspace": "latest",
         "@theia/terminal": "latest",
         "@theia/textmate-grammars": "latest"
     },
     "devDependencies": {
-        "@theia/cli": "latest"
+        "@theia/cli": "latest",
+        "@theia/debug": "latest"
+    },
+    "scripts": {
+        "postinstall": "download-debug-adapters"
+    },
+    "adapterDir": "plugins",
+    "adapters": {
+        "vscode-go": "https://ms-vscode.gallery.vsassets.io/_apis/public/gallery/publisher/ms-vscode/extension/Go/0.9.2/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
     }
 }
