@@ -1,0 +1,32 @@
+{
+    "private": true,
+    "theia": {
+        "frontend": {
+            "config": {
+                "applicationName": "Theia Dart Example",
+                "preferences": {
+                    "files.enableTrash": false
+                }
+            }
+        }
+    },
+    "dependencies": {
+        "@theia/editor-preview": "next",
+        "@theia/getting-started": "next",
+        "@theia/json": "next",
+        "@theia/plugin-ext-vscode": "next",
+        "@theia/preview": "next",
+        "@theia/textmate-grammars": "next"
+    },
+    "devDependencies": {
+        "@theia/cli": "next",
+        "@theia/debug": "next"
+    },
+    "scripts": {
+        "postinstall": "download-debug-adapters"
+    },
+    "adapterDir": "plugins",
+    "adapters": {
+        "dart-code": "https://ms-vscode.gallery.vsassets.io/_apis/public/gallery/publisher/Dart-Code/extension/dart-code/3.2.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+    }
+}
