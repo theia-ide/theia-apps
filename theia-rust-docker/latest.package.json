@@ -1,0 +1,20 @@
+{
+    "private": true,
+    "dependencies": {
+        "@theia/file-search": "latest",
+        "@theia/git": "latest",
+        "@theia/rust": "latest",
+        "@theia/json": "latest",
+        "@theia/markers": "latest",
+        "@theia/messages": "latest",
+        "@theia/navigator": "latest",
+        "@theia/outline-view": "latest",
+        "@theia/preferences": "latest",
+        "@theia/search-in-workspace": "latest",
+        "@theia/terminal": "latest",
+        "@theia/textmate-grammars": "latest"
+    },
+    "devDependencies": {
+        "@theia/cli": "latest"
+    }
+}

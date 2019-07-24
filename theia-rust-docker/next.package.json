@@ -1,0 +1,22 @@
+{
+    "private": true,
+    "dependencies": {
+        "@theia/editor-preview": "next",
+        "@theia/getting-started": "next",
+        "@theia/json": "next",
+        "@theia/plugin-ext-vscode": "next",
+        "@theia/preview": "next",
+        "@theia/textmate-grammars": "next"
+    },
+    "devDependencies": {
+        "@theia/cli": "next",
+        "@theia/debug": "next"
+    },
+    "scripts": {
+        "postinstall": "download-debug-adapters"
+    },
+    "adapterDir": "plugins",
+    "adapters": {
+        "rls-vscode": "https://ms-vscode.gallery.vsassets.io/_apis/public/gallery/publisher/rust-lang/extension/rust/0.6.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+    }
+}
