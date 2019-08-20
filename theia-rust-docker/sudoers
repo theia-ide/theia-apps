@@ -11,6 +11,8 @@ Defaults	mail_badpass
 Defaults	secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin"
 Defaults    env_keep += "CONTAINER_START_PATH"
 Defaults    env_keep += "THEIA_RUST_APP_PATH"
+Defaults    env_keep += "RUSTUP_HOME"
+Defaults    env_keep += "CARGO_HOME"
 
 # Host alias specification
 

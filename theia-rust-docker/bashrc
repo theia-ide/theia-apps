@@ -18,6 +18,10 @@ echo "CONTAINER_START_PATH: $CONTAINER_START_PATH"
 cd "$CONTAINER_START_PATH"
 source $HOME/.bashrc
 source /root/nvm_setup.sh
-export RUSTUP_HOME=/root/rust/rustup
-export CARGO_HOME=/root/rust/cargo
-source /root/rust/cargo/env
+
+# allow writing of the CARGO_HOME dir which is owned
+# by group 'rust'
+# when installing rust crates using cargo keep files
+# group writeable
+umask 002
+source $CARGO_HOME/env
