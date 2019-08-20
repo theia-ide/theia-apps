@@ -2,11 +2,12 @@ services:
   - docker
 
 git:
-  depth: 1
+  depth: 2
 
 branches:
   only:
   - master
+  - build_on_changes
 
 language: generic
 
@@ -28,20 +29,17 @@ env:
   - NPM_TAG=latest IMAGE_NAME=theia-cpp NODE_VERSION=10.15.3
   - NPM_TAG=next IMAGE_NAME=theia-cpp NODE_VERSION=10.15.3
   - NPM_TAG=next IMAGE_NAME=theia-rust NODE_VERSION=10.15.3
+  - NPM_TAG=latest IMAGE_NAME=theia-dart NODE_VERSION=10.15.3
+  - NPM_TAG=next IMAGE_NAME=theia-dart NODE_VERSION=10.15.3
 
 install:
-  - cd "$IMAGE_NAME-docker"
-  - IMAGE="theiaide/$IMAGE_NAME"
-  - IMAGE_TAG="$IMAGE":$(npm view "@theia/core@$NPM_TAG" version)
-  - echo $IMAGE_TAG
   # this makes it possible to see output of the docker build as it unfolds:
   # from https://stackoverflow.com/questions/43918874/how-to-increase-no-activity-wait-time-in-travis-ci
   - "travis_wait 30 sleep 1800 &"
-  - docker build --build-arg "version=$NPM_TAG" --build-arg "NODE_VERSION=$NODE_VERSION" --build-arg "GITHUB_TOKEN=$GITHUB_TOKEN" . -t "$IMAGE_TAG" --no-cache
-  - docker tag "$IMAGE_TAG" "$IMAGE:$NPM_TAG"
-  - docker run --init -d -p 0.0.0.0:4000:3000 "$IMAGE_TAG"
+  - ./check_changed.sh $IMAGE_NAME || travis_terminate 0
+  - ./build_container.sh $NPM_TAG $IMAGE_NAME $NODE_VERSION
 
-script: cd ../tests; yarn; yarn test-app-$IMAGE_NAME
+script: cd tests; yarn; yarn test-app-$IMAGE_NAME
 
 after_failure:
   script: cd $TRAVIS_BUILD_DIR && ./commit_screenshots.sh
