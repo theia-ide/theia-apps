@@ -20,8 +20,8 @@ ENV THEIA_RUST_APP_PATH /root/theia_rust_app
 RUN mkdir $THEIA_RUST_APP_PATH
 RUN . /root/nvm_setup.sh && cd $THEIA_RUST_APP_PATH && yarn global add node-gyp
 ADD next.package.json $THEIA_RUST_APP_PATH/package.json
-RUN git clone https://github.com/eclipse/theia-cpp-extension.git /root/theia-cpp-extension
-RUN cp -R /root/theia-cpp-extension/packages $THEIA_RUST_APP_PATH/.
+RUN git clone https://github.com/eclipse-theia/theia-cpp-extensions.git /root/theia-cpp-extensions
+RUN cp -R /root/theia-cpp-extensions/packages $THEIA_RUST_APP_PATH/.
 RUN . /root/nvm_setup.sh && cd $THEIA_RUST_APP_PATH && yarn --cache-folder $THEIA_RUST_APP_PATH/ycache 
 RUN . /root/nvm_setup.sh && cd $THEIA_RUST_APP_PATH/packages/cpp-debug && yarn --cache-folder $THEIA_RUST_APP_PATH/ycache 
 RUN . /root/nvm_setup.sh && cd $THEIA_RUST_APP_PATH && yarn theia build
