@@ -28,8 +28,8 @@ env:
   - NPM_TAG=latest IMAGE_NAME=theia-cpp NODE_VERSION=10.15.3
   - NPM_TAG=next IMAGE_NAME=theia-cpp NODE_VERSION=10.15.3
   - NPM_TAG=next IMAGE_NAME=theia-rust NODE_VERSION=10.15.3
-  - NPM_TAG=latest IMAGE_NAME=theia-dart NODE_VERSION=10.15.3
-  - NPM_TAG=next IMAGE_NAME=theia-dart NODE_VERSION=10.15.3
+  - NPM_TAG=latest IMAGE_NAME=theia-dart NODE_VERSION=10
+  - NPM_TAG=next IMAGE_NAME=theia-dart NODE_VERSION=10
 
 install:
   - cd "$IMAGE_NAME-docker"
