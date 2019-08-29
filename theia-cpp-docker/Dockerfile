@@ -98,6 +98,7 @@ RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - && \
     apt-get update && \
     apt-get install -y cmake \
                        clang-tools-10 \
+                       clangd-10 \
                        clang-tidy-10 \
                        gdb && \
     ln -s /usr/bin/clangd-10 /usr/bin/clangd && \
