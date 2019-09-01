@@ -28,11 +28,20 @@ At the moment Theia is still in [active development](https://github.com/theia-id
 
 This script pulls the image and runs Theia IDE on http://localhost:3000 with the current directory as a workspace. The option of `--init` is added to fix the [defunct process problem](https://github.com/theia-ide/theia-apps/issues/195).
 
+    # Linux or macOS
     docker run -it --init -p 3000:3000 -v "$(pwd):/home/project:cached" theiaide/theia:next
+    
+    # Windows
+    docker run -it --init -p 3000:3000 -v "%cd%:/home/project:cached" theiaide/theia:next
+
 
 You can pass additional arguments to Theia after the image name, for example to enable debugging:
 
+    # Linux or macOS
     docker run -it --init -p 3000:3000 --expose 9229 -p 9229:9229 -v "$(pwd):/home/project:cached" theiaide/theia:next --inspect=0.0.0.0:9229
+    
+    # Windows
+    docker run -it --init -p 3000:3000 --expose 9229 -p 9229:9229 -v "%cd%:/home/project:cached" theiaide/theia:next --inspect=0.0.0.0:9229
 
 ### Image Variants
 
