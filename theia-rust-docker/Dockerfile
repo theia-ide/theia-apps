@@ -20,27 +20,34 @@ ENV THEIA_RUST_APP_PATH /root/theia_rust_app
 RUN mkdir $THEIA_RUST_APP_PATH
 RUN . /root/nvm_setup.sh && cd $THEIA_RUST_APP_PATH && yarn global add node-gyp
 ADD next.package.json $THEIA_RUST_APP_PATH/package.json
-RUN git clone https://github.com/eclipse/theia-cpp-extension.git /root/theia-cpp-extension
+RUN git clone https://github.com/eclipse-theia/theia-cpp-extensions.git /root/theia-cpp-extension
 RUN cp -R /root/theia-cpp-extension/packages $THEIA_RUST_APP_PATH/.
+RUN cp -Rv /root/theia-cpp-extension/dev-packages/* $THEIA_RUST_APP_PATH/packages/.
 RUN . /root/nvm_setup.sh && cd $THEIA_RUST_APP_PATH && yarn --cache-folder $THEIA_RUST_APP_PATH/ycache 
-RUN . /root/nvm_setup.sh && cd $THEIA_RUST_APP_PATH/packages/cpp-debug && yarn --cache-folder $THEIA_RUST_APP_PATH/ycache 
 RUN . /root/nvm_setup.sh && cd $THEIA_RUST_APP_PATH && yarn theia build
 
 # when creating a container a volume is mapped to /root/rust
 # to allow to make persistent changes
+ENV RUST_HOME /root/rust
 ENV RUSTUP_HOME /root/rust/rustup
 ENV CARGO_HOME /root/rust/cargo
 
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > /tmp/sh.rustup.rs && sh /tmp/sh.rustup.rs -y
+# ensure that a custom user who's member of the 'rust' group
+# is able to modify CARGO_HOME dir
+RUN mkdir -p $RUST_HOME && \
+    groupadd -g 500 rust && \
+    chown root:rust $RUST_HOME && \
+    chmod g+rwxs $RUST_HOME 
+RUN umask 0002 && curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > /tmp/sh.rustup.rs && sh /tmp/sh.rustup.rs -y
 
 ARG rust_channel=nightly-2019-08-01
 
 # install language server dependencies for theia
-RUN . /root/rust/cargo/env && rustup toolchain install $rust_channel
-RUN . /root/rust/cargo/env && rustup default $rust_channel
-RUN . /root/rust/cargo/env && rustup component add rust-src rust-docs rls rust-analysis rustfmt clippy
+RUN . /root/rust/cargo/env && umask 0002 && rustup toolchain install $rust_channel
+RUN . /root/rust/cargo/env && umask 0002 && rustup default $rust_channel
 
-RUN . /root/rust/cargo/env && cargo +$rust_channel install racer
+RUN . /root/rust/cargo/env && umask 0002 && rustup component add rust-src rust-docs rls rust-analysis rustfmt clippy
+RUN . /root/rust/cargo/env && umask 0002 && cargo +$rust_channel install racer
 
 EXPOSE 3000
 ENV SHELL /bin/bash
