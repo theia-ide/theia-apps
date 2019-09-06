@@ -9,7 +9,6 @@
     },
     "dependencies": {
         "@theia/core": "next",
-        "@theia/cpp-debug": "*",
         "@theia/editor": "next",
         "@theia/editorconfig": "next",
         "@theia/editor-preview": "next",
@@ -43,7 +42,9 @@
         "@theia/textmate-grammars": "next",
         "@theia/userstorage": "next",
         "@theia/variable-resolver": "next",
-        "@theia/workspace": "next"
+        "@theia/workspace": "next",
+        "@theia/ext-scripts": "*",
+        "@theia/cpp-debug": "next"
     },
     "devDependencies": {
         "@theia/cli": "next"
