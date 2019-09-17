@@ -2,7 +2,7 @@ services:
   - docker
 
 git:
-  depth: 2
+  depth: 1
 
 branches:
   only:
