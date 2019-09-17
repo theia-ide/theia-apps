@@ -3,7 +3,7 @@
     "theia": {
         "frontend": {
             "config": {
-                "applicationName": "Theia Java Example",
+                "applicationName": "Theia Java Example TEST JB",
                 "preferences": {
                     "files.enableTrash": false
                 }
