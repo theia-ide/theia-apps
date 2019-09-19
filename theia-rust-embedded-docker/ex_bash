@@ -1,0 +1,180 @@
+#!/usr/bin/env bash
+# Copyright 2019 D.W.J. Bosman
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+# 
+#      http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+# 
+#
+# This script creates a container and optionally runs a command 
+# Usage:
+# 
+# ex_create
+# Creates the container from an image. The image name is "theia_rust_image" or
+# is obtained from the environment variable SOURCE_IMAGE
+# The container name is default_$SOURCE_IMAGE_$USER or is 
+# $CONTAINER_PREFIX_$SOURCE_IMAGE_$USER when the CONTAINER_PREFIX env var is 
+# specified
+#
+# ex_bash [commands]
+# works as ex_create, but also runs bash with the corect env and the specified 
+# argument commands.
+#
+# ex_bash
+# works as ex_create, but also runs bash with the corect env and starts an
+# interactive shell
+#
+# ex [commands]
+# works as ex_create, but also runs the specified argument commands 
+# without sourcing any environment
+
+
+# Bash's exit on error
+set -e
+
+# Check if any parameters were given
+if [ -z $SOURCE_IMAGE ]; then
+    export SOURCE_IMAGE="theia_rust_image"
+fi
+
+if [ -z $CONTAINER_PREFIX ]; then
+    export CONTAINER_PREFIX="default"
+fi
+
+CURPATH=`pwd`
+
+
+
+# Env variables explanation:
+# TERM: to change the default terminal from none to xterm with colors
+# TMUX: to forward the value of the existing TMUX variable to the container (so you can tell you are in tmux)
+
+if [ ! -e "${TMUX}" ]; then
+    # If not set use a dummy value
+    TMUX=0
+fi
+
+if [[ "$CURPATH" =~ ^$HOME ]]; then
+    :
+else
+    # CURPATH is not below $HOME
+    # CURPATH is not available in the container
+    CURPATH=""
+fi
+
+
+ENV_VARIABLES="--env CONTAINER_START_PATH=""$CURPATH"" --env TERM=xterm-256color --env TMUX=${TMUX}"
+
+SCRIPTNAME=$(basename $BASH_SOURCE)
+
+echo "script is $SCRIPTNAME"
+
+EXECMODE="-ti"
+
+# based on the script invocation handle different scenarios
+if [ $SCRIPTNAME == "ex_create" ]; then
+    # create the container if it doesn't exist.
+    # don't run any command
+    CMD_IN_CONTAINER=""
+elif [ $SCRIPTNAME == "ex" ]; then
+    # create the container if it doesn't exist.
+    # run bash inside the container with the arguments supplied to this script
+    if [ $# -eq 0 ] ; then
+        echo "Need to specify a command"
+        exit 1
+    fi
+    ARGS=${@:1}
+    CMD="bash -ci"
+    CMD_IN_CONTAINER=($CMD "$ARGS")
+    echo "cmd_in_container(ex): ${CMD_IN_CONTAINER[@]}"
+elif [ $SCRIPTNAME == "ex_theia" ]; then
+    # create the container if it doesn't exist.
+    # start Theia
+
+    CMD_IN_CONTAINER=(sudo -i -u $USER bash --rcfile /root/bashrc -i /root/run.sh)
+    EXECMODE="-d"
+    echo "cmd_in_container(ex_theia): ${CMD_IN_CONTAINER[@]}"
+elif [ $SCRIPTNAME == "ex_bash" ]; then
+    # create the container if it doesn't exist.
+    # enter interactive bash session in the container
+    # if an argument is supplied to this script this command is directly
+    # executed in the container    
+     
+    if [ $# -eq 0 ] ; then
+        CMD_IN_CONTAINER=(sudo -i -u $USER bash --rcfile /root/bashrc)
+        echo "cmd_in_container(ex_bash0): ${CMD_IN_CONTAINER[@]}"
+    else
+        ARGS=${@:1}
+        echo "arguments: $ARGS"
+        CMD="sudo -i -u $USER bash --rcfile /root/bashrc -ci"
+        CMD_IN_CONTAINER=($CMD "$ARGS")
+        echo "cmd_in_container(ex_bash): ${CMD_IN_CONTAINER[@]}"
+    fi
+fi
+
+# Set up the container name
+CONTAINER_NAME="${CONTAINER_PREFIX}-${SOURCE_IMAGE}-${USER}"
+echo "Searching for Docker container: ${CONTAINER_NAME}"
+
+CID=$(docker ps -q -f status=exited -f name=^/${CONTAINER_NAME}$)
+if [ "${CID}" ]; then
+    # exited, restart
+    docker restart \
+          ${CONTAINER_NAME} 
+fi
+
+echo "Opening container: ${CONTAINER_NAME}"
+echo "Executing command: ${CMD_IN_CONTAINER[@]}"
+echo "Using environment variables: ${ENV_VARIABLES}"
+
+
+CID=$(docker ps -q -f status=running -f name=^/${CONTAINER_NAME}$)
+if [ ! "${CID}" ]; then
+      echo "Docker container doesn't exist yet; creating."
+      echo "Using source Docker image: ${SOURCE_IMAGE}"
+      USER_UID=$(id -u $USER)
+      USER_GID=$(id -g $USER)
+
+      WWW_UID=$(id -u www-data)
+      WWW_GID=$(id -g www-data)
+
+      # security-opt needed to avoid "Error disabling address
+      # space randomization: Operation not permitted" in gdb
+
+      # privileged required to access usb devices for openocd
+      # Prepare the container
+      docker run \
+          -td \
+          --security-opt seccomp=unconfined \
+          --privileged \
+          -p 3000:3000 \
+          -v /home/$USER:/home/$USER \
+          -v /dev/bus/usb:/dev/bus/usb \
+	      --mount source=rust-cargo-vol,target=/root/rust \
+          --name "${CONTAINER_NAME}" \
+          ${ENV_VARIABLES} \
+          "${SOURCE_IMAGE}" \
+          /bin/bash 
+      # Add the current user to the container
+      docker exec \
+          -ti \
+          ${ENV_VARIABLES} \
+          ${CONTAINER_NAME} \
+          /bin/bash -c "addgroup --gid $USER_GID $USER >/dev/null 2>&1 && adduser --no-create-home --disabled-password --gecos \"\" --uid $USER_UID --gid $USER_GID $USER >/dev/null 2>&1 && usermod -a -G sudo $USER && usermod -aG plugdev $USER && usermod -aG rust $USER"
+
+      CID=$(docker ps -q -f status=running -f name=^/${CONTAINER_NAME}$)
+fi
+
+if [[ -n "${CMD_IN_CONTAINER[@]}" ]]; then
+    # command was specified
+    docker exec $EXECMODE ${ENV_VARIABLES} ${CID} "${CMD_IN_CONTAINER[@]}"
+else
+    :
+fi
