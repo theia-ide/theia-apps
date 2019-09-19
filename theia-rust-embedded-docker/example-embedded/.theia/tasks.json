@@ -1,0 +1,39 @@
+{
+    "tasks": [
+        {
+            "label": "Build",
+            "type": "shell",
+            "command": "cargo",
+            "args": [
+                "build"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Run",
+            "type": "shell",
+            "command": "'sleep 0.1 ; target/debug/adder'",
+            "args": [],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "Start openocd",
+            "type": "shell",
+            "command": "'openocd",
+            "args": [
+                "-f",
+                "/usr/local/share/openocd/scripts/interface/stlink.cfg",
+                "-f",
+                "/usr/local/share/openocd/scripts/target/stm32l1.cfg"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        }
+    ]
+}

@@ -1,0 +1,15 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  "version": "0.2.0",
+  "configurations": [
+      {
+          "gdb": "gdb-multiarch",
+          "type": "gdbtarget",
+          "request": "attach",
+          "name": "Remote debug",
+          "target": {"port": "1234", "host": "127.0.0.1"},
+          "program": "${workspaceFolder}/target/thumbv7m-none-eabi/debug/example-embedded"
+      }
+  ]
+}

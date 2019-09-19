@@ -17,7 +17,7 @@
 # Usage:
 # 
 # ex_create
-# Creates the container from an image. The image name is "theia_rust_image" or
+# Creates the container from an image. The image name is "theia_rust_embedded_image" or
 # is obtained from the environment variable SOURCE_IMAGE
 # The container name is default_$SOURCE_IMAGE_$USER or is 
 # $CONTAINER_PREFIX_$SOURCE_IMAGE_$USER when the CONTAINER_PREFIX env var is 
@@ -41,7 +41,7 @@ set -e
 
 # Check if any parameters were given
 if [ -z $SOURCE_IMAGE ]; then
-    export SOURCE_IMAGE="theia_rust_image"
+    export SOURCE_IMAGE="theia_rust_embedded_image"
 fi
 
 if [ -z $CONTAINER_PREFIX ]; then
@@ -157,7 +157,7 @@ if [ ! "${CID}" ]; then
           -p 3000:3000 \
           -v /home/$USER:/home/$USER \
           -v /dev/bus/usb:/dev/bus/usb \
-	      --mount source=rust-cargo-vol,target=/root/rust \
+	      --mount source=rust-embedded-cargo-vol,target=/root/rust \
           --name "${CONTAINER_NAME}" \
           ${ENV_VARIABLES} \
           "${SOURCE_IMAGE}" \
