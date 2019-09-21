@@ -7,7 +7,7 @@
           "gdb": "gdb-multiarch",
           "type": "gdbtarget",
           "request": "attach",
-          "name": "Remote debug",
+          "name": "Remote debug (qemu)",
           "target": {"port": "1234", "host": "127.0.0.1"},
           "program": "${workspaceFolder}/target/thumbv7m-none-eabi/debug/example-embedded"
       }

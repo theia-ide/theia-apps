@@ -7,11 +7,11 @@ cd [this repo]/theia-rust-docker
 make image
 </pre>
 
-By default Rust channel "nightly-2019-07-19" is used (it contains a.o. the required rls component). You can specify which Rust channel is used. Eg.
+By default Rust channel "nightly-2019-08-01" is used (it contains a.o. the required rls component). You can specify which Rust channel is used. Eg.
 
 <pre>
 cd [this repo]/theia-rust-docker
-RUST_CHANNEL=nightly make image
+RUST_CHANNEL=nightly-2019-08-01 make image
 </pre>
 
 
@@ -59,8 +59,25 @@ docker volume rm rust-cargo-vol
 
 ## Example project
 
-A very simple rust example project is included in the example_project folder. It contains a build task and debug configuration which uses rust-gdb.
+A very simple rust example project is included in the example_embedded folder. It contains a build task and debug configuration which uses rust-gdb.
+
+The [embedded Rust book](https://rust-embedded.github.io/book/) was used to test the image.
+
+### Using QEMU
+
+  1. Run the compile task
+  2. Run run\_qemu.sh to start qemu with the example prokect
+  3. Set a breakpoint on main
+  4. Start the debug configuration "Remote debug (qemu)
+
+### Using OpenOCD
+
+TODO
 
 ## How does it work?
 
 The ex\* scripts check if a container exists and if so reuses it. If not, the container is created including a named volume (rust-cargo-vol) to store persistent changes to the Rust environment. A command is ran inside the container to create a user corresponding to the user calling the ex script. This user has its umask set to 002 and is added to "rust" group so that the user has write access to the cargo folder (mounted from the named volume). If ex_theia is ran, the bashrc script is sourced after which the run.sh script is ran inside the container. The bashrc script changes the dir to the same location from which the ex script was ran (via the CONTAINER_START_PATH environment variable). This is done only if the current path is within the users mounted HOME dir. Next the bashrc script sources nvm_setup.sh which activates a specific node version and adds yarn to the path. Lastly it sets up the rust build environment through RUSTUP_HOME and CARGO_HOME. Once the environment is sourced the run.sh script can actually start Theia.
+
+The container is started with the "--privileged" flag. This ensures that openocd can access the jtag programmer via USB.
+
+
