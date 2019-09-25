@@ -30,6 +30,8 @@ env:
   - NPM_TAG=next IMAGE_NAME=theia-rust NODE_VERSION=10.15.3
   - NPM_TAG=latest IMAGE_NAME=theia-dart NODE_VERSION=10
   - NPM_TAG=next IMAGE_NAME=theia-dart NODE_VERSION=10
+  - NPM_TAG=latest IMAGE_NAME=theia-https NODE_VERSION=10 ENV_VARS="-e token=" PORT=10443
+  - NPM_TAG=next IMAGE_NAME=theia-https NODE_VERSION=10 ENV_VARS="-e token=" PORT=10443
 
 install:
   # this makes it possible to see output of the docker build as it unfolds:
@@ -38,7 +40,7 @@ install:
   # check if there were changes since the previous commit in this image
   # if not (script returns 137) then the build process is terminated
   - ./check_changed.sh $IMAGE_NAME ; RETURN_CODE=$? ; if [ $RETURN_CODE -eq 137 ]; then travis_terminate 0; elif [ $RETURN_CODE -ne 0 ]; then travis_terminate $RETURN_CODE; fi
-  - ./build_container.sh $NPM_TAG $IMAGE_NAME $NODE_VERSION
+  - ./build_container.sh $NPM_TAG $IMAGE_NAME $NODE_VERSION $PORT $ENV_VARS
 
 script: cd tests; yarn; yarn test-app-$IMAGE_NAME
 

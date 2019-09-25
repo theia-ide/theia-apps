@@ -13,7 +13,8 @@
     "test-app-theia-swift": "yarn test",
     "test-app-theia-cpp": "yarn test",
     "test-app-theia-rust": "yarn test",
-    "test-app-theia-dart": "yarn test"
+    "test-app-theia-dart": "yarn test",
+    "test-app-theia-https": "wdio wdio.theia-https.conf.js --theia-port 4000"
   },
   "devDependencies": {
     "@types/chai": "^4.0.1",
