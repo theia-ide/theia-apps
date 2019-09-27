@@ -5,6 +5,7 @@
 
 This repository contains example Theia applications based on published Theia extension packages.
 
+
 - [Theia Docker](#theia-docker)
   - [How to use `theiaide/theia` image?](#how-to-use-theiaidetheia-image)
   - [Image Variants](#image-variants)
