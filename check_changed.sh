@@ -8,9 +8,9 @@ IMAGE_NAME=$1
 
 echo "Travis event type: $TRAVIS_EVENT_TYPE"
 
-if [ "$TRAVIS_EVENT_TYPE" == "api" ]
+if [ "$TRAVIS_EVENT_TYPE" != "pull_request" ]
 then
-    # trigger via travis dashboard
+    # trigger via travis dashboard or cron job
     # test all
     echo "Trigger all tests"
     exit 0
