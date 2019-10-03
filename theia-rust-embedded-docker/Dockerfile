@@ -28,8 +28,10 @@ ENV THEIA_RUST_APP_PATH /root/theia_rust_app
 RUN mkdir $THEIA_RUST_APP_PATH
 RUN . /root/nvm_setup.sh && cd $THEIA_RUST_APP_PATH && yarn global add node-gyp
 ADD next.package.json $THEIA_RUST_APP_PATH/package.json
+# needed for ext-scripts which is not in npm
+# note that cpp-debug is installed from npm and not from this local copy
 RUN git clone https://github.com/eclipse-theia/theia-cpp-extensions.git /root/theia-cpp-extension
-RUN cp -R /root/theia-cpp-extension/packages $THEIA_RUST_APP_PATH/.
+RUN mkdir $THEIA_RUST_APP_PATH/packages
 RUN cp -Rv /root/theia-cpp-extension/dev-packages/* $THEIA_RUST_APP_PATH/packages/.
 RUN . /root/nvm_setup.sh && cd $THEIA_RUST_APP_PATH && yarn --cache-folder $THEIA_RUST_APP_PATH/ycache 
 RUN . /root/nvm_setup.sh && cd $THEIA_RUST_APP_PATH && yarn theia build
@@ -63,9 +65,9 @@ RUN . /root/rust/cargo/env && umask 0002 && rustup target add thumbv7em-none-eab
 RUN . /root/rust/cargo/env && umask 0002 && rustup target add thumbv7em-none-eabihf
 RUN . /root/rust/cargo/env && umask 0002 && cargo +$rust_channel install cargo-binutils
 RUN . /root/rust/cargo/env && umask 0002 && cargo +$rust_channel install cargo-generate
-	
-RUN git clone git://repo.or.cz/openocd.git /root/openocd
 
+# install openocd from source	
+RUN git clone git://repo.or.cz/openocd.git /root/openocd
 RUN cd /root/openocd && ./bootstrap && ./configure --enable-stlink && make && make install
 
 EXPOSE 3000

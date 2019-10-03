@@ -3,7 +3,7 @@
     "theia": {
         "frontend": {
             "config": {
-                "applicationName": "Theia Rust Example"
+                "applicationName": "Theia Embedded Rust Example"
             }
         }
     },
@@ -29,8 +29,6 @@
         "@theia/outline-view": "next",
         "@theia/output": "next",
         "@theia/plantuml": "next",
-        "@theia/plugin": "next",
-        "@theia/plugin-ext": "next",
         "@theia/plugin-ext-vscode": "next",
         "@theia/preferences": "next",
         "@theia/preview": "next",
@@ -44,11 +42,18 @@
         "@theia/variable-resolver": "next",
         "@theia/workspace": "next",
         "@theia/ext-scripts": "*",
-        "@theia/cpp-debug": "next",
-        "@theia/cortex-debug": "next"
+        "@theia/cpp-debug": "next"
     },
     "devDependencies": {
-        "@theia/cli": "next"
+        "@theia/cli": "next",
+        "@theia/debug": "next"
+    },
+    "scripts": {
+        "postinstall": "download-debug-adapters"
+    },
+    "adapterDir": "plugins",
+    "adapters": {
+        "vscode-cortex-debug": "https://marus25.gallery.vsassets.io/_apis/public/gallery/publisher/marus25/extension/Cortex-Debug/0.3.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
     },
     "workspaces": [
       "packages/*"
