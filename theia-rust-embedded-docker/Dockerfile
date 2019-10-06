@@ -29,7 +29,8 @@ RUN mkdir $THEIA_RUST_APP_PATH
 RUN . /root/nvm_setup.sh && cd $THEIA_RUST_APP_PATH && yarn global add node-gyp
 ADD next.package.json $THEIA_RUST_APP_PATH/package.json
 # needed for ext-scripts which is not in npm
-# note that cpp-debug is installed from npm and not from this local copy
+# note 1. that cpp-debug is installed from npm and not from this local copy
+# note 2. cortex-debug is not used from this repo, rather the vscode plugin is used.
 RUN git clone https://github.com/eclipse-theia/theia-cpp-extensions.git /root/theia-cpp-extension
 RUN mkdir $THEIA_RUST_APP_PATH/packages
 RUN cp -Rv /root/theia-cpp-extension/dev-packages/* $THEIA_RUST_APP_PATH/packages/.

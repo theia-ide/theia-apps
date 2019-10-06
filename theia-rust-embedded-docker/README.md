@@ -41,7 +41,7 @@ eg. cd to the example\_workspace folder.
 
 <pre>[path to theia-apps]/theia-rust-docker/ex_theia</pre>
 
-This creates a container and mounts your home dir. It creates a user inside the container with matching UID/GID so that you can edit files without corrupting permissions. A volume rust-cargo-vol is created in which the rust environment is stored. This will allow you to persistently install crates etc. across container life cycles.
+This creates a container and mounts your home dir. It creates a user inside the container with matching UID/GID so that you can edit files without corrupting permissions. A volume rust-embedded-cargo-vol is created in which the rust environment is stored. This will allow you to persistently install crates etc. across container life cycles.
 
 ## Bash inside the container
 
