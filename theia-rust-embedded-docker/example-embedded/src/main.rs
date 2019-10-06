@@ -12,9 +12,18 @@ use cortex_m_semihosting::{debug, hprintln};
 fn main() -> ! {
     hprintln!("Hello, world!").unwrap();
 
+
     // exit QEMU
     // NOTE do not run this on hardware; it can corrupt OpenOCD state
-    debug::exit(debug::EXIT_SUCCESS);
+    // debug::exit(debug::EXIT_SUCCESS);
 
-    loop {}
+    let mut cnt: i32 = 0;
+    loop {
+        cnt += 1;
+        if (cnt % 100) == 0 {
+            hprintln!("Loop {} !", cnt).unwrap();
+
+        }
+
+    }
 }

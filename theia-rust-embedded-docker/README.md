@@ -21,6 +21,16 @@ cd [this repo]/theia-rust-docker
 make clean-image
 </pre>
 
+## Docker configuration
+
+To use this image you must run the docker deamon with ipv6 support (otherwise the Theia cortex-debug plugin will not work correctly). You could add the following to the /etc/docker/daemon.json file:
+<pre>
+    ....
+    "ipv6": true,
+    "fixed-cidr-v6": "2001:db8:1::/64",
+    ...
+</pre>
+
 ## Start Theia
 
 1. cd to a folder in your home dir.
@@ -59,21 +69,23 @@ docker volume rm rust-cargo-vol
 
 ## Example project
 
-A very simple rust example project is included in the example_embedded folder. It contains a build task and debug configuration which uses rust-gdb.
-
-The [embedded Rust book](https://rust-embedded.github.io/book/) was used to test the image.
+A very simple rust example project is included in the example_embedded folder. It contains a build task and debug configurations. I'm using a STM32L152c-discovery board. This board contains a cortex-m3 ARM processor. The [embedded Rust book](https://rust-embedded.github.io/book/) was used as inpsiration.
 
 ### Using QEMU
 
-  1. Run the compile task
-  2. Run run\_qemu.sh to start qemu with the example prokect
-  3. Set a breakpoint on main
-  4. Start the debug configuration "Remote debug (qemu)
+  1. Update memory.x so that flash origin is at 0x0
+  2. Run the compile task
+  3. Run run\_qemu.sh in a terminal to start qemu with the example project
+  4. Set a breakpoint on main
+  5. Start the debug configuration "Remote debug (qemu)"
 
 ### Using OpenOCD
 
-TODO
-
+  1. Update memory.x so that flash origin is at 0x08000000
+  2. Run the compile task
+  3. Set a breakpoint on main
+  4. Start the debug configuration "Debug Microcontroller"
+ 
 ## How does it work?
 
 The ex\* scripts check if a container exists and if so reuses it. If not, the container is created including a named volume (rust-cargo-vol) to store persistent changes to the Rust environment. A command is ran inside the container to create a user corresponding to the user calling the ex script. This user has its umask set to 002 and is added to "rust" group so that the user has write access to the cargo folder (mounted from the named volume). If ex_theia is ran, the bashrc script is sourced after which the run.sh script is ran inside the container. The bashrc script changes the dir to the same location from which the ex script was ran (via the CONTAINER_START_PATH environment variable). This is done only if the current path is within the users mounted HOME dir. Next the bashrc script sources nvm_setup.sh which activates a specific node version and adds yarn to the path. Lastly it sets up the rust build environment through RUSTUP_HOME and CARGO_HOME. Once the environment is sourced the run.sh script can actually start Theia.

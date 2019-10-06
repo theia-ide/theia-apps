@@ -3,6 +3,20 @@
   // Hover to view descriptions of existing attributes.
   "version": "0.2.0",
   "configurations": [
+    {
+        "cwd": "${workspaceRoot}",
+        "executable": "${workspaceFolder}/target/thumbv7m-none-eabi/debug/example-embedded",
+        "name": "Debug Microcontroller",
+        "armToolchainPath": "/usr/bin",
+        "request": "launch",
+        "type": "cortex-debug",
+        "configFiles": ["/home/dinne/theia-apps/theia-rust-embedded-docker/example-embedded/openocd.cfg"],
+        "servertype": "openocd",
+        "openDebug": "openOnSessionStart",
+        "showDevDebugOutput": true,
+        "interface": "jtag",
+        "postLaunchCommands": ["monitor arm semihosting enable"]
+    },
       {
           "gdb": "gdb-multiarch",
           "type": "gdbtarget",
