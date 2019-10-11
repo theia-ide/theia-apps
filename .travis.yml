@@ -57,7 +57,7 @@ before_deploy:
 
 deploy:
   provider: script
-  script: docker push "$IMAGE"
+  script: docker push "theiaide/$IMAGE_NAME"
   on:
     branch: master
   skip_cleanup: true
