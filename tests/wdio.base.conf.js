@@ -189,14 +189,14 @@ function makeConfig(headless) {
             javaArgs: ["-Xmx1024m", "-Djna.nosys=true"],
             drivers: {
                 chrome: {
-                    version: '2.33'
+                    version: '2.35'
                 }
             }
         },
         seleniumInstallArgs: {
             drivers: {
                 chrome: {
-                    version: '2.33'
+                    version: '2.35'
                 }
             }
         },
