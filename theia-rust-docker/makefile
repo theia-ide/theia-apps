@@ -9,7 +9,7 @@ DOCKER_CONTAINER = theia_rust_container
 BUILD_DIR = build-env
 
 ifeq ($(RUST_CHANNEL),)
-RUST_CHANNEL := nightly-2019-08-25
+RUST_CHANNEL := nightly-2019-10-21
 endif
 
 # build the image using the cache
