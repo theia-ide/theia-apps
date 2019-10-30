@@ -1,0 +1,33 @@
+{
+    "private": true,
+    "theia": {
+        "frontend": {
+            "config": {
+                "applicationName": "Theia Python Example",
+                "preferences": {
+                    "files.enableTrash": false
+                }
+            }
+        }
+    },
+    "dependencies": {
+        "@theia/editor-preview": "next",
+        "@theia/file-search": "next",
+        "@theia/getting-started": "next",
+        "@theia/git": "next",
+        "@theia/json": "next",
+        "@theia/messages": "next",
+        "@theia/markers": "next",
+        "@theia/monaco": "next",
+        "@theia/navigator": "next",
+        "@theia/outline-view": "next",
+        "@theia/preferences": "next",
+        "@theia/python": "next",
+        "@theia/search-in-workspace": "next",
+        "@theia/terminal": "next",
+        "@theia/textmate-grammars": "next"
+    },
+    "devDependencies": {
+        "@theia/cli": "next"
+    }
+}
