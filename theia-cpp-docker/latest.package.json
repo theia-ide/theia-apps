@@ -18,6 +18,7 @@
         "@theia/console": "latest",
         "@theia/core": "latest",
         "@theia/cpp": "latest",
+        "@theia/cpp-debug": "latest",
         "@theia/debug": "latest",
         "@theia/debug-nodejs": "latest",
         "@theia/editor": "latest",

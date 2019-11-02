@@ -18,6 +18,7 @@
         "@theia/console": "next",
         "@theia/core": "next",
         "@theia/cpp": "next",
+        "@theia/cpp-debug": "next",
         "@theia/debug": "next",
         "@theia/debug-nodejs": "next",
         "@theia/editor": "next",
