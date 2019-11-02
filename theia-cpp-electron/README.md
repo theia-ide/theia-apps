@@ -46,6 +46,3 @@ $> yarn theia start /home/user/workspace
 ```
 
 If you wish to package your application, you might take inspiration from the `theia-electron` [example](https://github.com/theia-ide/theia-apps/tree/master/theia-electron).
-
-### Coming soon
-- Basic debugging using GDB, provided by `@theia/cpp-debug`

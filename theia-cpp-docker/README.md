@@ -8,7 +8,7 @@ A containerized Theia-based C/C++ demo IDE, including commonly used tools:
 
 The included Theia-based IDE application has the following notable features
 - [@theia/cpp] Language-server built-in clang-tidy static analyser integration. Will analyse files opened in the IDE's editors and report problems for configured rules. See [README](https://github.com/theia-ide/theia/tree/master/packages/cpp#using-the-clang-tidy-linter) for more details, including related preferences
-- [TODO][@theia/cpp-debug] basic C/C++ debugging support
+- [@theia/cpp-debug] Basic C/C++ debugging support
 
 ### How to use
 
@@ -24,7 +24,7 @@ Options:
 
 ### How to build
 
-Build image using `next` Theia packages and strip the Theia application to save space (with reduced debuggability) 
+Build image using `next` Theia packages and strip the Theia application to save space (with reduced debuggability)
 ```bash
 docker build --no-cache --build-arg version=next --build-arg strip=true  -t theia-cpp:next .
 ```
