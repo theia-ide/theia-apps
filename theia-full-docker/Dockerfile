@@ -181,7 +181,8 @@ ARG GITHUB_TOKEN
 RUN yarn --cache-folder ./ycache && rm -rf ./ycache && \
     NODE_OPTIONS="--max_old_space_size=4096" yarn theia build
 EXPOSE 3000
-ENV SHELL /bin/bash
+ENV SHELL /bin/bash\
+    THEIA_DEFAULT_PLUGINS=local-dir:/home/theia/plugins
 
 ENV GOPATH=/home/project
 ENV PATH=$PATH:$GOPATH/bin
