@@ -5,11 +5,6 @@ set -e
 NPM_TAG=$1
 IMAGE_NAME=$2
 NODEVERSION=$3
-PORT=${4:-3000}
-shift
-shift
-shift
-[ $# -gt 0 ] && shift
 
 # Theia standard port is listening in port 3000 (the common nodejs port), and it is exposed when running the docker
 # container (-p 0.0.0.0:4000:3000). But some new applications may need to change it (e.g. theia-https-docker).
