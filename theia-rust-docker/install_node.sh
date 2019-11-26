@@ -10,8 +10,8 @@ INSTALL_NVM_VER=0.34.0
 
 # You can pass argument to this script --version 8
 if [ "$1" = '--version' ]; then
-	echo "==> Using specified node version - $2"
-	INSTALL_NODE_VER=$2
+    echo "==> Using specified node version - $2"
+    INSTALL_NODE_VER=$2
 fi
 
 # don't let nvm change bashrc

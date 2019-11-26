@@ -1,27 +1,26 @@
 {
-  // Use IntelliSense to learn about possible attributes.
-  // Hover to view descriptions of existing attributes.
-  "version": "0.2.0",
-  "configurations": [
-      {
-          "name" : "rust debug",
-          "gdb": "/root/rust/cargo/bin/rust-gdb",
-          "request": "launch",
-          "type": "gdb",
-          "program": "${workspaceFolder}/target/debug/adder",
-          "arguments" : "",
-          "verbose": true,
-          "openGdbConsole": true,
-      },
-      {
-          "name" : "gcc debug",
-          "gdb": "gdb",
-          "request": "launch",
-          "type": "gdb",
-          "program": "${workspaceFolder}/tst/a.out",
-          "arguments" : "",
-          "verbose": true,
-      }
-
-  ]
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "rust debug",
+            "gdb": "/root/rust/cargo/bin/rust-gdb",
+            "request": "launch",
+            "type": "gdb",
+            "program": "${workspaceFolder}/target/debug/adder",
+            "arguments": "",
+            "verbose": true,
+            "openGdbConsole": true,
+        },
+        {
+            "name": "gcc debug",
+            "gdb": "gdb",
+            "request": "launch",
+            "type": "gdb",
+            "program": "${workspaceFolder}/tst/a.out",
+            "arguments": "",
+            "verbose": true,
+        }
+    ]
 }
