@@ -5,8 +5,5 @@ insert_final_newline = true
 end_of_line = lf
 indent_style = space
 
-[*.{js,ts,md}]
-indent_size = 4
-
-[*.{json,yml}]
+[*.{json, md}]
 indent_size = 4

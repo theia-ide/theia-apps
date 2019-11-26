@@ -30,7 +30,7 @@
     "resolutions": {
         "vscode-languageserver-protocol": "3.15.0-next.9",
         "vscode-languageserver-types": "3.15.0-next.5"
-      },
+    },
     "devDependencies": {
         "@theia/cli": "next"
     }
