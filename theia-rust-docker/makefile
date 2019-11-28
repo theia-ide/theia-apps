@@ -9,11 +9,11 @@ DOCKER_CONTAINER = theia_rust_container
 BUILD_DIR = build-env
 
 ifeq ($(RUST_CHANNEL),)
-RUST_CHANNEL := nightly-2019-08-25
+RUST_CHANNEL := nightly-2019-11-25
 endif
 
 # build the image using the cache
-image: 
+image:
     docker build --build-arg rust_channel=$(RUST_CHANNEL) -t $(DOCKER_IMAGE) .
 
 # This empty directory '$(BUILD_DIR)' exists in git, with only an .gitignore file, set to ignore the entire contents of the dir.
