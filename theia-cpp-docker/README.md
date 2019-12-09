@@ -39,3 +39,8 @@ Build image using `latest` theia packages (Theia app not stripped)
 ```bash
 docker build --no-cache --build-arg version=latest --build-arg -t theia-cpp:latest .
 ```
+
+## Additional Information
+
+#### Build Options:
+  - `--build-arg strip=true` strips the application to save space but with reduced debuggability.
