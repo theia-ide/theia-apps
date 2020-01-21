@@ -4,7 +4,7 @@ FROM ibmcom/ibmjava:8-sdk as java-base
 FROM node:$NODE_VERSION
 COPY --from=java-base /opt/ibm/java /opt/ibm/java
 
-ENV JAVA_HOME=/opt/ibm/java/jre \
+ENV JAVA_HOME=/opt/ibm/java \
     PATH=/opt/ibm/java/jre/bin:/opt/ibm/java/bin/:$PATH
 
 RUN apt-get update && \
@@ -25,8 +25,10 @@ USER theia
 ARG version=latest
 ADD $version.package.json ./package.json
 ARG GITHUB_TOKEN
-RUN yarn --cache-folder ./ycache && rm -rf ./ycache
-RUN yarn theia build
+RUN yarn --cache-folder ./ycache && rm -rf ./ycache && \
+    yarn theia build ; \
+    yarn theia download:plugins
 EXPOSE 3000
-ENV SHELL /bin/bash
+ENV SHELL=/bin/bash \
+    THEIA_DEFAULT_PLUGINS=local-dir:/home/theia/plugins
 ENTRYPOINT [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]
