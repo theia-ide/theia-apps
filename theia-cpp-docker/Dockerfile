@@ -24,7 +24,7 @@ RUN apt-get update && \
                        python \
                        wget \
                        xz-utils && \
-    rm -rf /var/lib/apt/lists/* 
+    rm -rf /var/lib/apt/lists/*
 
 #Install node and yarn
 #From: https://github.com/nodejs/docker-node/blob/6b8d86d6ad59e0d1e7a94cec2e909cad137a028f/8/Dockerfile
@@ -103,7 +103,7 @@ RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - && \
                        gdb && \
     ln -s /usr/bin/clangd-10 /usr/bin/clangd && \
     ln -s /usr/bin/clang-tidy-10 /usr/bin/clang-tidy && \
-    rm -rf /var/lib/apt/lists/* 
+    rm -rf /var/lib/apt/lists/*
 
 ## User account
 RUN adduser --disabled-password --gecos '' theia
@@ -134,9 +134,11 @@ yarn --pure-lockfile && \
 yarn --cache-folder ./ycache && rm -rf ./ycache && \
      NODE_OPTIONS="--max_old_space_size=4096" yarn theia build \
 ;fi
+RUN yarn theia download:plugins
 
 EXPOSE 3000
-ENV SHELL /bin/bash
+ENV SHELL=/bin/bash \
+    THEIA_DEFAULT_PLUGINS=local-dir:/home/theia/plugins
 
 ENTRYPOINT [ "node", "/home/theia/src-gen/backend/main.js", "/home/project", "--hostname=0.0.0.0" ]
-# ENTRYPOINT [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ] 
+# ENTRYPOINT [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]
