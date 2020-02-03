@@ -119,9 +119,9 @@ RUN apt-get update && apt-get -y install openjdk-8-jdk maven gradle
 # public LLVM PPA, development version of LLVM
 RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - && \
     echo "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic main" > /etc/apt/sources.list.d/llvm.list && \
-    apt-get update && apt-get install -y clang-tools-10 clangd-10 clang-tidy-10 && \
-    ln -s /usr/bin/clangd-10 /usr/bin/clangd && \
-    ln -s /usr/bin/clang-tidy-10 /usr/bin/clang-tidy
+    apt-get update && apt-get install -y clang-tools-11 clangd-11 clang-tidy-11 && \
+    ln -s /usr/bin/clangd-11 /usr/bin/clangd && \
+    ln -s /usr/bin/clang-tidy-11 /usr/bin/clang-tidy
 
 #Python 2
 RUN apt-get update && apt-get install -y python python-pip && \
