@@ -6,10 +6,14 @@ asar: false
 directories:
   buildResources: resources
 files:
-  - 'src-gen/**/*'
-  - 'lib/**/*'
-  - 'node_modules/**/*'
+  - node_modules
+  - src-gen
+  - lib
+  - scripts
   - package.json
+extraResources:
+  - from: plugins
+    to: app/plugins
 
 win:
   target:
@@ -25,6 +29,8 @@ linux:
   category: Development
   icon: resources/icons
 
+appImage:
+  artifactName: ${productName}-${version}.${ext}
 nsis:
   menuCategory: true
   oneClick: false
@@ -41,13 +47,11 @@ dmg:
   icon: resources/icon.icns
   iconSize: 128
   contents:
-    -
-      x: 380
+    - x: 380
       y: 240
       type: link
       path: /Applications
-    -
-      x: 122
+    - x: 122
       y: 240
       type: file
 
