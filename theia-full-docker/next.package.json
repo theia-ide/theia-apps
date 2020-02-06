@@ -58,7 +58,6 @@
         "@theia/userstorage": "next",
         "@theia/variable-resolver": "next",
         "@theia/workspace": "next",
-        "theia-yang-extension": "next",
         "typescript": "latest"
     },
     "resolutions": {
