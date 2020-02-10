@@ -123,6 +123,7 @@ ADD $version.package.json ./package.json
 RUN if [ "$strip" = "true" ]; then \
 yarn --pure-lockfile && \
     NODE_OPTIONS="--max_old_space_size=4096" yarn theia build && \
+    yarn theia download:plugins && \
     yarn --production && \
     yarn autoclean --init && \
     echo *.ts >> .yarnclean && \
@@ -132,9 +133,8 @@ yarn --pure-lockfile && \
     yarn cache clean \
 ;else \
 yarn --cache-folder ./ycache && rm -rf ./ycache && \
-     NODE_OPTIONS="--max_old_space_size=4096" yarn theia build \
+     NODE_OPTIONS="--max_old_space_size=4096" yarn theia build && yarn theia download:plugins \
 ;fi
-RUN yarn theia download:plugins
 
 EXPOSE 3000
 ENV SHELL=/bin/bash \
