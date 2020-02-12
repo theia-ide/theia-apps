@@ -1,0 +1,47 @@
+{
+    "private": true,
+    "theia": {
+        "frontend": {
+            "config": {
+                "applicationName": "Theia Flutter Example",
+                "preferences": {
+                    "files.enableTrash": false
+                }
+            }
+        }
+    },
+    "dependencies": {
+        "@theia/editor-preview": "latest",
+        "@theia/file-search": "latest",
+        "@theia/getting-started": "latest",
+        "@theia/git": "latest",
+        "@theia/json": "latest",
+        "@theia/markers": "latest",
+        "@theia/messages": "latest",
+        "@theia/navigator": "latest",
+        "@theia/outline-view": "latest",
+        "@theia/plugin-ext-vscode": "latest",
+        "@theia/preferences": "latest",
+        "@theia/preview": "latest",
+        "@theia/search-in-workspace": "latest",
+        "@theia/terminal": "latest",
+        "@theia/textmate-grammars": "latest"
+    },
+    "devDependencies": {
+        "@theia/cli": "latest",
+        "@theia/debug": "latest"
+    },
+    "resolutions": {
+        "vscode-languageserver-protocol": "3.15.0-next.9",
+        "vscode-languageserver-types": "3.15.0-next.5",
+        "**/vscode-json-languageserver/**/vscode-languageserver": "6.0.0-next.1"
+    },
+    "scripts": {
+        "postinstall": "download-debug-adapters"
+    },
+    "adapterDir": "plugins",
+    "adapters": {
+        "dart-code": "https://ms-vscode.gallery.vsassets.io/_apis/public/gallery/publisher/Dart-Code/extension/dart-code/3.2.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage",
+        "flutter": "https://ms-vscode.gallery.vsassets.io/_apis/public/gallery/publisher/Dart-Code/extension/flutter/3.8.1/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage"
+    }
+}
