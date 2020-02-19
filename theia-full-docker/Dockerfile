@@ -123,9 +123,13 @@ RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - && \
     ln -s /usr/bin/clangd-11 /usr/bin/clangd && \
     ln -s /usr/bin/clang-tidy-11 /usr/bin/clang-tidy
 
-#Python 2
-RUN apt-get update && apt-get install -y python python-pip && \
-    pip install python-language-server;
+#Python 2-3
+RUN apt-get update \
+    && apt-get install -y python python-pip \
+    && apt-get install -y python3-dev python3-pip \
+    && pip install --upgrade pip --user \
+    && pip3 install --upgrade pip --user \
+    && pip install python-language-server flake8 autopep8 ;
 
 #PHP
 RUN apt-get -y install php curl php-cli php-mbstring unzip
@@ -144,14 +148,14 @@ RUN apt-get -y install ruby ruby-dev zlib1g-dev && \
 # Rust
 ENV RUSTUP_HOME=/usr/local/rustup \
     CARGO_HOME=/usr/local/cargo \
-    PATH=/usr/local/cargo/bin:$PATH 
+    PATH=/usr/local/cargo/bin:$PATH
 
 ENV USER root
 
 RUN curl -fsSL https://sh.rustup.rs | sh -s -- -y \
     && rustup update \
     && rustup component add rls rust-src rust-analysis
-    
+
 
 ## User account
 RUN adduser --disabled-password --gecos '' theia && \
@@ -180,12 +184,15 @@ ADD $version.package.json ./package.json
 ARG GITHUB_TOKEN
 # using "NODE_OPTIONS=..." to avoid out-of-memory problem in CI
 RUN yarn --cache-folder ./ycache && rm -rf ./ycache && \
-    NODE_OPTIONS="--max_old_space_size=4096" yarn theia build
+    NODE_OPTIONS="--max_old_space_size=4096" yarn theia build ;\
+    yarn theia download:plugins
 EXPOSE 3000
 ENV SHELL=/bin/bash \
     THEIA_DEFAULT_PLUGINS=local-dir:/home/theia/plugins
 
 ENV GOPATH=/home/project
 ENV PATH=$PATH:$GOPATH/bin
+ENV LC_ALL=C.UTF-8
+ENV LANG=C.UTF-8
 
 ENTRYPOINT [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]
