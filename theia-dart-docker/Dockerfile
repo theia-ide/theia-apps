@@ -6,6 +6,7 @@ ADD $version.package.json ./package.json
 ARG GITHUB_TOKEN
 RUN yarn --pure-lockfile && \
     NODE_OPTIONS="--max_old_space_size=4096" yarn theia build && \
+    yarn theia download:plugins && \
     yarn --production && \
     yarn autoclean --init && \
     echo *.ts >> .yarnclean && \
@@ -24,7 +25,7 @@ RUN apt-get update && \
     apt-get -qq update && \
     apt-get install -y build-essential curl
 
-RUN curl -sL https://deb.nodesource.com/setup_$NODE_VERSION.x | bash 
+RUN curl -sL https://deb.nodesource.com/setup_$NODE_VERSION.x | bash
 RUN apt-get install -y nodejs
 RUN apt-get -y install git sudo
 
