@@ -16,6 +16,7 @@ ARG GITHUB_TOKEN
 RUN yarn --cache-folder ./ycache && rm -rf ./ycache
 RUN yarn --pure-lockfile && \
     NODE_OPTIONS="--max_old_space_size=4096" yarn theia build && \
+    yarn theia download:plugins && \
     yarn --production && \
     yarn autoclean --init && \
     echo *.ts >> .yarnclean && \
