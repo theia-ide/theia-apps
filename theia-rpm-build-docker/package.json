@@ -10,7 +10,6 @@
         "@theia/file-search": "latest",
         "@theia/json": "latest",
         "@theia/markers": "latest",
-        "@theia/merge-conflicts": "latest",
         "@theia/messages": "latest",
         "@theia/mini-browser": "latest",
         "@theia/navigator": "latest",
@@ -19,7 +18,6 @@
         "@theia/preview": "latest",
         "@theia/search-in-workspace": "latest",
         "@theia/terminal": "latest",
-        "@theia/textmate-grammars": "latest",
         "typescript": "latest"
     },
     "devDependencies": {
