@@ -26,7 +26,7 @@ ARG version=latest
 ADD $version.package.json ./package.json
 ARG GITHUB_TOKEN
 RUN yarn --cache-folder ./ycache && rm -rf ./ycache && \
-    yarn theia build ; \
+    NODE_OPTIONS="--max_old_space_size=4096" yarn theia build ; \
     yarn theia download:plugins
 EXPOSE 3000
 ENV SHELL=/bin/bash \
