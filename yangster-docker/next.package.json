@@ -28,6 +28,7 @@
         "@theia/process": "next",
         "@theia/search-in-workspace": "next",
         "@theia/terminal": "next",
+        "@theia/vsx-registry": "next",
         "@theia/workspace": "next",
         "theia-yang-extension": "next"
     },

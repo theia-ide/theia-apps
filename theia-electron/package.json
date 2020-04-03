@@ -62,6 +62,7 @@
         "@theia/task": "next",
         "@theia/terminal": "next",
         "@theia/userstorage": "next",
+        "@theia/vsx-registry": "next",
         "@theia/workspace": "next"
     },
     "devDependencies": {

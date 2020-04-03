@@ -41,6 +41,7 @@
         "@theia/userstorage": "next",
         "@theia/variable-resolver": "next",
         "@theia/workspace": "next",
+        "@theia/vsx-registry": "next",
         "@theia/ext-scripts": "*",
         "@theia/cpp-debug": "next"
     },

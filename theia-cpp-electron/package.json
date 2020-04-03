@@ -69,6 +69,7 @@
         "@theia/typehierarchy": "latest",
         "@theia/userstorage": "latest",
         "@theia/variable-resolver": "latest",
+        "@theia/vsx-registry": "latest",
         "@theia/workspace": "latest",
         "@theia/node-pty": "0.7.8-theia004",
         "nsfw": "1.2.5",
