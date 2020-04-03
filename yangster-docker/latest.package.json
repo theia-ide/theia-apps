@@ -25,7 +25,6 @@
         "@theia/process": "latest",
         "@theia/search-in-workspace": "latest",
         "@theia/terminal": "latest",
-        "@theia/vsx-registry": "latest",
         "@theia/workspace": "latest",
         "theia-yang-extension": "latest",
         "typescript": "latest"

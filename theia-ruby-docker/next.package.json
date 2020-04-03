@@ -27,8 +27,7 @@
         "@theia/plugin-ext-vscode": "next",
         "@theia/preferences": "next",
         "@theia/search-in-workspace": "next",
-        "@theia/terminal": "next",
-        "@theia/vsx-registry": "next"
+        "@theia/terminal": "next"
     },
     "resolutions": {
         "vscode-languageserver-protocol": "3.15.0-next.9",
