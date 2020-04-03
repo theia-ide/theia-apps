@@ -26,7 +26,8 @@
         "@theia/preferences": "next",
         "@theia/preview": "next",
         "@theia/search-in-workspace": "next",
-        "@theia/terminal": "next"
+        "@theia/terminal": "next",
+        "@theia/vsx-registry": "next"
     },
     "resolutions": {
         "vscode-json-languageserver": "1.2.2",

@@ -51,6 +51,7 @@
         "@theia/typehierarchy": "latest",
         "@theia/userstorage": "latest",
         "@theia/variable-resolver": "latest",
+        "@theia/vsx-registry": "latest",
         "@theia/workspace": "latest"
     },
     "resolutions": {

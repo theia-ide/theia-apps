@@ -25,7 +25,8 @@
         "@theia/plugin-ext-vscode": "latest",
         "@theia/preferences": "latest",
         "@theia/search-in-workspace": "latest",
-        "@theia/terminal": "latest"
+        "@theia/terminal": "latest",
+        "@theia/vsx-registry": "latest"
     },
     "theiaPluginsDir": "plugins",
     "theiaPlugins": {

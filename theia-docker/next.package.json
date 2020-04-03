@@ -29,7 +29,8 @@
         "@theia/preferences": "next",
         "@theia/preview": "next",
         "@theia/search-in-workspace": "next",
-        "@theia/terminal": "next"
+        "@theia/terminal": "next",
+        "@theia/vsx-registry": "next"
     },
     "devDependencies": {
         "@theia/cli": "next"
