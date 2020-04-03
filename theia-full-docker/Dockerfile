@@ -3,7 +3,7 @@ FROM ubuntu:18.04
 ENV DEBIAN_FRONTEND noninteractive
 
 #Common deps
-RUN apt-get update && apt-get -y install curl xz-utils wget gpg
+RUN apt-get update && apt-get -y install curl xz-utils wget gpg build-essential
 
 #Install node and yarn
 #From: https://github.com/nodejs/docker-node/blob/6b8d86d6ad59e0d1e7a94cec2e909cad137a028f/8/Dockerfile
@@ -80,14 +80,15 @@ RUN apt-get -y install git sudo
 #LSPs
 
 ##GO
-ENV GO_VERSION 1.11.4
+ENV GO_VERSION 1.14
 ENV GOPATH=/usr/local/go-packages
 ENV GO_ROOT=/usr/local/go
 ENV PATH $PATH:/usr/local/go/bin
 ENV PATH $PATH:${GOPATH}/bin
 
-RUN curl -sS https://storage.googleapis.com/golang/go$GO_VERSION.linux-amd64.tar.gz | tar -C /usr/local -xzf - && \
-    go get -u -v github.com/nsf/gocode && \
+RUN curl -sS https://storage.googleapis.com/golang/go$GO_VERSION.linux-amd64.tar.gz | tar -C /usr/local -xzf -
+
+RUN go get -u -v github.com/mdempsky/gocode && \
     go get -u -v github.com/uudashr/gopkgs/cmd/gopkgs && \
     go get -u -v github.com/ramya-rao-a/go-outline && \
     go get -u -v github.com/acroca/go-symbols && \
@@ -98,18 +99,20 @@ RUN curl -sS https://storage.googleapis.com/golang/go$GO_VERSION.linux-amd64.tar
     go get -u -v github.com/josharian/impl && \
     go get -u -v github.com/tylerb/gotype-live && \
     go get -u -v github.com/rogpeppe/godef && \
-    # godoc causing issues ATM, preventing image to build - commenting-out
-    # go get -u -v golang.org/x/tools/cmd/godoc && \
     go get -u -v github.com/zmb3/gogetdoc && \
     go get -u -v golang.org/x/tools/cmd/goimports && \
-    go get -u -v sourcegraph.com/sqs/goreturns && \
-    go get -u -v github.com/golang/lint/golint && \
+    go get -u -v github.com/sqs/goreturns && \
+    go get -u -v winterdrache.de/goformat/goformat && \
+    go get -u -v golang.org/x/lint/golint && \
     go get -u -v github.com/cweill/gotests/... && \
     go get -u -v github.com/alecthomas/gometalinter && \
     go get -u -v honnef.co/go/tools/... && \
+    go get -u -v github.com/golangci/golangci-lint/cmd/golangci-lint && \
+    go get -u -v github.com/mgechev/revive && \
     go get -u -v github.com/sourcegraph/go-langserver && \
-    go get -u -v github.com/derekparker/delve/cmd/dlv && \
-    go get -u -v github.com/davidrjenni/reftools/cmd/fillstruct
+    go get -u -v github.com/go-delve/delve/cmd/dlv && \
+    go get -u -v github.com/davidrjenni/reftools/cmd/fillstruct && \
+    go get -u -v github.com/godoctor/godoctor
 
 #Java
 RUN apt-get update && apt-get -y install openjdk-8-jdk maven gradle
