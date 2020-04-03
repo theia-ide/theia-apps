@@ -92,11 +92,11 @@ RUN set -ex \
 #C/C++ Developer tools
 
 # install clangd and clang-tidy from the public LLVM PPA (nightly build / development version)
-# and also the GDB debugger, cmake from the Ubuntu repos
+# and also the GDB debugger from the Ubuntu repos
 RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - && \
     echo "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic main" > /etc/apt/sources.list.d/llvm.list && \
     apt-get update && \
-    apt-get install -y cmake \
+    apt-get install -y \
                        clang-tools-11 \
                        clangd-11 \
                        clang-tidy-11 \
@@ -104,6 +104,12 @@ RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - && \
     ln -s /usr/bin/clangd-11 /usr/bin/clangd && \
     ln -s /usr/bin/clang-tidy-11 /usr/bin/clang-tidy && \
     rm -rf /var/lib/apt/lists/*
+
+# Install latest stable CMake
+RUN wget "https://cmake.org/files/v3.17/cmake-3.17.0-Linux-x86_64.sh" && \
+    chmod a+x cmake-3.17.0-Linux-x86_64.sh && \
+    ./cmake-3.17.0-Linux-x86_64.sh --prefix=/usr/ --skip-license && \
+    rm cmake-3.17.0-Linux-x86_64.sh
 
 ## User account
 RUN adduser --disabled-password --gecos '' theia
