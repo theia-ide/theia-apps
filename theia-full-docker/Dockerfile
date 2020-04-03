@@ -123,6 +123,12 @@ RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - && \
     ln -s /usr/bin/clangd-11 /usr/bin/clangd && \
     ln -s /usr/bin/clang-tidy-11 /usr/bin/clang-tidy
 
+# Install latest stable CMake
+RUN wget "https://cmake.org/files/v3.17/cmake-3.17.0-Linux-x86_64.sh" && \
+    chmod a+x cmake-3.17.0-Linux-x86_64.sh && \
+    ./cmake-3.17.0-Linux-x86_64.sh --prefix=/usr/ --skip-license && \
+    rm cmake-3.17.0-Linux-x86_64.sh
+
 #Python 2-3
 RUN apt-get update \
     && apt-get install -y python python-pip \
