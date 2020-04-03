@@ -29,7 +29,8 @@
         "@theia/preferences": "latest",
         "@theia/preview": "latest",
         "@theia/search-in-workspace": "latest",
-        "@theia/terminal": "latest"
+        "@theia/terminal": "latest",
+        "@theia/vsx-registry": "latest"
     },
     "devDependencies": {
         "@theia/cli": "latest"
