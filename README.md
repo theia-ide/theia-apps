@@ -24,6 +24,8 @@ This repository contains example Theia applications based on published Theia ext
 
 ### How to use `theiaide/theia` image?
 
+Keep in mind: Theia is a *platform*. The base `theiaide/theia` image contains a barebones theia configuration in a fairly basic environment. If you want to try out Theia, you should probably instead use the `theiaide/theia-full` image first, which contains a setup suitable for developing in multiple languages. Additional Theia images can be seen at [the theiaide organization on Dockerhub](https://hub.docker.com/u/theiaide/). (You can simply substitute `theiaide/theia` in the commands below with your chosen image.)
+
 At the moment Theia is still in [active development](https://github.com/theia-ide/theia#roadmap). It is recommended to use [`theiaide/theia:next`](#typefoxtheianext) image to have a look at the current state.
 
 This script pulls the image and runs Theia IDE on http://localhost:3000 with the current directory as a workspace. The option of `--init` is added to fix the [defunct process problem](https://github.com/theia-ide/theia-apps/issues/195).
