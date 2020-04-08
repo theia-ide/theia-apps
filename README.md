@@ -31,7 +31,7 @@ This script pulls the image and runs Theia IDE on http://localhost:3000 with the
     # Linux or macOS
     docker run -it --init -p 3000:3000 -v "$(pwd):/home/project:cached" theiaide/theia:next
     
-    # Windows
+    # Windows CMD
     docker run -it --init -p 3000:3000 -v "%cd%:/home/project:cached" theiaide/theia:next
 
 
@@ -40,7 +40,7 @@ You can pass additional arguments to Theia after the image name, for example to 
     # Linux or macOS
     docker run -it --init -p 3000:3000 --expose 9229 -p 9229:9229 -v "$(pwd):/home/project:cached" theiaide/theia:next --inspect=0.0.0.0:9229
     
-    # Windows
+    # Windows CMD
     docker run -it --init -p 3000:3000 --expose 9229 -p 9229:9229 -v "%cd%:/home/project:cached" theiaide/theia:next --inspect=0.0.0.0:9229
 
 ### Image Variants
