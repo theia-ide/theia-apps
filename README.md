@@ -1,3 +1,5 @@
+sudo PWD=$(pwd) docker-compose -f theia-ebr00ks/docker-compose.yml up
+
 # Theia applications
 [![Build Status](https://travis-ci.org/theia-ide/theia-apps.svg?branch=master)](https://travis-ci.org/theia-ide/theia-apps)
 

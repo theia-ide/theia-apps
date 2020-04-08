@@ -1,0 +1,19 @@
+version: '3.3'
+services:
+  theia-id:
+    image: theia-ide:latest
+    volumes: 
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${PWD}:/home/project:cached
+    ports: 
+      - 4200:4200
+      - 3000:3000 
+      - 9229:9229
+    expose:
+      - 9229
+    command: --inspect=0.0.0.0:9229
+    networks:
+      - docker-Traefik_private
+networks:
+  docker-Traefik_private:
+    external: true
