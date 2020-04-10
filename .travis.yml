@@ -37,6 +37,8 @@ env:
   - NPM_TAG=next IMAGE_NAME=theia-dart NODE_VERSION=10
   - NPM_TAG=latest IMAGE_NAME=theia-https NODE_VERSION=10 ENV_VARS="-e token=" PORT=10443
   - NPM_TAG=next IMAGE_NAME=theia-https NODE_VERSION=10 ENV_VARS="-e token=" PORT=10443
+  - NPM_TAG=latest IMAGE_NAME=theia-php NODE_VERSION=10
+  - NPM_TAG=next IMAGE_NAME=theia-php NODE_VERSION=10
 
 before_install:
 - nvm install 10
