@@ -23,8 +23,10 @@ ADD next.package.json $THEIA_RUST_APP_PATH/package.json
 RUN git clone https://github.com/eclipse-theia/theia-cpp-extensions.git /root/theia-cpp-extension
 RUN cp -R /root/theia-cpp-extension/packages $THEIA_RUST_APP_PATH/.
 RUN cp -Rv /root/theia-cpp-extension/dev-packages/* $THEIA_RUST_APP_PATH/packages/.
-RUN . /root/nvm_setup.sh && cd $THEIA_RUST_APP_PATH && yarn --cache-folder $THEIA_RUST_APP_PATH/ycache 
-RUN . /root/nvm_setup.sh && cd $THEIA_RUST_APP_PATH && yarn theia build
+RUN . /root/nvm_setup.sh && cd $THEIA_RUST_APP_PATH && yarn --cache-folder $THEIA_RUST_APP_PATH/ycache && \
+    . /root/nvm_setup.sh && cd $THEIA_RUST_APP_PATH && yarn theia build && \
+    . /root/nvm_setup.sh && cd $THEIA_RUST_APP_PATH && yarn theia download:plugins && \
+    rm -rf $THEIA_RUST_APP_PATH/ycache
 
 # when creating a container a volume is mapped to /root/rust
 # to allow to make persistent changes
@@ -40,7 +42,7 @@ RUN mkdir -p $RUST_HOME && \
     chmod g+rwxs $RUST_HOME 
 RUN umask 0002 && curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > /tmp/sh.rustup.rs && sh /tmp/sh.rustup.rs -y
 
-ARG rust_channel=nightly-2020-04-10
+ARG rust_channel=nightly
 
 # install language server dependencies for theia
 RUN . /root/rust/cargo/env && umask 0002 && rustup toolchain install $rust_channel
@@ -51,6 +53,8 @@ RUN . /root/rust/cargo/env && umask 0002 && cargo +$rust_channel install racer
 
 EXPOSE 3000
 ENV SHELL /bin/bash
+ENV THEIA_DEFAULT_PLUGINS=local-dir:/root/theia_rust_app/plugins
+
 # script to start theia
 ADD run.sh /root/run.sh
 # script to set environment
@@ -60,4 +64,3 @@ RUN chmod 755 /root \
 WORKDIR $THEIA_RUST_APP_PATH
 ENV USER root
 CMD [ "bash", "-rcfile", "/root/bashrc", "-i", "/root/run.sh" ]
-

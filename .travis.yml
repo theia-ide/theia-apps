@@ -32,8 +32,7 @@ env:
   - NPM_TAG=next IMAGE_NAME=theia-swift NODE_VERSION=10
   - NPM_TAG=latest IMAGE_NAME=theia-cpp NODE_VERSION=10.15.3
   - NPM_TAG=next IMAGE_NAME=theia-cpp NODE_VERSION=10.15.3
-  # skip the `rust` CI build due to known failures: https://github.com/theia-ide/theia-apps/issues/253
-  # - NPM_TAG=next IMAGE_NAME=theia-rust NODE_VERSION=10.15.3
+  - NPM_TAG=next IMAGE_NAME=theia-rust NODE_VERSION=10.15.3
   - NPM_TAG=latest IMAGE_NAME=theia-dart NODE_VERSION=10
   - NPM_TAG=next IMAGE_NAME=theia-dart NODE_VERSION=10
   - NPM_TAG=latest IMAGE_NAME=theia-https NODE_VERSION=10 ENV_VARS="-e token=" PORT=10443

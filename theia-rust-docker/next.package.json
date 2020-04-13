@@ -10,7 +10,6 @@
     "dependencies": {
         "@theia/core": "next",
         "@theia/editor": "next",
-        "@theia/editorconfig": "next",
         "@theia/editor-preview": "next",
         "@theia/file-search": "next",
         "@theia/filesystem": "next",
