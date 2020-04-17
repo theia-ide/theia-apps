@@ -17,7 +17,6 @@
         "@theia/callhierarchy": "next",
         "@theia/console": "next",
         "@theia/core": "next",
-        "@theia/cpp": "next",
         "@theia/cpp-debug": "next",
         "@theia/debug": "next",
         "@theia/editor": "next",
@@ -56,8 +55,6 @@
     },
     "resolutions": {
         "vscode-json-languageserver": "1.2.2",
-        "vscode-languageserver-protocol": "3.15.0-next.9",
-        "vscode-languageserver-types": "3.15.0-next.5",
         "**/vscode-json-languageserver/**/vscode-languageserver": "6.0.0-next.1"
     },
     "devDependencies": {
@@ -126,6 +123,7 @@
         "vscode-builtin-icon-theme-seti": "https://github.com/theia-ide/vscode-builtin-extensions/releases/download/v1.39.1-prel/vscode-theme-seti-1.39.1-prel.vsix",
         "vscode-builtin-xml": "https://github.com/theia-ide/vscode-builtin-extensions/releases/download/v1.39.1-prel/xml-1.39.1-prel.vsix",
         "vscode-builtin-yaml": "https://github.com/theia-ide/vscode-builtin-extensions/releases/download/v1.39.1-prel/yaml-1.39.1-prel.vsix",
+        "vscode-clangd": "https://open-vsx.org/api/llvm-vs-code-extensions/vscode-clangd/0.0.21/file/llvm-vs-code-extensions.vscode-clangd-0.0.21.vsix",
         "vscode-editorconfig": "https://github.com/theia-ide/editorconfig-vscode/releases/download/v0.14.4/EditorConfig-0.14.4.vsix"
     }
 }
