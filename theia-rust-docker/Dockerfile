@@ -24,7 +24,7 @@ RUN git clone https://github.com/eclipse-theia/theia-cpp-extensions.git /root/th
 RUN cp -R /root/theia-cpp-extension/packages $THEIA_RUST_APP_PATH/.
 RUN cp -Rv /root/theia-cpp-extension/dev-packages/* $THEIA_RUST_APP_PATH/packages/.
 RUN . /root/nvm_setup.sh && cd $THEIA_RUST_APP_PATH && yarn --cache-folder $THEIA_RUST_APP_PATH/ycache && \
-    . /root/nvm_setup.sh && cd $THEIA_RUST_APP_PATH && yarn theia build && \
+    . /root/nvm_setup.sh && cd $THEIA_RUST_APP_PATH && NODE_OPTIONS="--max_old_space_size=4096" yarn theia build && \
     . /root/nvm_setup.sh && cd $THEIA_RUST_APP_PATH && yarn theia download:plugins && \
     rm -rf $THEIA_RUST_APP_PATH/ycache
 
