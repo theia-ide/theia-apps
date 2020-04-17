@@ -6,8 +6,9 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - ${PWD}:/home/project:cached
     ports: 
-      - 4200:4200
       - 3000:3000 
+      - 4040:4040
+      - 4200:4200
       - 9229:9229
     expose:
       - 9229
