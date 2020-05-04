@@ -89,6 +89,7 @@
     "resolutions": {
         "vscode-languageserver-protocol": "3.15.0-next.9",
         "vscode-languageserver-types": "3.15.0-next.5",
-        "**/vscode-json-languageserver/**/vscode-languageserver": "6.0.0-next.1"
+        "**/vscode-json-languageserver/**/vscode-languageserver": "6.0.0-next.1",
+        "**/moment": "2.24.0"
     }
 }
