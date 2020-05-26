@@ -94,6 +94,8 @@
         "vscode-builtin-node-debug2": "https://github.com/theia-ide/vscode-node-debug2/releases/download/v1.33.0/node-debug2-1.33.0.vsix",
         "vscode-builtin-objective-c": "https://github.com/theia-ide/vscode-builtin-extensions/releases/download/v1.39.1-prel/objective-c-1.39.1-prel.vsix",
         "vscode-builtin-perl": "https://github.com/theia-ide/vscode-builtin-extensions/releases/download/v1.39.1-prel/perl-1.39.1-prel.vsix",
+        "vscode-builtin-php": "https://github.com/theia-ide/vscode-builtin-extensions/releases/download/v1.39.1-prel/php-1.39.1-prel.vsix",
+        "vscode-builtin-php-language-features": "https://github.com/theia-ide/vscode-builtin-extensions/releases/download/v1.39.1-prel/php-language-features-1.39.1-prel.vsix",
         "vscode-builtin-powershell": "https://github.com/theia-ide/vscode-builtin-extensions/releases/download/v1.39.1-prel/powershell-1.39.1-prel.vsix",
         "vscode-builtin-pug": "https://github.com/theia-ide/vscode-builtin-extensions/releases/download/v1.39.1-prel/pug-1.39.1-prel.vsix",
         "vscode-builtin-python": "https://github.com/theia-ide/vscode-builtin-extensions/releases/download/v1.39.1-prel/python-1.39.1-prel.vsix",
@@ -128,6 +130,8 @@
         "vscode-java-dependency-viewer": "https://github.com/microsoft/vscode-java-dependency/releases/download/0.6.0/vscode-java-dependency-0.6.0.vsix",
         "vscode-java-redhat": "https://github.com/redhat-developer/vscode-java/releases/download/v0.54.2/redhat.java-0.54.2.vsix",
         "vscode-java-test": "https://github.com/microsoft/vscode-java-test/releases/download/0.22.0/vscjava.vscode-java-test-0.22.0.vsix",
+        "vscode-php-intellisense": "https://github.com/felixfbecker/vscode-php-intellisense/releases/download/v2.3.14/php-intellisense.vsix",
+        "vscode-php-debug": "https://github.com/felixfbecker/vscode-php-debug/releases/download/v1.13.0/php-debug.vsix",
         "vscode-python": "https://github.com/microsoft/vscode-python/releases/download/2020.1.58038/ms-python-release.vsix",
         "vscode-ruby": "https://github.com/rubyide/vscode-ruby/releases/download/v0.25.0/ruby-0.25.0.vsix"
     }
