@@ -57,7 +57,7 @@ RUN go get -u -v github.com/mdempsky/gocode && \
     go get -u -v github.com/cweill/gotests/... && \
     go get -u -v github.com/alecthomas/gometalinter && \
     go get -u -v honnef.co/go/tools/... && \
-    go get -u -v github.com/golangci/golangci-lint/cmd/golangci-lint && \
+    GO111MODULE=on go get github.com/golangci/golangci-lint/cmd/golangci-lint && \
     go get -u -v github.com/mgechev/revive && \
     go get -u -v github.com/sourcegraph/go-langserver && \
     go get -u -v github.com/go-delve/delve/cmd/dlv && \
@@ -65,9 +65,7 @@ RUN go get -u -v github.com/mdempsky/gocode && \
     go get -u -v github.com/godoctor/godoctor
 
 RUN go get -u -v -d github.com/stamblerre/gocode && \
-    go build -o $GOPATH/bin/gocode-gomod github.com/stamblerre/gocode && \
-    rm -rf $GOPATH/src && \
-    rm -rf $GOPATH/pkg
+    go build -o $GOPATH/bin/gocode-gomod github.com/stamblerre/gocode
 
 # configure Theia
 ENV SHELL=/bin/bash \
