@@ -2,7 +2,7 @@
 FROM ubuntu:18.04
 
 RUN apt-get update -yq \
-    && apt-get install curl gnupg build-essential gcc g++ gdb make python sudo git -yq 
+    && apt-get install curl gnupg build-essential gcc g++ gdb make python sudo git -yq
 
 # allow a user to become root in the container
 ADD sudoers /etc/sudoers
@@ -39,7 +39,7 @@ ENV CARGO_HOME /root/rust/cargo
 RUN mkdir -p $RUST_HOME && \
     groupadd -g 500 rust && \
     chown root:rust $RUST_HOME && \
-    chmod g+rwxs $RUST_HOME 
+    chmod g+rwxs $RUST_HOME
 RUN umask 0002 && curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > /tmp/sh.rustup.rs && sh /tmp/sh.rustup.rs -y
 
 ARG rust_channel=nightly
@@ -49,7 +49,7 @@ RUN . /root/rust/cargo/env && umask 0002 && rustup toolchain install $rust_chann
 RUN . /root/rust/cargo/env && umask 0002 && rustup default $rust_channel
 
 RUN . /root/rust/cargo/env && umask 0002 && rustup component add rust-src rust-docs rls rust-analysis rustfmt clippy
-RUN . /root/rust/cargo/env && umask 0002 && cargo +$rust_channel install racer
+# RUN . /root/rust/cargo/env && umask 0002 && cargo +$rust_channel install racer
 
 EXPOSE 3000
 ENV SHELL /bin/bash

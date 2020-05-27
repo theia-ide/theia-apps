@@ -7,3 +7,8 @@ indent_style = space
 
 [*.{json, md}]
 indent_size = 4
+
+# Makefiles require tabs to run successfully.
+[Makefile]
+indent_style = tab
+indent_size = 4
