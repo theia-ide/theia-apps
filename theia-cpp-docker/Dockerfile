@@ -4,6 +4,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 ARG GITHUB_TOKEN
 ARG NODE_VERSION=10.15.3
+ARG LLVM=11
 ENV NODE_VERSION $NODE_VERSION
 ENV YARN_VERSION 1.13.0
 
@@ -97,12 +98,12 @@ RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - && \
     echo "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic main" > /etc/apt/sources.list.d/llvm.list && \
     apt-get update && \
     apt-get install -y \
-                       clang-tools-11 \
-                       clangd-11 \
-                       clang-tidy-11 \
+                       clang-tools-$LLVM \
+                       clangd-$LLVM \
+                       clang-tidy-$LLVM \
                        gdb && \
-    ln -s /usr/bin/clangd-11 /usr/bin/clangd && \
-    ln -s /usr/bin/clang-tidy-11 /usr/bin/clang-tidy && \
+    ln -s /usr/bin/clangd-$LLVM /usr/bin/clangd && \
+    ln -s /usr/bin/clang-tidy-$LLVM /usr/bin/clang-tidy && \
     rm -rf /var/lib/apt/lists/*
 
 # Install latest stable CMake
