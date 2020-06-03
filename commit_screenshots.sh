@@ -19,9 +19,9 @@ SOURCE_BRANCH="master"
 # the screenshots will be committed in this branch
 TARGET_BRANCH="bugs"
 
-# Add the GITHUB_TOKEN to the url so that travis is able to commit
+# Add the GH_TOKEN to the url so that travis is able to commit
 REPO=`git config remote.origin.url`
-AUTH_REPO=${REPO/https:\/\/github.com\//https://${GITHUB_TOKEN}@github.com/}
+AUTH_REPO=${REPO/https:\/\/github.com\//https://${GH_TOKEN}@github.com/}
 SHA=`git rev-parse --verify HEAD`
 
 git config user.name "Travis CI"

@@ -24,7 +24,7 @@ cd "$IMAGE_NAME-docker"
 IMAGE="theiaide/$IMAGE_NAME"
 IMAGE_TAG="$IMAGE":$(npm view "@theia/core@$NPM_TAG" version)
 echo $IMAGE_TAG
-docker build --build-arg "version=$NPM_TAG" --build-arg "NODE_VERSION=$NODE_VERSION" --build-arg "GITHUB_TOKEN=$GITHUB_TOKEN" . -t "$IMAGE_TAG" --no-cache
+docker build --build-arg "version=$NPM_TAG" --build-arg "NODE_VERSION=$NODE_VERSION" --build-arg "GITHUB_TOKEN=$GH_TOKEN" . -t "$IMAGE_TAG" --no-cache
 docker tag "$IMAGE_TAG" "$IMAGE:$NPM_TAG"
 
 # Now we allow to pass extra parameters to the docker run command: any extra parameter to build_container.sh is
