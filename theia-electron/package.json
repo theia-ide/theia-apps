@@ -1,7 +1,7 @@
 {
     "private": true,
-    "name": "theia-electron",
-    "version": "0.1.0",
+    "name": "theia-electron-example",
+    "version": "1.2.0",
     "description": "Theia",
     "main": "scripts/theia-electron-main.js",
     "engines": {
@@ -9,10 +9,15 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/theia-ide/theia.git"
+        "url": "git+https://github.com/theia-ide/theia-apps.git"
     },
     "theia": {
         "target": "electron",
+        "frontend": {
+          "config": {
+            "applicationName": "Theia Electron Example Application"
+          }
+        }, 
         "backend": {
             "config": {
                 "startupTimeout": -1
@@ -31,41 +36,41 @@
     "author": "typefox <npm@typefox.io>",
     "license": "Apache-2.0",
     "bugs": {
-        "url": "https://github.com/theia-ide/theia/issues"
+        "url": "https://github.com/theia-ide/theia-apps/issues"
     },
-    "homepage": "https://github.com/theia-ide/theia#readme",
+    "homepage": "https://github.com/theia-ide/theia-apps#readme",
     "dependencies": {
-        "@theia/callhierarchy": "next",
-        "@theia/core": "next",
-        "@theia/editor": "next",
-        "@theia/electron": "next",
-        "@theia/file-search": "next",
-        "@theia/filesystem": "next",
-        "@theia/getting-started": "next",
-        "@theia/git": "next",
-        "@theia/json": "next",
-        "@theia/keymaps": "next",
-        "@theia/languages": "next",
-        "@theia/markers": "next",
-        "@theia/messages": "next",
-        "@theia/mini-browser": "next",
-        "@theia/monaco": "next",
-        "@theia/navigator": "next",
-        "@theia/outline-view": "next",
-        "@theia/output": "next",
-        "@theia/plugin-ext": "next",
-        "@theia/plugin-ext-vscode": "next",
-        "@theia/preferences": "next",
-        "@theia/preview": "next",
-        "@theia/process": "next",
-        "@theia/search-in-workspace": "next",
-        "@theia/task": "next",
-        "@theia/terminal": "next",
-        "@theia/userstorage": "next",
-        "@theia/workspace": "next"
+        "@theia/callhierarchy": "latest",
+        "@theia/core": "latest",
+        "@theia/editor": "latest",
+        "@theia/electron": "latest",
+        "@theia/file-search": "latest",
+        "@theia/filesystem": "latest",
+        "@theia/getting-started": "latest",
+        "@theia/git": "latest",
+        "@theia/json": "latest",
+        "@theia/keymaps": "latest",
+        "@theia/languages": "latest",
+        "@theia/markers": "latest",
+        "@theia/messages": "latest",
+        "@theia/mini-browser": "latest",
+        "@theia/monaco": "latest",
+        "@theia/navigator": "latest",
+        "@theia/outline-view": "latest",
+        "@theia/output": "latest",
+        "@theia/plugin-ext": "latest",
+        "@theia/plugin-ext-vscode": "latest",
+        "@theia/preferences": "latest",
+        "@theia/preview": "latest",
+        "@theia/process": "latest",
+        "@theia/search-in-workspace": "latest",
+        "@theia/task": "latest",
+        "@theia/terminal": "latest",
+        "@theia/userstorage": "latest",
+        "@theia/workspace": "latest"
     },
     "devDependencies": {
-        "@theia/cli": "next",
+        "@theia/cli": "latest",
         "electron-builder": "^22.4.1",
         "bufferutil": "4",
         "utf-8-validate": "5"
@@ -75,9 +80,9 @@
     ],
     "resolutions": {
         "vscode-json-languageserver": "1.2.2",
-        "vscode-languageserver-protocol": "3.15.0-next.9",
-        "vscode-languageserver-types": "3.15.0-next.5",
-        "**/vscode-json-languageserver/**/vscode-languageserver": "6.0.0-next.1",
+        "vscode-languageserver-protocol": "3.15.0",
+        "vscode-languageserver-types": "3.15.0",
+        "**/vscode-json-languageserver/**/vscode-languageserver": "6.0.0",
         "**/fs-extra": "^4.0.3"
     },
     "theiaPluginsDir": "plugins",
