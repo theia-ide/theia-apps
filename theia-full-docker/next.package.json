@@ -5,22 +5,25 @@
             "config": {
                 "applicationName": "Theia Multi-Language Example",
                 "preferences": {
-                    "files.enableTrash": false
+                    "files.enableTrash": false,
+                    "ruby.useLanguageServer": true
                 }
             }
         }
     },
     "dependencies": {
         "@theia/callhierarchy": "next",
+        "@theia/console": "next",
         "@theia/core": "next",
         "@theia/cpp": "next",
+        "@theia/cpp-debug": "next",
         "@theia/debug": "next",
         "@theia/editor": "next",
         "@theia/editor-preview": "next",
         "@theia/file-search": "next",
         "@theia/filesystem": "next",
-        "@theia/git": "next",
         "@theia/getting-started": "next",
+        "@theia/git": "next",
         "@theia/json": "next",
         "@theia/keymaps": "next",
         "@theia/languages": "next",
@@ -41,9 +44,11 @@
         "@theia/preview": "next",
         "@theia/process": "next",
         "@theia/rust": "next",
+        "@theia/scm": "next",
         "@theia/search-in-workspace": "next",
         "@theia/task": "next",
         "@theia/terminal": "next",
+        "@theia/typehierarchy": "next",
         "@theia/userstorage": "next",
         "@theia/variable-resolver": "next",
         "@theia/vsx-registry": "next",
@@ -124,6 +129,7 @@
         "vscode-builtin-icon-theme-seti": "https://github.com/theia-ide/vscode-builtin-extensions/releases/download/v1.39.1-prel/vscode-theme-seti-1.39.1-prel.vsix",
         "vscode-builtin-xml": "https://github.com/theia-ide/vscode-builtin-extensions/releases/download/v1.39.1-prel/xml-1.39.1-prel.vsix",
         "vscode-builtin-yaml": "https://github.com/theia-ide/vscode-builtin-extensions/releases/download/v1.39.1-prel/yaml-1.39.1-prel.vsix",
+        "vscode-clangd": "https://open-vsx.org/api/llvm-vs-code-extensions/vscode-clangd/0.0.21/file/llvm-vs-code-extensions.vscode-clangd-0.0.21.vsix",
         "vscode-editorconfig": "https://github.com/theia-ide/editorconfig-vscode/releases/download/v0.14.4/EditorConfig-0.14.4.vsix",
         "vscode-eslint": "https://github.com/theia-ide/vscode-eslint/releases/download/release%2F2.0.15/vscode-eslint-2.0.15.vsix",
         "vscode-go": "https://github.com/microsoft/vscode-go/releases/download/0.12.0/Go-0.12.0.vsix",
