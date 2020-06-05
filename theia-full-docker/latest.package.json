@@ -5,15 +5,18 @@
             "config": {
                 "applicationName": "Theia Multi-Language Example",
                 "preferences": {
-                    "files.enableTrash": false
+                    "files.enableTrash": false,
+                    "ruby.useLanguageServer": true
                 }
             }
         }
     },
     "dependencies": {
         "@theia/callhierarchy": "latest",
+        "@theia/console": "latest",
         "@theia/core": "latest",
         "@theia/cpp": "latest",
+        "@theia/cpp-debug": "latest",
         "@theia/debug": "latest",
         "@theia/editor": "latest",
         "@theia/editor-preview": "latest",
@@ -40,9 +43,11 @@
         "@theia/preview": "latest",
         "@theia/process": "latest",
         "@theia/rust": "latest",
+        "@theia/scm": "latest",
         "@theia/search-in-workspace": "latest",
         "@theia/task": "latest",
         "@theia/terminal": "latest",
+        "@theia/typehierarchy": "latest",
         "@theia/userstorage": "latest",
         "@theia/variable-resolver": "latest",
         "@theia/vsx-registry": "latest",

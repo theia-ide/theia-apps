@@ -2,8 +2,28 @@ FROM ubuntu:18.04
 
 ENV DEBIAN_FRONTEND noninteractive
 
+ARG GITHUB_TOKEN
+ARG NODE_VERSION=10.15.3
+ENV NODE_VERSION $NODE_VERSION
+ENV YARN_VERSION 1.13.0
+
+# use "latest" or "next" version for Theia packages
+ARG version=latest
+
+# Optionally build a striped Theia application with no map file or .ts sources.
+# Makes image ~150MB smaller when enabled
+ARG strip=false
+ENV strip=$strip
+
 #Common deps
-RUN apt-get update && apt-get -y install curl xz-utils wget gpg build-essential
+RUN apt-get update && \
+    apt-get -y install build-essential \
+                       curl \
+                       git \
+                       gpg \
+                       python \
+                       wget \
+                       xz-utils
 
 #Install node and yarn
 #From: https://github.com/nodejs/docker-node/blob/6b8d86d6ad59e0d1e7a94cec2e909cad137a028f/8/Dockerfile
@@ -30,9 +50,6 @@ RUN set -ex \
     gpg --batch --keyserver ha.pool.sks-keyservers.net --recv-keys "$key" ; \
     done
 
-ARG NODE_VERSION=10.15.3
-ENV NODE_VERSION $NODE_VERSION
-
 RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
     && case "${dpkgArch##*-}" in \
     amd64) ARCH='x64';; \
@@ -51,7 +68,6 @@ RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
     && rm "node-v$NODE_VERSION-linux-$ARCH.tar.xz" SHASUMS256.txt.asc SHASUMS256.txt \
     && ln -s /usr/local/bin/node /usr/local/bin/nodejs
 
-ENV YARN_VERSION 1.13.0
 
 RUN set -ex \
     && for key in \
@@ -75,19 +91,22 @@ RUN set -ex \
 #Developer tools
 
 ## Git and sudo (sudo needed for user override)
-RUN apt-get -y install git sudo
+RUN apt-get update && apt-get -y install git sudo
 
 #LSPs
 
 ##GO
-ENV GO_VERSION 1.14
-ENV GOPATH=/usr/local/go-packages
-ENV GO_ROOT=/usr/local/go
-ENV PATH $PATH:/usr/local/go/bin
-ENV PATH $PATH:${GOPATH}/bin
+ENV GO_VERSION=1.14 \
+    GOOS=linux \
+    GOARCH=amd64 \
+    GOROOT=/usr/local/go \
+    GOPATH=/usr/local/go-packages
+ENV PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 
-RUN curl -sS https://storage.googleapis.com/golang/go$GO_VERSION.linux-amd64.tar.gz | tar -C /usr/local -xzf -
+# install Go
+RUN curl -fsSL https://storage.googleapis.com/golang/go$GO_VERSION.$GOOS-$GOARCH.tar.gz | tar -C /usr/local -xzv
 
+# install VS Code Go tools: https://github.com/Microsoft/vscode-go/blob/058eccf17f1b0eebd607581591828531d768b98e/src/goInstallTools.ts#L19-L45
 RUN go get -u -v github.com/mdempsky/gocode && \
     go get -u -v github.com/uudashr/gopkgs/cmd/gopkgs && \
     go get -u -v github.com/ramya-rao-a/go-outline && \
@@ -114,17 +133,31 @@ RUN go get -u -v github.com/mdempsky/gocode && \
     go get -u -v github.com/davidrjenni/reftools/cmd/fillstruct && \
     go get -u -v github.com/godoctor/godoctor
 
+RUN go get -u -v -d github.com/stamblerre/gocode && \
+    go build -o $GOPATH/bin/gocode-gomod github.com/stamblerre/gocode
+
+ENV PATH=$PATH:$GOPATH/bin
+
+
 #Java
 RUN apt-get update && apt-get -y install openjdk-8-jdk maven gradle
 
 
 #C/C++
 # public LLVM PPA, development version of LLVM
+ARG LLVM=11
+
 RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - && \
     echo "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic main" > /etc/apt/sources.list.d/llvm.list && \
-    apt-get update && apt-get install -y clang-tools-11 clangd-11 clang-tidy-11 && \
-    ln -s /usr/bin/clangd-11 /usr/bin/clangd && \
-    ln -s /usr/bin/clang-tidy-11 /usr/bin/clang-tidy
+    apt-get update && \
+    apt-get install -y \
+                       clang-tools-$LLVM \
+                       clangd-$LLVM \
+                       clang-tidy-$LLVM \
+                       gdb && \
+    ln -s /usr/bin/clangd-$LLVM /usr/bin/clangd && \
+    ln -s /usr/bin/clang-tidy-$LLVM /usr/bin/clang-tidy
+
 
 # Install latest stable CMake
 RUN wget "https://cmake.org/files/v3.17/cmake-3.17.0-Linux-x86_64.sh" && \
@@ -132,13 +165,15 @@ RUN wget "https://cmake.org/files/v3.17/cmake-3.17.0-Linux-x86_64.sh" && \
     ./cmake-3.17.0-Linux-x86_64.sh --prefix=/usr/ --skip-license && \
     rm cmake-3.17.0-Linux-x86_64.sh
 
+
 #Python 2-3
 RUN apt-get update \
-    && apt-get install -y python python-pip \
+    && apt-get install -y python-dev python-pip \
     && apt-get install -y python3-dev python3-pip \
     && pip install --upgrade pip --user \
     && pip3 install --upgrade pip --user \
-    && pip install python-language-server flake8 autopep8 ;
+    && pip install python-language-server flake8 autopep8
+
 
 #.NET Core SDK
 ARG DOTNET_VERSION=3.1
@@ -151,20 +186,21 @@ RUN curl -SLO "https://packages.microsoft.com/config/ubuntu/18.04/packages-micro
 
 
 #PHP
-RUN apt-get -y install php curl php-cli php-mbstring unzip
-
-# https://getcomposer.org/doc/faqs/how-to-install-composer-programmatically.md
-# https://linuxconfig.org/how-to-install-php-composer-on-debian-linux
+RUN apt-get update && apt-get -y install curl php php-cli php-mbstring unzip php-phar php-json php-tokenizer php-ctype php-yaml php-xdebug
+RUN echo '[XDebug]\n\
+xdebug.remote_enable = 1\n\
+xdebug.remote_autostart = 1' >> /etc/php/7.2/mods-available/xdebug.ini
 RUN curl -s -o composer-setup.php https://getcomposer.org/installer \
     && php composer-setup.php --install-dir=/usr/local/bin --filename=composer \
     && rm composer-setup.php
 
+
 #Ruby
-RUN apt-get -y install ruby ruby-dev zlib1g-dev && \
+RUN apt-get update && apt-get -y install ruby ruby-dev zlib1g-dev && \
     gem install solargraph
 
 
-# Rust
+#Rust
 ENV RUSTUP_HOME=/usr/local/rustup \
     CARGO_HOME=/usr/local/cargo \
     PATH=/usr/local/cargo/bin:$PATH
@@ -200,18 +236,17 @@ RUN apt-get update \
     && ln -s /usr/local/swift/usr/bin/sourcekit-lsp /usr/bin
 
 
-# Dart
+#Dart
 ENV DART_VERSION 2.8.4
 
 RUN \
-  apt-get -q update && apt-get install --no-install-recommends -y -q gnupg2 curl git ca-certificates apt-transport-https openssh-client && \
+  apt-get update && apt-get install --no-install-recommends -y -q gnupg2 curl git ca-certificates apt-transport-https openssh-client && \
   curl https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
   curl https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_stable.list > /etc/apt/sources.list.d/dart_stable.list && \
   curl https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_testing.list > /etc/apt/sources.list.d/dart_testing.list && \
   curl https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_unstable.list > /etc/apt/sources.list.d/dart_unstable.list && \
   apt-get update && \
-  apt-get install dart=$DART_VERSION-1 && \
-  rm -rf /var/lib/apt/lists/*
+  apt-get install dart=$DART_VERSION-1
 
 ENV DART_SDK /usr/lib/dart
 ENV PATH $DART_SDK/bin:/theia/.pub-cache/bin:$PATH
@@ -220,7 +255,8 @@ ENV PATH $DART_SDK/bin:/theia/.pub-cache/bin:$PATH
 ## User account
 RUN adduser --disabled-password --gecos '' theia && \
     adduser theia sudo && \
-    echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers;
+    echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+ADD settings.json /home/theia/.theia/
 
 RUN chmod g+rw /home && \
     mkdir -p /home/project && \
@@ -228,32 +264,49 @@ RUN chmod g+rw /home && \
     mkdir -p /usr/local/cargo && \
     mkdir -p /usr/local/go && \
     mkdir -p /usr/local/go-packages && \
+    chown -R theia:theia /home/theia && \
+    chown -R theia:theia /home/project && \
     chown -R theia:theia /usr/local/cargo && \
     chown -R theia:theia /usr/local/go && \
-    chown -R theia:theia /usr/local/go-packages && \
-    chown -R theia:theia /home/theia && \
-    chown -R theia:theia /home/project;
+    chown -R theia:theia /usr/local/go-packages
 
-#Theia
+
+# Theia application
 ##Needed for node-gyp, nsfw build
-RUN apt-get update && apt-get install -y python build-essential
+RUN apt-get update && apt-get install -y python build-essential && \
+  apt-get clean && \
+  rm -rf /var/cache/apt/* && \
+  rm -rf /var/lib/apt/lists/* && \
+  rm -rf /tmp/*
 
 USER theia
-ARG version=latest
 WORKDIR /home/theia
 ADD $version.package.json ./package.json
-ARG GITHUB_TOKEN
-# using "NODE_OPTIONS=..." to avoid out-of-memory problem in CI
-RUN yarn --cache-folder ./ycache && rm -rf ./ycache && \
-    NODE_OPTIONS="--max_old_space_size=4096" yarn theia build ;\
-    yarn theia download:plugins
-EXPOSE 3000
-ENV SHELL=/bin/bash \
-    THEIA_DEFAULT_PLUGINS=local-dir:/home/theia/plugins
 
-ENV GOPATH=/home/project
-ENV PATH=$PATH:$GOPATH/bin
+RUN if [ "$strip" = "true" ]; then \
+yarn --pure-lockfile && \
+    NODE_OPTIONS="--max_old_space_size=4096" yarn theia build && \
+    yarn theia download:plugins && \
+    yarn --production && \
+    yarn autoclean --init && \
+    echo *.ts >> .yarnclean && \
+    echo *.ts.map >> .yarnclean && \
+    echo *.spec.* >> .yarnclean && \
+    yarn autoclean --force && \
+    yarn cache clean \
+;else \
+yarn --cache-folder ./ycache && rm -rf ./ycache && \
+     NODE_OPTIONS="--max_old_space_size=4096" yarn theia build && yarn theia download:plugins \
+;fi
+
+EXPOSE 3000
+# configure Theia
+ENV SHELL=/bin/bash \
+    THEIA_DEFAULT_PLUGINS=local-dir:/home/theia/plugins  \
+    # configure user Go path
+    GOPATH=/home/project
+
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
 
-ENTRYPOINT [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]
+ENTRYPOINT [ "node", "/home/theia/src-gen/backend/main.js", "/home/project", "--hostname=0.0.0.0" ]
