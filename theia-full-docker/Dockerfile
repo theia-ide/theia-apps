@@ -166,6 +166,23 @@ RUN curl -fsSL https://sh.rustup.rs | sh -s -- -y \
     && rustup component add rls rust-src rust-analysis
 
 
+# Dart
+ENV DART_VERSION 2.8.4
+
+RUN \
+  apt-get -q update && apt-get install --no-install-recommends -y -q gnupg2 curl git ca-certificates apt-transport-https openssh-client && \
+  curl https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
+  curl https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_stable.list > /etc/apt/sources.list.d/dart_stable.list && \
+  curl https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_testing.list > /etc/apt/sources.list.d/dart_testing.list && \
+  curl https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_unstable.list > /etc/apt/sources.list.d/dart_unstable.list && \
+  apt-get update && \
+  apt-get install dart=$DART_VERSION-1 && \
+  rm -rf /var/lib/apt/lists/*
+
+ENV DART_SDK /usr/lib/dart
+ENV PATH $DART_SDK/bin:/theia/.pub-cache/bin:$PATH
+
+
 ## User account
 RUN adduser --disabled-password --gecos '' theia && \
     adduser theia sudo && \
@@ -173,6 +190,7 @@ RUN adduser --disabled-password --gecos '' theia && \
 
 RUN chmod g+rw /home && \
     mkdir -p /home/project && \
+    mkdir -p /home/theia/.pub-cache/bin && \
     mkdir -p /usr/local/cargo && \
     mkdir -p /usr/local/go && \
     mkdir -p /usr/local/go-packages && \
