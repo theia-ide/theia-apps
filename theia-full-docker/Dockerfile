@@ -140,7 +140,7 @@ ENV PATH=$PATH:$GOPATH/bin
 
 
 #Java
-RUN apt-get update && apt-get -y install openjdk-8-jdk maven gradle
+RUN apt-get update && apt-get -y install openjdk-11-jdk maven gradle
 
 
 #C/C++
