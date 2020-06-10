@@ -175,10 +175,13 @@ RUN wget "https://cmake.org/files/v3.17/cmake-$CMAKE_VERSION-Linux-x86_64.sh" &&
 
 #Python 2-3
 RUN apt-get update \
+    && apt-get install -y software-properties-common \
+    && add-apt-repository -y ppa:deadsnakes/ppa \
     && apt-get install -y python-dev python-pip \
-    && apt-get install -y python3-dev python3-pip \
-    && pip install --upgrade pip --user \
-    && pip3 install --upgrade pip --user \
+    && apt-get install -y python3.8 python3-dev python3-pip \
+    && apt-get remove -y software-properties-common \
+    && python -m pip install --upgrade pip --user \
+    && python3.8 -m pip install --upgrade pip --user \
     && pip install python-language-server flake8 autopep8
 
 
@@ -282,6 +285,7 @@ RUN chmod g+rw /home && \
 ##Needed for node-gyp, nsfw build
 RUN apt-get update && apt-get install -y python build-essential && \
   apt-get clean && \
+  apt-get autoremove -y && \
   rm -rf /var/cache/apt/* && \
   rm -rf /var/lib/apt/lists/* && \
   rm -rf /tmp/*
