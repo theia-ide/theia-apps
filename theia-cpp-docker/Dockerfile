@@ -101,20 +101,26 @@ RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - && \
                        clang-tools-$LLVM \
                        clangd-$LLVM \
                        clang-tidy-$LLVM \
+                       gcc-multilib \
+                       g++-multilib \
                        gdb && \
-    ln -s /usr/bin/clangd-$LLVM /usr/bin/clangd && \
+    ln -s /usr/bin/clang-$LLVM /usr/bin/clang && \
+    ln -s /usr/bin/clang++-$LLVM /usr/bin/clang++ && \
+    ln -s /usr/bin/clang-cl-$LLVM /usr/bin/clang-cl && \
+    ln -s /usr/bin/clang-cpp-$LLVM /usr/bin/clang-cpp && \
     ln -s /usr/bin/clang-tidy-$LLVM /usr/bin/clang-tidy && \
-    rm -rf /var/lib/apt/lists/*
+    ln -s /usr/bin/clangd-$LLVM /usr/bin/clangd
 
 # Install latest stable CMake
-RUN wget "https://cmake.org/files/v3.17/cmake-3.17.0-Linux-x86_64.sh" && \
-    chmod a+x cmake-3.17.0-Linux-x86_64.sh && \
-    ./cmake-3.17.0-Linux-x86_64.sh --prefix=/usr/ --skip-license && \
-    rm cmake-3.17.0-Linux-x86_64.sh
+ARG CMAKE_VERSION=3.17.3
+
+RUN wget "https://cmake.org/files/v3.17/cmake-$CMAKE_VERSION-Linux-x86_64.sh" && \
+    chmod a+x cmake-$CMAKE_VERSION-Linux-x86_64.sh && \
+    ./cmake-$CMAKE_VERSION-Linux-x86_64.sh --prefix=/usr/ --skip-license && \
+    rm cmake-$CMAKE_VERSION-Linux-x86_64.sh
 
 ## User account
 RUN adduser --disabled-password --gecos '' theia
-ADD settings.json /home/theia/.theia/
 
 RUN chmod g+rw /home && \
     mkdir -p /home/project && \
