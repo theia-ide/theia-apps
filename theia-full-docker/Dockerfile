@@ -96,7 +96,7 @@ RUN apt-get update && apt-get -y install git sudo
 #LSPs
 
 ##GO
-ENV GO_VERSION=1.14 \
+ENV GO_VERSION=1.14.4 \
     GOOS=linux \
     GOARCH=amd64 \
     GOROOT=/usr/local/go \
