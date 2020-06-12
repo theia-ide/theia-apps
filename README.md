@@ -127,7 +127,7 @@ Many applications in the repository now include support for running VS Code exte
 
 - #### Build Options:
     - `--init` injects an instance of [tini](https://github.com/krallin/tini) in the container, that will wait-for and reap terminated processes, to avoid leaking PIDs.
-    - `--security-opt seccomp=unconfined` enables running without [the default seccomp profile](https://docs.docker.com/engine/security/seccomp/) for debugging.
+    - `--security-opt seccomp=unconfined` enables running without [the default seccomp profile](https://docs.docker.com/engine/security/seccomp/) for debugging. This option is also required if the swift REPL is needed.
 
 ## Contributing
 
