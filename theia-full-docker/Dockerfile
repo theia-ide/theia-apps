@@ -140,6 +140,16 @@ RUN apt-get update \
     && pip3 install --upgrade pip --user \
     && pip install python-language-server flake8 autopep8 ;
 
+#.NET Core SDK
+ARG DOTNET_VERSION=3.1
+
+RUN curl -SLO "https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb" \
+    && dpkg -i packages-microsoft-prod.deb \
+    && rm packages-microsoft-prod.deb \
+    && apt-get update \
+    && apt-get install -y dotnet-sdk-$DOTNET_VERSION
+
+
 #PHP
 RUN apt-get -y install php curl php-cli php-mbstring unzip
 
