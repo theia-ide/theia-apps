@@ -49,6 +49,7 @@ jobs:
       env:
       install: skip
       script: cd theia-electron && yarn && yarn package
+      before_deploy: skip
       deploy: skip
     - <<: *publish
       os: osx
