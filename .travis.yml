@@ -48,9 +48,7 @@ jobs:
     - &publish
       env:
       install: skip
-      script: cd theia-electron && yarn && yarn package
-      before_deploy: skip
-      deploy: skip
+      script: cd theia-electron && yarn && travis_wait 30 yarn package
     - <<: *publish
       os: osx
     - <<: *publish
@@ -82,6 +80,7 @@ deploy:
   script: docker push "theiaide/$IMAGE_NAME"
   on:
     branch: master
+    condition: $IMAGE_NAME
   skip_cleanup: true
 
 notifications:
