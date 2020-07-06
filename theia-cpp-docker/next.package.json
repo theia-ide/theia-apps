@@ -25,7 +25,6 @@
         "@theia/filesystem": "next",
         "@theia/getting-started": "next",
         "@theia/git": "next",
-        "@theia/json": "next",
         "@theia/keymaps": "next",
         "@theia/languages": "next",
         "@theia/markers": "next",
@@ -52,10 +51,6 @@
         "@theia/variable-resolver": "next",
         "@theia/vsx-registry": "next",
         "@theia/workspace": "next"
-    },
-    "resolutions": {
-        "vscode-json-languageserver": "1.2.2",
-        "**/vscode-json-languageserver/**/vscode-languageserver": "6.0.0-next.1"
     },
     "devDependencies": {
         "@theia/cli": "next"
@@ -84,7 +79,8 @@
         "vscode-builtin-jake": "https://github.com/theia-ide/vscode-builtin-extensions/releases/download/v1.39.1-prel/jake-1.39.1-prel.vsix",
         "vscode-builtin-java": "https://github.com/theia-ide/vscode-builtin-extensions/releases/download/v1.39.1-prel/java-1.39.1-prel.vsix",
         "vscode-builtin-javascript": "https://github.com/theia-ide/vscode-builtin-extensions/releases/download/v1.39.1-prel/javascript-1.39.1-prel.vsix",
-        "vscode-builtin-json": "https://github.com/theia-ide/vscode-builtin-extensions/releases/download/v1.39.1-prel/json-1.39.1-prel.vsix",
+        "vscode-builtin-json": "https://open-vsx.org/api/vscode/json/1.46.1/file/vscode.json-1.46.1.vsix",
+        "vscode-builtin-json-language-features": "https://open-vsx.org/api/vscode/json-language-features/1.46.1/file/vscode.json-language-features-1.46.1.vsix",
         "vscode-builtin-less": "https://github.com/theia-ide/vscode-builtin-extensions/releases/download/v1.39.1-prel/less-1.39.1-prel.vsix",
         "vscode-builtin-log": "https://github.com/theia-ide/vscode-builtin-extensions/releases/download/v1.39.1-prel/log-1.39.1-prel.vsix",
         "vscode-builtin-lua": "https://github.com/theia-ide/vscode-builtin-extensions/releases/download/v1.39.1-prel/lua-1.39.1-prel.vsix",
