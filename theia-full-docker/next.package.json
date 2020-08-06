@@ -134,6 +134,7 @@
         "vscode-python": "https://github.com/microsoft/vscode-python/releases/download/2020.1.58038/ms-python-release.vsix",
         "vscode-ruby": "https://github.com/rubyide/vscode-ruby/releases/download/v0.25.0/ruby-0.25.0.vsix",
         "vscode-dart": "https://github.com/Dart-Code/Dart-Code/releases/download/v3.8.1/Dart-Code.dart-code-3.8.1.vsix",
-        "vscode-flutter": "https://github.com/Dart-Code/Flutter/releases/download/v3.8.1/Dart-Code.flutter-3.8.1.vsix"
+        "vscode-flutter": "https://github.com/Dart-Code/Flutter/releases/download/v3.8.1/Dart-Code.flutter-3.8.1.vsix",
+        "yangster": "https://open-vsx.org/api/typefox/yang-vscode/2.0.3/file/typefox.yang-vscode-2.0.3.vsix"
     }
 }

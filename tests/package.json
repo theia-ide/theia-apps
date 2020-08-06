@@ -9,7 +9,6 @@
         "test-app-theia-go": "yarn test",
         "test-app-theia-java": "yarn test",
         "test-app-theia-python": "yarn test",
-        "test-app-yangster": "yarn test",
         "test-app-theia-swift": "yarn test",
         "test-app-theia-cpp": "yarn test",
         "test-app-theia-rust": "yarn test",
