@@ -316,6 +316,9 @@ yarn --cache-folder ./ycache && rm -rf ./ycache && \
      NODE_OPTIONS="--max_old_space_size=4096" yarn theia build && yarn theia download:plugins \
 ;fi
 
+# Change permissions to make the `yang-language-server` executable.
+RUN chmod +x ./plugins/yangster/extension/server/bin/yang-language-server
+
 EXPOSE 3000
 # configure Theia
 ENV SHELL=/bin/bash \

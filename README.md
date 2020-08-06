@@ -62,7 +62,6 @@ _Other Variants_:
 | [theiaide/theia-ruby](https://hub.docker.com/r/theiaide/theia-ruby) | Theia-based Ruby example application | |
 | [theiaide/theia-rust](https://hub.docker.com/r/theiaide/theia-rust) | Theia-based Rust example application | [docs](./theia-rust-docker/README.md) |
 | [theiaide/theia-swift](https://hub.docker.com/r/theiaide/theia-swift) | Theia-based Swift example application | |
-| [theiaide/yangster](https://hub.docker.com/r/theiaide/yangster) | Theia-based YANG example application | |
 
 ---
 
