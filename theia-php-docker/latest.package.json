@@ -21,7 +21,6 @@
         "@theia/git": "latest",
         "@theia/getting-started": "latest",
         "@theia/keymaps": "latest",
-        "@theia/languages": "latest",
         "@theia/markers": "latest",
         "@theia/messages": "latest",
         "@theia/metrics": "latest",

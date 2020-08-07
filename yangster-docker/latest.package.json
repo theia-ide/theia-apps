@@ -15,7 +15,6 @@
         "@theia/editor": "latest",
         "@theia/filesystem": "latest",
         "@theia/git": "latest",
-        "@theia/languages": "latest",
         "@theia/markers": "latest",
         "@theia/monaco": "latest",
         "@theia/navigator": "latest",
