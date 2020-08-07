@@ -1,4 +1,4 @@
-ARG NODE_VERSION=10
+ARG NODE_VERSION=12.18.3
 FROM ibmcom/ibmjava:8-sdk as java-base
 
 FROM node:$NODE_VERSION
