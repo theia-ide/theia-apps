@@ -16,7 +16,6 @@
         "@theia/git": "next",
         "@theia/getting-started": "next",
         "@theia/keymaps": "next",
-        "@theia/languages": "next",
         "@theia/markers": "next",
         "@theia/messages": "next",
         "@theia/metrics": "next",

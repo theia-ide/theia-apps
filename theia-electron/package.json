@@ -17,7 +17,7 @@
           "config": {
             "applicationName": "Theia Electron Example Application"
           }
-        }, 
+        },
         "backend": {
             "config": {
                 "startupTimeout": -1
@@ -49,7 +49,6 @@
         "@theia/getting-started": "latest",
         "@theia/git": "latest",
         "@theia/keymaps": "latest",
-        "@theia/languages": "latest",
         "@theia/markers": "latest",
         "@theia/messages": "latest",
         "@theia/mini-browser": "latest",
