@@ -1,4 +1,4 @@
-ARG NODE_VERSION=10
+ARG NODE_VERSION=12
 FROM node:$NODE_VERSION as theia-builder
 ARG version=latest
 WORKDIR /home/theia
@@ -18,7 +18,7 @@ RUN yarn --pure-lockfile && \
 
 FROM google/dart
 
-ARG NODE_VERSION=10
+ARG NODE_VERSION=12
 ENV NODE_VERSION $NODE_VERSION
 
 RUN apt-get update && \

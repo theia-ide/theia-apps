@@ -1,4 +1,4 @@
-ARG NODE_VERSION=10
+ARG NODE_VERSION=12
 FROM node:$NODE_VERSION as extension-builder
 RUN npm install -g vsce
 RUN git clone --depth 1 https://github.com/apple/sourcekit-lsp
@@ -28,7 +28,7 @@ RUN yarn --pure-lockfile && \
 
 FROM satishbabariya/sourcekit-lsp
 ENV DEBIAN_FRONTEND noninteractive
-ARG NODE_VERSION=10
+ARG NODE_VERSION=12
 ENV NODE_VERSION $NODE_VERSION
 RUN apt-get update
 RUN apt-get -qq update

@@ -2,14 +2,14 @@
 FROM ubuntu:18.04
 
 RUN apt-get update -yq \
-    && apt-get install curl gnupg build-essential gcc g++ gdb make python sudo git -yq 
+    && apt-get install curl gnupg build-essential gcc g++ gdb make python sudo git -yq
 
 # allow a user to become root in the container
 ADD sudoers /etc/sudoers
 
 ARG GITHUB_TOKEN
 ARG NODE_OPTIONS="--max-old-space-size=4096"
-ARG NODE_VERSION=10
+ARG NODE_VERSION=12.18.3
 
 ADD install_node.sh /root/install_node.sh
 RUN bash /root/install_node.sh --version $NODE_VERSION
@@ -39,7 +39,7 @@ ENV CARGO_HOME /root/rust/cargo
 RUN mkdir -p $RUST_HOME && \
     groupadd -g 500 rust && \
     chown root:rust $RUST_HOME && \
-    chmod g+rwxs $RUST_HOME 
+    chmod g+rwxs $RUST_HOME
 RUN umask 0002 && curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > /tmp/sh.rustup.rs && sh /tmp/sh.rustup.rs -y
 
 ARG rust_channel=nightly
