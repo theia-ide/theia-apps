@@ -145,7 +145,7 @@ RUN apt-get update && apt-get -y install openjdk-11-jdk maven gradle
 
 #C/C++
 # public LLVM PPA, development version of LLVM
-ARG LLVM=11
+ARG LLVM=12
 
 RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - && \
     echo "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic main" > /etc/apt/sources.list.d/llvm.list && \

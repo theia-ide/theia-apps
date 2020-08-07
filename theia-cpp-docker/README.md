@@ -44,4 +44,4 @@ docker build --no-cache --build-arg version=latest --build-arg -t theia-cpp:late
 
 #### Build Options:
   - `--build-arg strip=true` strips the application to save space but with reduced debuggability.
-  - `--build-arg LLVM=<version>` version of LLVM tools (clang-tools, clangd and clang-tidy) you prefer (defaults to 11). Please set LLVM=9 to build on ppc64le platform.
+  - `--build-arg LLVM=<version>` version of LLVM tools (clang-tools, clangd and clang-tidy) you prefer (defaults to 12). Please set LLVM=9 to build on ppc64le platform.
