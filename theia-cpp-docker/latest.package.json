@@ -34,7 +34,6 @@
         "@theia/navigator": "latest",
         "@theia/outline-view": "latest",
         "@theia/output": "latest",
-        "@theia/plantuml": "latest",
         "@theia/plugin": "latest",
         "@theia/plugin-ext": "latest",
         "@theia/plugin-ext-vscode": "latest",
@@ -119,6 +118,7 @@
         "vscode-builtin-xml": "https://github.com/theia-ide/vscode-builtin-extensions/releases/download/v1.39.1-prel/xml-1.39.1-prel.vsix",
         "vscode-builtin-yaml": "https://github.com/theia-ide/vscode-builtin-extensions/releases/download/v1.39.1-prel/yaml-1.39.1-prel.vsix",
         "vscode-clangd": "https://open-vsx.org/api/llvm-vs-code-extensions/vscode-clangd/0.1.5/file/llvm-vs-code-extensions.vscode-clangd-0.1.5.vsix",
-        "vscode-editorconfig": "https://github.com/theia-ide/editorconfig-vscode/releases/download/v0.14.4/EditorConfig-0.14.4.vsix"
+        "vscode-editorconfig": "https://github.com/theia-ide/editorconfig-vscode/releases/download/v0.14.4/EditorConfig-0.14.4.vsix",
+        "plantuml": "https://open-vsx.org/api/jebbs/plantuml/2.13.12/file/jebbs.plantuml-2.13.12.vsix"
     }
 }
