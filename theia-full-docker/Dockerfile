@@ -96,7 +96,7 @@ RUN apt-get update && apt-get -y install git sudo
 #LSPs
 
 ##GO
-ENV GO_VERSION=1.14.4 \
+ENV GO_VERSION=1.15 \
     GOOS=linux \
     GOARCH=amd64 \
     GOROOT=/usr/local/go \
@@ -165,9 +165,9 @@ RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - && \
     ln -s /usr/bin/clangd-$LLVM /usr/bin/clangd
 
 # Install latest stable CMake
-ARG CMAKE_VERSION=3.17.3
+ARG CMAKE_VERSION=3.18.1
 
-RUN wget "https://cmake.org/files/v3.17/cmake-$CMAKE_VERSION-Linux-x86_64.sh" && \
+RUN wget "https://github.com/Kitware/CMake/releases/download/v$CMAKE_VERSION/cmake-$CMAKE_VERSION-Linux-x86_64.sh" && \
     chmod a+x cmake-$CMAKE_VERSION-Linux-x86_64.sh && \
     ./cmake-$CMAKE_VERSION-Linux-x86_64.sh --prefix=/usr/ --skip-license && \
     rm cmake-$CMAKE_VERSION-Linux-x86_64.sh
@@ -241,7 +241,7 @@ RUN apt-get update \
 
 
 #Dart
-ENV DART_VERSION 2.8.4
+ENV DART_VERSION 2.9.0
 
 RUN \
   apt-get update && apt-get install --no-install-recommends -y -q gnupg2 curl git ca-certificates apt-transport-https openssh-client && \
