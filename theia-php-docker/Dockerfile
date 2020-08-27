@@ -1,7 +1,7 @@
 ARG NODE_VERSION=12.18.3
 FROM node:${NODE_VERSION}-alpine
 ARG version=latest
-RUN apk add --no-cache make gcc g++ python
+RUN apk add --no-cache make pkgconfig gcc g++ python libx11-dev libxkbfile-dev
 WORKDIR /home/theia
 ADD $version.package.json ./package.json
 ARG GITHUB_TOKEN
@@ -28,8 +28,8 @@ RUN apk add --no-cache git openssh bash
 RUN apk add --no-cache curl php php-cli php-mbstring unzip php-openssl php-phar php-json php-tokenizer php-ctype php7-pecl-yaml php7-pecl-xdebug
 RUN sed -i 's/;zend_extension=xdebug.so/zend_extension=xdebug.so/g' /etc/php7/conf.d/xdebug.ini
 RUN echo $'[XDebug]\n\
-xdebug.remote_enable = 1\n\
-xdebug.remote_autostart = 1' >> /etc/php7/conf.d/xdebug.ini
+    xdebug.remote_enable = 1\n\
+    xdebug.remote_autostart = 1' >> /etc/php7/conf.d/xdebug.ini
 RUN curl -s -o composer-setup.php https://getcomposer.org/installer \
     && php composer-setup.php --install-dir=/usr/local/bin --filename=composer \
     && rm composer-setup.php
