@@ -6,7 +6,7 @@ ARG VERSION=3.8.3
 RUN apt-get update \
     && apt-get upgrade -y \
     && apt-get install -y make build-essential libssl-dev \
-    && apt-get install -y wget curl
+    && apt-get install -y wget curl nano
 
 RUN apt-get update \
     && apt-get install -y yarn \
