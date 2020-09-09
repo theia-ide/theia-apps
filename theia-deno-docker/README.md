@@ -1,5 +1,9 @@
 # Deno
 
+A docker container for developing applications and services under Deno with [Eclipse Theia Cloud IDE](https://github.com/eclipse-theia/theia).
+
+![./theia-deno-screenshot.png](./theia-deno-screenshot.png)
+
 ### Build latest
 
 ```bash
