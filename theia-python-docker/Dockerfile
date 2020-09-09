@@ -1,4 +1,21 @@
 ARG NODE_VERSION=12.18.3
+
+FROM node:${NODE_VERSION}
+ARG version=latest
+WORKDIR /home/theia
+ADD $version.package.json ./package.json
+ARG GITHUB_TOKEN
+RUN yarn --pure-lockfile && \
+    NODE_OPTIONS="--max_old_space_size=4096" yarn theia build && \
+    yarn theia download:plugins && \
+    yarn --production && \
+    yarn autoclean --init && \
+    echo *.ts >> .yarnclean && \
+    echo *.ts.map >> .yarnclean && \
+    echo *.spec.* >> .yarnclean && \
+    yarn autoclean --force && \
+    yarn cache clean
+
 FROM node:${NODE_VERSION}
 
 # Install Python 3 from source
@@ -24,7 +41,7 @@ RUN apt-get update \
     && pip install --upgrade pip --user \
     && apt-get install -y python3-dev python3-pip \
     && pip3 install --upgrade pip --user \
-    && pip install python-language-server flake8 autopep8 \
+    && pip3 install python-language-server flake8 autopep8 \
     && apt-get install -y yarn \
     && apt-get clean \
     && apt-get auto-remove -y \
@@ -34,15 +51,11 @@ RUN apt-get update \
 
 RUN mkdir -p /home/theia \
     && mkdir -p /home/project
+ENV HOME /home/theia
 WORKDIR /home/theia
-
-ARG version=latest
-ADD $version.package.json ./package.json
-ARG GITHUB_TOKEN
-RUN yarn --cache-folder ./ycache && rm -rf ./ycache && \
-     NODE_OPTIONS="--max_old_space_size=4096" yarn theia build ; \
-    yarn theia download:plugins
+COPY --from=0 /home/theia /home/theia
 EXPOSE 3000
 ENV SHELL=/bin/bash \
     THEIA_DEFAULT_PLUGINS=local-dir:/home/theia/plugins
-ENTRYPOINT [ "yarn", "theia", "start", "/home/project", "--hostname=0.0.0.0" ]
+ENV USE_LOCAL_GIT true
+ENTRYPOINT [ "node", "/home/theia/src-gen/backend/main.js", "/home/project", "--hostname=0.0.0.0" ]
