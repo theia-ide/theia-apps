@@ -58,7 +58,6 @@ _Other Variants_:
 | [theiaide/theia-go](https://hub.docker.com/r/theiaide/theia-go) | Theia-based Go example application | [docs](./theia-go-docker/README.md) |
 | [theiaide/theia-python](https://hub.docker.com/r/theiaide/theia-python) | Theia-based Python example application | [docs](./theia-python-docker/README.md) |
 | [theiaide/theia-php](https://hub.docker.com/r/theiaide/theia-php) | Theia-based PHP example application | [docs](./theia-php-docker/README.md) |
-| [theiaide/theia-ruby](https://hub.docker.com/r/theiaide/theia-ruby) | Theia-based Ruby example application | |
 | [theiaide/theia-rust](https://hub.docker.com/r/theiaide/theia-rust) | Theia-based Rust example application | [docs](./theia-rust-docker/README.md) |
 | [theiaide/theia-swift](https://hub.docker.com/r/theiaide/theia-swift) | Theia-based Swift example application | |
 
