@@ -77,7 +77,7 @@ before_deploy:
 
 deploy:
   provider: script
-  script: docker push "theiaide/$IMAGE_NAME"
+  script: "echo 'Publish to dockerhub disabled temporarily'" #docker push "theiaide/$IMAGE_NAME"
   on:
     branch: master
     condition: $IMAGE_NAME
