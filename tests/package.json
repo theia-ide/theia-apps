@@ -7,7 +7,6 @@
         "test-app-theia": "wdio wdio.theia-docker.conf.js --theia-port 4000",
         "test-app-theia-full": "yarn test",
         "test-app-theia-go": "yarn test",
-        "test-app-theia-java": "yarn test",
         "test-app-theia-python": "yarn test",
         "test-app-theia-swift": "yarn test",
         "test-app-theia-cpp": "yarn test",
