@@ -260,7 +260,6 @@ ENV PATH $DART_SDK/bin:/theia/.pub-cache/bin:$PATH
 RUN adduser --disabled-password --gecos '' theia && \
     adduser theia sudo && \
     echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
-ADD settings.json /home/theia/.theia/
 
 RUN chmod g+rw /home && \
     mkdir -p /home/project && \
