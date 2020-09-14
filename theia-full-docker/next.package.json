@@ -6,7 +6,8 @@
                 "applicationName": "Theia Multi-Language Example",
                 "preferences": {
                     "files.enableTrash": false,
-                    "ruby.useLanguageServer": true
+                    "ruby.useLanguageServer": true,
+                    "php.suggest.basic": false
                 }
             }
         }
