@@ -90,6 +90,27 @@ RUN set -ex \
     && ln -s /opt/yarn/bin/yarn /usr/local/bin/yarnpkg \
     && rm yarn-v$YARN_VERSION.tar.gz.asc yarn-v$YARN_VERSION.tar.gz
 
+WORKDIR /home/theia
+ADD $version.package.json ./package.json
+
+RUN if [ "$strip" = "true" ]; then \
+yarn --pure-lockfile && \
+    NODE_OPTIONS="--max_old_space_size=4096" yarn theia build && \
+    yarn theia download:plugins && \
+    yarn --production && \
+    yarn autoclean --init && \
+    echo *.ts >> .yarnclean && \
+    echo *.ts.map >> .yarnclean && \
+    echo *.spec.* >> .yarnclean && \
+    yarn autoclean --force && \
+    yarn cache clean \
+;else \
+yarn --cache-folder ./ycache && rm -rf ./ycache && \
+     NODE_OPTIONS="--max_old_space_size=4096" yarn theia build && yarn theia download:plugins \
+;fi
+
+FROM ubuntu:18.04
+
 #C/C++ Developer tools
 
 # install clangd and clang-tidy from the public LLVM PPA (nightly build / development version)
@@ -128,30 +149,12 @@ RUN chmod g+rw /home && \
     chown -R theia:theia /home/theia && \
     chown -R theia:theia /home/project;
 
-# Theia application
-
-USER theia
+ENV HOME /home/theia
 WORKDIR /home/theia
-ADD $version.package.json ./package.json
-
-RUN if [ "$strip" = "true" ]; then \
-yarn --pure-lockfile && \
-    NODE_OPTIONS="--max_old_space_size=4096" yarn theia build && \
-    yarn theia download:plugins && \
-    yarn --production && \
-    yarn autoclean --init && \
-    echo *.ts >> .yarnclean && \
-    echo *.ts.map >> .yarnclean && \
-    echo *.spec.* >> .yarnclean && \
-    yarn autoclean --force && \
-    yarn cache clean \
-;else \
-yarn --cache-folder ./ycache && rm -rf ./ycache && \
-     NODE_OPTIONS="--max_old_space_size=4096" yarn theia build && yarn theia download:plugins \
-;fi
-
+COPY --from=0 /home/theia /home/theia
 EXPOSE 3000
 ENV SHELL=/bin/bash \
     THEIA_DEFAULT_PLUGINS=local-dir:/home/theia/plugins
-
+ENV USE_LOCAL_GIT true
+USER theia
 ENTRYPOINT [ "node", "/home/theia/src-gen/backend/main.js", "/home/project", "--hostname=0.0.0.0" ]
