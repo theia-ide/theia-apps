@@ -6,6 +6,7 @@ ARG GITHUB_TOKEN
 ARG NODE_VERSION=12.18.3
 ENV NODE_VERSION $NODE_VERSION
 ENV YARN_VERSION 1.13.0
+ENV DOTNET_CLI_TELEMETRY_OPTOUT 1
 
 # use "latest" or "next" version for Theia packages
 ARG version=latest
