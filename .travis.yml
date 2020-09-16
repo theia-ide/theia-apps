@@ -64,8 +64,8 @@ install:
   # if not (script returns 137) then the build process is terminated
   - ./check_changed.sh $IMAGE_NAME ; RETURN_CODE=$? ; if [ $RETURN_CODE -eq 137 ]; then travis_terminate 0; elif [ $RETURN_CODE -ne 0 ]; then travis_terminate $RETURN_CODE; fi
   - ./build_container.sh $NPM_TAG $IMAGE_NAME $NODE_VERSION $PORT $ENV_VARS
-  # Disable DOTNET Telemetry
-  - export DOTNET_CLI_TELEMETRY_OUTPUT=1
+  # opt out DOTNET Telemetry
+  - export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
 script: cd tests; yarn; yarn test-app-$IMAGE_NAME
 
