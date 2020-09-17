@@ -54,6 +54,7 @@
         "vscode-builtin-debug-auto-launch": "https://github.com/theia-ide/vscode-builtin-extensions/releases/download/v1.39.1-prel/debug-auto-launch-1.39.1-prel.vsix",
         "vscode-builtin-handlebars": "https://github.com/theia-ide/vscode-builtin-extensions/releases/download/v1.39.1-prel/handlebars-1.39.1-prel.vsix",
         "vscode-builtin-html": "https://github.com/theia-ide/vscode-builtin-extensions/releases/download/v1.39.1-prel/html-1.39.1-prel.vsix",
+        "vscode-builtin-html-language-features": "https://open-vsx.org/api/vscode/html-language-features/1.49.0/file/vscode.html-language-features-1.49.0.vsix",
         "vscode-builtin-ini": "https://github.com/theia-ide/vscode-builtin-extensions/releases/download/v1.39.1-prel/ini-1.39.1-prel.vsix",
         "vscode-builtin-javascript": "https://github.com/theia-ide/vscode-builtin-extensions/releases/download/v1.39.1-prel/javascript-1.39.1-prel.vsix",
         "vscode-builtin-json": "https://github.com/theia-ide/vscode-builtin-extensions/releases/download/v1.39.1-prel/json-1.39.1-prel.vsix",
