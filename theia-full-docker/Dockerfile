@@ -187,6 +187,10 @@ RUN apt-get update \
 
 #.NET Core SDK
 ARG DOTNET_VERSION=3.1
+# disables .NET telemetry
+ENV DOTNET_CLI_TELEMETRY_OPTOUT 1
+# suppresses .NET welcome message
+ENV DOTNET_SKIP_FIRST_TIME_EXPERIENCE 1
 
 RUN curl -SLO "https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb" \
     && dpkg -i packages-microsoft-prod.deb \
