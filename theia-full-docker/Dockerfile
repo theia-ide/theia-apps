@@ -198,6 +198,8 @@ RUN curl -SLO "https://packages.microsoft.com/config/ubuntu/18.04/packages-micro
     && apt-get update \
     && apt-get install -y dotnet-sdk-$DOTNET_VERSION
 
+# verify .NET telemetry
+RUN dotnet -d 
 
 #PHP
 ARG PHP_VERSION=7.4
