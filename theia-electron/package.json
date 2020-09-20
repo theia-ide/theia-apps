@@ -5,7 +5,8 @@
     "description": "Theia",
     "main": "scripts/theia-electron-main.js",
     "engines": {
-        "node": ">=10.2.0"
+        "yarn": "1.0.x || >=1.2.1",
+        "node": ">=12.14.1 <13"
     },
     "repository": {
         "type": "git",
