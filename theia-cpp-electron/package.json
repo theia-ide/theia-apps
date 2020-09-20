@@ -11,6 +11,10 @@
     "bugs": {
         "url": "https://github.com/theia-ide/theia-apps/issues"
     },
+    "engines": {
+        "yarn": "1.0.x || >=1.2.1",
+        "node": ">=12.14.1 <13"
+    },
     "homepage": "https://github.com/theia-ide/theia-apps/theia-cpp-electron",
     "theia": {
         "target": "electron",
