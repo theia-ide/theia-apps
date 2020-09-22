@@ -45,6 +45,7 @@ jobs:
   include:
     - &publish
       env:
+      node_js: 12
       install: skip
       script: cd theia-electron && yarn && travis_wait 30 yarn package
     - <<: *publish
