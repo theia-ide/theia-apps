@@ -207,7 +207,8 @@ RUN apt-get update \
     && rm -rf /tmp/* \
     && python -m pip install --upgrade pip --user \
     && python3.8 -m pip install --upgrade pip --user \
-    && pip3 install python-language-server flake8 autopep8
+    && pip3 install python-language-server flake8 autopep8 \
+    && rm -rf $HOME/.cache/pip
 
 
 #.NET Core SDK
