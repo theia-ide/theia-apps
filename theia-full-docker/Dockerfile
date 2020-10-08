@@ -23,7 +23,12 @@ RUN apt-get update && \
                        gpg \
                        python \
                        wget \
-                       xz-utils
+                       xz-utils && \
+    apt-get clean && \
+    apt-get autoremove -y && \
+    rm -rf /var/cache/apt/* && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /tmp/*
 
 #Install node and yarn
 #From: https://github.com/nodejs/docker-node/blob/6b8d86d6ad59e0d1e7a94cec2e909cad137a028f/8/Dockerfile
@@ -91,7 +96,12 @@ RUN set -ex \
 #Developer tools
 
 ## Git and sudo (sudo needed for user override)
-RUN apt-get update && apt-get -y install git sudo
+RUN apt-get update && apt-get -y install git sudo && \
+    apt-get clean && \
+    apt-get autoremove -y && \
+    rm -rf /var/cache/apt/* && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /tmp/*
 
 #LSPs
 
@@ -140,7 +150,12 @@ ENV PATH=$PATH:$GOPATH/bin
 
 
 #Java
-RUN apt-get update && apt-get -y install openjdk-11-jdk maven gradle
+RUN apt-get update && apt-get -y install openjdk-11-jdk maven gradle && \
+    apt-get clean && \
+    apt-get autoremove -y && \
+    rm -rf /var/cache/apt/* && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /tmp/*
 
 
 #C/C++
@@ -157,6 +172,11 @@ RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - && \
                        gcc-multilib \
                        g++-multilib \
                        gdb && \
+    apt-get clean && \
+    apt-get autoremove -y && \
+    rm -rf /var/cache/apt/* && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /tmp/* && \
     ln -s /usr/bin/clang-$LLVM /usr/bin/clang && \
     ln -s /usr/bin/clang++-$LLVM /usr/bin/clang++ && \
     ln -s /usr/bin/clang-cl-$LLVM /usr/bin/clang-cl && \
@@ -180,6 +200,11 @@ RUN apt-get update \
     && apt-get install -y python-dev python-pip \
     && apt-get install -y python3.8 python3-dev python3-pip \
     && apt-get remove -y software-properties-common \
+    && apt-get clean \
+    && apt-get autoremove -y \
+    && rm -rf /var/cache/apt/* \
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /tmp/* \
     && python -m pip install --upgrade pip --user \
     && python3.8 -m pip install --upgrade pip --user \
     && pip3 install python-language-server flake8 autopep8
@@ -196,7 +221,12 @@ RUN curl -SLO "https://packages.microsoft.com/config/ubuntu/18.04/packages-micro
     && dpkg -i packages-microsoft-prod.deb \
     && rm packages-microsoft-prod.deb \
     && apt-get update \
-    && apt-get install -y dotnet-sdk-$DOTNET_VERSION
+    && apt-get install -y dotnet-sdk-$DOTNET_VERSION \
+    && apt-get clean \
+    && apt-get autoremove -y \
+    && rm -rf /var/cache/apt/* \
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /tmp/*
 
 
 #PHP
@@ -206,7 +236,12 @@ RUN apt-get update \
     && apt-get install -y software-properties-common \
     && add-apt-repository -y ppa:ondrej/php \
     && apt-get install -y curl php$PHP_VERSION php$PHP_VERSION-cli php$PHP_VERSION-mbstring unzip php$PHP_VERSION-common php$PHP_VERSION-json php-yaml php-xdebug \
-    && apt-get remove -y software-properties-common
+    && apt-get remove -y software-properties-common \
+    && apt-get clean \
+    && apt-get autoremove -y \
+    && rm -rf /var/cache/apt/* \
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /tmp/*
 RUN echo '[XDebug]\n\
 xdebug.remote_enable = 1\n\
 xdebug.remote_autostart = 1' >> /etc/php/$PHP_VERSION/mods-available/xdebug.ini
@@ -216,7 +251,13 @@ RUN curl -s -o composer-setup.php https://getcomposer.org/installer \
 
 
 #Ruby
-RUN apt-get update && apt-get -y install ruby ruby-dev zlib1g-dev && \
+RUN apt-get update && \
+    apt-get -y install ruby ruby-dev zlib1g-dev && \
+    apt-get clean && \
+    apt-get autoremove -y && \
+    rm -rf /var/cache/apt/* && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /tmp/* && \
     gem install solargraph
 
 
@@ -225,6 +266,11 @@ ARG SWIFT_VERSION=5.2.4
 
 RUN apt-get update \
     && apt-get install -y binutils libc6-dev libcurl4 libedit2 libgcc-5-dev libpython2.7 libsqlite3-0 libstdc++-5-dev libxml2 pkg-config tzdata zlib1g-dev \
+    && apt-get clean \
+    && apt-get autoremove -y \
+    && rm -rf /var/cache/apt/* \
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /tmp/* \
     && curl -SLO https://swift.org/builds/swift-$SWIFT_VERSION-release/ubuntu1804/swift-$SWIFT_VERSION-RELEASE/swift-$SWIFT_VERSION-RELEASE-ubuntu18.04.tar.gz \
     && curl -SLO https://swift.org/builds/swift-$SWIFT_VERSION-release/ubuntu1804/swift-$SWIFT_VERSION-RELEASE/swift-$SWIFT_VERSION-RELEASE-ubuntu18.04.tar.gz.sig \
     && wget -q -O - https://swift.org/keys/all-keys.asc | gpg --import - \
@@ -254,7 +300,12 @@ RUN \
   curl https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_testing.list > /etc/apt/sources.list.d/dart_testing.list && \
   curl https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_unstable.list > /etc/apt/sources.list.d/dart_unstable.list && \
   apt-get update && \
-  apt-get install dart=$DART_VERSION-1
+  apt-get install dart=$DART_VERSION-1 && \
+  apt-get clean && \
+  apt-get autoremove -y && \
+  rm -rf /var/cache/apt/* && \
+  rm -rf /var/lib/apt/lists/* && \
+  rm -rf /tmp/*
 
 ENV DART_SDK /usr/lib/dart
 ENV PATH $DART_SDK/bin:/theia/.pub-cache/bin:$PATH
