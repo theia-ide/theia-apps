@@ -1,22 +1,13 @@
-FROM ubuntu:18.04
+FROM ubuntu:18.04 as common
 
-ENV DEBIAN_FRONTEND noninteractive
-
-ARG GITHUB_TOKEN
 ARG NODE_VERSION=12.18.3
-ARG LLVM=12
-ENV NODE_VERSION $NODE_VERSION
-ENV YARN_VERSION 1.13.0
 
-# use "latest" or "next" version for Theia packages
-ARG version=latest
+ENV NODE_VERSION=$NODE_VERSION
 
-# Optionally build a striped Theia application with no map file or .ts sources.
-# Makes image ~150MB smaller when enabled
-ARG strip=false
-ENV strip=$strip
+# User account
+RUN adduser --disabled-password --gecos '' theia
 
-#Common deps
+# Common deps
 RUN apt-get update && \
     apt-get -y install build-essential \
                        curl \
@@ -27,8 +18,8 @@ RUN apt-get update && \
                        xz-utils && \
     rm -rf /var/lib/apt/lists/*
 
-#Install node and yarn
-#From: https://github.com/nodejs/docker-node/blob/6b8d86d6ad59e0d1e7a94cec2e909cad137a028f/8/Dockerfile
+# Install Node.js
+# From: https://github.com/nodejs/docker-node/blob/6b8d86d6ad59e0d1e7a94cec2e909cad137a028f/8/Dockerfile
 
 # gpg keys listed at https://github.com/nodejs/node#release-keys
 RUN set -ex \
@@ -70,6 +61,21 @@ RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
     && rm "node-v$NODE_VERSION-linux-$ARCH.tar.xz" SHASUMS256.txt.asc SHASUMS256.txt \
     && ln -s /usr/local/bin/node /usr/local/bin/nodejs
 
+FROM common as theia
+
+ARG GITHUB_TOKEN
+# Use "latest" or "next" version for Theia packages
+ARG version=latest
+# Optionally build a striped Theia application with no map file or .ts sources.
+# Makes image ~150MB smaller when enabled
+ARG strip=false
+
+ENV DEBIAN_FRONTEND=noninteractive \
+    YARN_VERSION=1.13.0 \
+    strip=$strip
+
+# Install Yarn
+# From: https://github.com/nodejs/docker-node/blob/6b8d86d6ad59e0d1e7a94cec2e909cad137a028f/8/Dockerfile
 
 RUN set -ex \
     && for key in \
@@ -90,49 +96,11 @@ RUN set -ex \
     && ln -s /opt/yarn/bin/yarn /usr/local/bin/yarnpkg \
     && rm yarn-v$YARN_VERSION.tar.gz.asc yarn-v$YARN_VERSION.tar.gz
 
-#C/C++ Developer tools
-
-# install clangd and clang-tidy from the public LLVM PPA (nightly build / development version)
-# and also the GDB debugger from the Ubuntu repos
-RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - && \
-    echo "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic main" > /etc/apt/sources.list.d/llvm.list && \
-    apt-get update && \
-    apt-get install -y \
-                       clang-tools-$LLVM \
-                       clangd-$LLVM \
-                       clang-tidy-$LLVM \
-                       gcc-multilib \
-                       g++-multilib \
-                       gdb && \
-    ln -s /usr/bin/clang-$LLVM /usr/bin/clang && \
-    ln -s /usr/bin/clang++-$LLVM /usr/bin/clang++ && \
-    ln -s /usr/bin/clang-cl-$LLVM /usr/bin/clang-cl && \
-    ln -s /usr/bin/clang-cpp-$LLVM /usr/bin/clang-cpp && \
-    ln -s /usr/bin/clang-tidy-$LLVM /usr/bin/clang-tidy && \
-    ln -s /usr/bin/clangd-$LLVM /usr/bin/clangd
-
-# Install latest stable CMake
-ARG CMAKE_VERSION=3.18.1
-
-
-RUN wget "https://github.com/Kitware/CMake/releases/download/v$CMAKE_VERSION/cmake-$CMAKE_VERSION-Linux-x86_64.sh" && \
-    chmod a+x cmake-$CMAKE_VERSION-Linux-x86_64.sh && \
-    ./cmake-$CMAKE_VERSION-Linux-x86_64.sh --prefix=/usr/ --skip-license && \
-    rm cmake-$CMAKE_VERSION-Linux-x86_64.sh
-
-## User account
-RUN adduser --disabled-password --gecos '' theia
-
-RUN chmod g+rw /home && \
-    mkdir -p /home/project && \
-    chown -R theia:theia /home/theia && \
-    chown -R theia:theia /home/project;
-
 # Theia application
 
-USER theia
 WORKDIR /home/theia
-ADD $version.package.json ./package.json
+
+ADD $version.package.json package.json
 
 RUN if [ "$strip" = "true" ]; then \
 yarn --pure-lockfile && \
@@ -150,6 +118,48 @@ yarn --cache-folder ./ycache && rm -rf ./ycache && \
      NODE_OPTIONS="--max_old_space_size=4096" yarn theia build && yarn theia download:plugins \
 ;fi
 
+FROM common
+
+ARG LLVM=12
+ARG CMAKE_VERSION=3.18.1
+
+COPY --from=theia /home/theia /home/theia
+WORKDIR /home/theia
+
+# C/C++ Developer tools
+
+# Install clangd and clang-tidy from the public LLVM PPA (nightly build / development version)
+# And also the GDB debugger from the Ubuntu repos
+RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - && \
+    echo "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic main" > /etc/apt/sources.list.d/llvm.list && \
+    apt-get update && \
+    apt-get install -y \
+                       clang-tools-$LLVM \
+                       clangd-$LLVM \
+                       clang-tidy-$LLVM \
+                       gcc-multilib \
+                       g++-multilib \
+                       gdb && \
+    ln -s /usr/bin/clang-$LLVM /usr/bin/clang && \
+    ln -s /usr/bin/clang++-$LLVM /usr/bin/clang++ && \
+    ln -s /usr/bin/clang-cl-$LLVM /usr/bin/clang-cl && \
+    ln -s /usr/bin/clang-cpp-$LLVM /usr/bin/clang-cpp && \
+    ln -s /usr/bin/clang-tidy-$LLVM /usr/bin/clang-tidy && \
+    ln -s /usr/bin/clangd-$LLVM /usr/bin/clangd
+
+
+# Install latest stable CMake
+RUN wget "https://github.com/Kitware/CMake/releases/download/v$CMAKE_VERSION/cmake-$CMAKE_VERSION-Linux-x86_64.sh" && \
+    chmod a+x cmake-$CMAKE_VERSION-Linux-x86_64.sh && \
+    ./cmake-$CMAKE_VERSION-Linux-x86_64.sh --prefix=/usr/ --skip-license && \
+    rm cmake-$CMAKE_VERSION-Linux-x86_64.sh
+
+RUN chmod g+rw /home && \
+    mkdir -p /home/project && \
+    chown -R theia:theia /home/theia && \
+    chown -R theia:theia /home/project;
+
+USER theia
 EXPOSE 3000
 ENV SHELL=/bin/bash \
     THEIA_DEFAULT_PLUGINS=local-dir:/home/theia/plugins
