@@ -1,9 +1,13 @@
 ARG NODE_VERSION=12.18.3
-FROM node:$NODE_VERSION
-ARG version=latest
-WORKDIR /home/theia
-ADD $version.package.json ./package.json
+
+FROM node:$NODE_VERSION as theia
+
 ARG GITHUB_TOKEN
+ARG version=latest
+
+WORKDIR /home/theia
+
+ADD $version.package.json ./package.json
 RUN yarn --pure-lockfile && \
     NODE_OPTIONS="--max_old_space_size=4096" yarn theia build && \
     yarn theia download:plugins && \
@@ -15,7 +19,13 @@ RUN yarn --pure-lockfile && \
     yarn autoclean --force && \
     yarn cache clean
 
-# See : https://github.com/theia-ide/theia-apps/issues/34
+FROM node:$NODE_VERSION
+
+COPY --from=theia /home/theia /home/theia
+
+WORKDIR /home/theia
+
+# See: https://github.com/theia-ide/theia-apps/issues/34
 RUN adduser --disabled-password --gecos '' theia && \
     chmod g+rw /home && \
     mkdir -p /home/project && \
@@ -25,6 +35,7 @@ RUN adduser --disabled-password --gecos '' theia && \
     chown -R theia:theia /home/project && \
     chown -R theia:theia /home/go && \
     chown -R theia:theia /home/go-tools;
+
 USER theia
 
 ENV GO_VERSION=1.15 \
@@ -34,10 +45,10 @@ ENV GO_VERSION=1.15 \
     GOPATH=/home/go-tools
 ENV PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 
-# install Go
+# Install Go
 RUN curl -fsSL https://storage.googleapis.com/golang/go$GO_VERSION.$GOOS-$GOARCH.tar.gz | tar -C /home -xzv
 
-# install VS Code Go tools: https://github.com/Microsoft/vscode-go/blob/058eccf17f1b0eebd607581591828531d768b98e/src/goInstallTools.ts#L19-L45
+# Install VS Code Go tools: https://github.com/Microsoft/vscode-go/blob/058eccf17f1b0eebd607581591828531d768b98e/src/goInstallTools.ts#L19-L45
 RUN go get -u -v github.com/mdempsky/gocode && \
     go get -u -v github.com/uudashr/gopkgs/cmd/gopkgs && \
     go get -u -v github.com/ramya-rao-a/go-outline && \
@@ -67,10 +78,10 @@ RUN go get -u -v github.com/mdempsky/gocode && \
 RUN go get -u -v -d github.com/stamblerre/gocode && \
     go build -o $GOPATH/bin/gocode-gomod github.com/stamblerre/gocode
 
-# configure Theia
+# Configure Theia
 ENV SHELL=/bin/bash \
     THEIA_DEFAULT_PLUGINS=local-dir:/home/theia/plugins  \
-    # configure user Go path
+    # Configure user Go path
     GOPATH=/home/project
 ENV PATH=$PATH:$GOPATH/bin
 
