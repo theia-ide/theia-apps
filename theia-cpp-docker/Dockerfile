@@ -71,7 +71,7 @@ ARG version=latest
 ARG strip=false
 
 ENV DEBIAN_FRONTEND=noninteractive \
-    YARN_VERSION=1.13.0 \
+    YARN_VERSION=1.22.5 \
     strip=$strip
 
 # Install Yarn
