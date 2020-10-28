@@ -286,7 +286,7 @@ ENV PATH $DART_SDK/bin:/theia/.pub-cache/bin:$PATH
 
 WORKDIR /home/theia
 
-COPY --from=theia /home/theia /home/theia
+COPY --from=theia --chown=theia:theia /home/theia /home/theia
 
 RUN chmod g+rw /home && \
     mkdir -p /home/project && \
@@ -294,8 +294,8 @@ RUN chmod g+rw /home && \
     mkdir -p /usr/local/cargo && \
     mkdir -p /usr/local/go && \
     mkdir -p /usr/local/go-packages && \
-    chown -R theia:theia /home/theia && \
     chown -R theia:theia /home/project && \
+    chown -R theia:theia /home/theia/.pub-cache/bin && \
     chown -R theia:theia /usr/local/cargo && \
     chown -R theia:theia /usr/local/go && \
     chown -R theia:theia /usr/local/go-packages
