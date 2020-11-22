@@ -3,11 +3,15 @@ FROM node:$NODE_VERSION
 
 ARG VERSION=3.8.3
 
+
+
+
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get install -y make build-essential libssl-dev && \
-    apt-get install -y make gcc g++ python libx11-dev libxkbfile-dev && \
+    apt-get install -y make build-essential libssl-dev net-tools && \
+    apt-get install -y gcc g++ python libx11-dev libxkbfile-dev && \
     apt-get install -y wget curl nano
+
 
 RUN apt-get update && \
     apt-get install -y apt-transport-https && \
@@ -32,7 +36,8 @@ WORKDIR /home/theia
 ARG version=latest
 ADD $version.package.json ./package.json
 ARG GITHUB_TOKEN
-RUN yarn --cache-folder ./ycache && rm -rf ./ycache && \
+RUN yarn global add node-gyp && \
+    yarn --cache-folder ./ycache && rm -rf ./ycache && \
     NODE_OPTIONS="--max_old_space_size=4096" yarn theia build && \
     yarn theia download:plugins
 
