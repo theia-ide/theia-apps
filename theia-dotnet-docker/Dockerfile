@@ -41,6 +41,9 @@ RUN yarn global add node-gyp && \
     NODE_OPTIONS="--max_old_space_size=4096" yarn theia build && \
     yarn theia download:plugins
 
+RUN wget https://github.com/Samsung/netcoredbg/releases/download/1.2.0-635/netcoredbg-linux-bionic.tar.gz && \
+    tar -xvf netcoredbg-linux-bionic.tar.gz && \
+    ln -s /home/theia/netcoredbg/netcoredbg /usr/bin/netcoredbg
 
 EXPOSE 3000
 ENV SHELL=/bin/bash \
