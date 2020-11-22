@@ -20,7 +20,6 @@
         "@theia/markers": "next",
         "@theia/messages": "next",
         "@theia/mini-browser": "next",
-        "@theia/monaco": "next",
         "@theia/navigator": "next",
         "@theia/outline-view": "next",
         "@theia/plugin": "next",

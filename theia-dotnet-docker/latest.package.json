@@ -20,7 +20,6 @@
         "@theia/markers": "latest",
         "@theia/messages": "latest",
         "@theia/mini-browser": "latest",
-        "@theia/monaco": "latest",
         "@theia/navigator": "latest",
         "@theia/outline-view": "latest",
         "@theia/plugin": "latest",
