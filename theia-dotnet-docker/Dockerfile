@@ -40,7 +40,8 @@ RUN yarn global add node-gyp && \
 
 RUN wget https://github.com/Samsung/netcoredbg/releases/download/1.2.0-635/netcoredbg-linux-bionic.tar.gz && \
     tar -xvf netcoredbg-linux-bionic.tar.gz && \
-    ln -s /home/theia/netcoredbg/netcoredbg /usr/bin/netcoredbg
+    ln -s /home/theia/netcoredbg/netcoredbg /usr/bin/netcoredbg && \
+    rm netcoredbg-linux-bionic.tar.gz
 
 EXPOSE 3000
 ENV SHELL=/bin/bash \

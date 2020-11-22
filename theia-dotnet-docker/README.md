@@ -26,7 +26,7 @@ docker build --build-arg version=next . -t kbarbounakis/theia-dotnet:next
 ```bash
 docker run -it --init -p 3000:3000 -v "$(pwd):/home/project" kbarbounakis/theia-dotnet:latest
 ```
-![./net-core-theia-ide-screenshot.png](./net-core-theia-ide-screenshot.png)
+![https://raw.githubusercontent.com/kbarbounakis/theia-apps/master/theia-dotnet-docker/net-core-theia-ide-screenshot.png](https://raw.githubusercontent.com/kbarbounakis/theia-apps/master/theia-dotnet-docker/net-core-theia-ide-screenshot.png)
 
 
 ### Debugging

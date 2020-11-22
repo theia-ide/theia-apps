@@ -102,6 +102,7 @@
         "vscode-theme-github": "https://open-vsx.org/api/GitHub/github-vscode-theme/1.1.3/file/GitHub.github-vscode-theme-1.1.3.vsix",
         "vscode-prettier": "https://open-vsx.org/api/esbenp/prettier-vscode/5.7.2/file/esbenp.prettier-vscode-5.7.2.vsix",
         "vscode-theme-dracula": "https://open-vsx.org/api/dracula-theme/theme-dracula/2.22.2/file/dracula-theme.theme-dracula-2.22.2.vsix",
-        "vscode-free-omnisharp": "https://open-vsx.org/api/muhammad-sammy/csharp/1.23.6/file/muhammad-sammy.csharp-1.23.6.vsix"
+        "vscode-free-omnisharp": "https://open-vsx.org/api/muhammad-sammy/csharp/1.23.6/file/muhammad-sammy.csharp-1.23.6.vsix",
+        "vscode-csharp-extensions": "https://open-vsx.org/api/jsw/csharpextensions/1.3.6/file/jsw.csharpextensions-1.3.6.vsix"
     }
 }
