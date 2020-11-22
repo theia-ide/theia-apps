@@ -1,10 +1,7 @@
-ARG NODE_VERSION=12.18.3-buster
+ARG NODE_VERSION=12-buster
 FROM node:$NODE_VERSION
 
 ARG VERSION=3.8.3
-
-
-
 
 RUN apt-get update && \
     apt-get upgrade -y && \
