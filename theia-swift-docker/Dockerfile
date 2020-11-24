@@ -26,7 +26,8 @@ RUN yarn --pure-lockfile && \
     yarn cache clean
 
 
-FROM satishbabariya/sourcekit-lsp
+FROM swift
+
 ENV DEBIAN_FRONTEND noninteractive
 ARG NODE_VERSION=12
 ENV NODE_VERSION $NODE_VERSION
