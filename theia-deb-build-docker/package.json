@@ -4,7 +4,7 @@
     "license": "EPL-2.0",
     "description": "A custom Theia debian package",
     "engines": {
-        "node": "10.x"
+        "node": "12.x"
     },
     "dependencies": {
         "@theia/callhierarchy": "latest",
@@ -29,7 +29,7 @@
     },
     "node_deb": {
         "init": "none",
-        "dependencies": "nodejs (>= 10.0.0)",
+        "dependencies": "nodejs (>= 12.0.0)",
         "install_strategy": "copy",
         "executable_name": "theia",
         "entrypoints": {
