@@ -2,7 +2,7 @@ FROM ubuntu:bionic
 # install development tools
 RUN apt-get update && \
     apt-get install -y curl sudo build-essential jq vim && \
-    curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash - && \
+    curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash - && \
     apt-get install -y nodejs && \
     npm install -g yarn
 
@@ -28,7 +28,7 @@ RUN npm run build-deb
 FROM ubuntu:bionic
 COPY --from=0 /theia-app/theia-example_0.0.1_all.deb /
 RUN apt-get update && apt-get install -y curl sudo && \
-    curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash - && \
+    curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash - && \
     apt-get install -y ./theia-example_0.0.1_all.deb && \
     rm theia-example_0.0.1_all.deb
 
