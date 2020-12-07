@@ -30,6 +30,9 @@
     "devDependencies": {
         "@theia/cli": "latest"
     },
+    "scripts": {
+        "preinstall": "node-gyp install"
+    },
     "theiaPluginsDir": "plugins",
     "theiaPlugins": {
         "vscode-builtin-bat": "https://github.com/theia-ide/vscode-builtin-extensions/releases/download/v1.39.1-prel/bat-1.39.1-prel.vsix",

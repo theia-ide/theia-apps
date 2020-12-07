@@ -46,6 +46,9 @@
         "@theia/cli": "latest",
         "@theia/debug": "latest"
     },
+    "scripts": {
+        "preinstall": "node-gyp install"
+    },
     "theiaPluginsDir": "plugins",
     "theiaPlugins": {
         "vscode-builtin-coffeescript": "https://github.com/theia-ide/vscode-builtin-extensions/releases/download/v1.39.1-prel/coffeescript-1.39.1-prel.vsix",
