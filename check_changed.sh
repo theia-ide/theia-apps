@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
-# This script is called by Travis during the install step.
-# It returns 1 if no files where changed. In that case
+# This script is called by GH Workflows before the install step.
+# It echoes 137 if no files where changed. In that case
 # no further building/test is required for this image
 
 IMAGE_NAME=$1
