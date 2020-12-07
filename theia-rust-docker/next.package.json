@@ -43,6 +43,9 @@
     "devDependencies": {
         "@theia/cli": "next"
     },
+    "scripts": {
+        "preinstall": "node-gyp install"
+    },
     "workspaces": [
         "packages/*"
     ],
