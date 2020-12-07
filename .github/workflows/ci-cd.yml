@@ -15,7 +15,7 @@ jobs:
   build:
     name: ${{ matrix.IMAGE_NAME }}@${{ matrix.NPM_TAG }}
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
 
     strategy:
       fail-fast: false
@@ -99,4 +99,4 @@ jobs:
       - name: Build
         if: github.event_name != 'pull_request' || steps.check_changed.outputs.status == 'continue'
         shell: bash
-        run: ./build_container.sh ${{ matrix.NPM_TAG }} ${{ matrix.IMAGE_NAME }} ${{ matrix.node }} ${{matrix.PORT}} ${{matrix.ENV_VARS}}
+        run: ./build_container.sh ${{ matrix.NPM_TAG }} ${{ matrix.IMAGE_NAME }} ${{ matrix.node }} ${{ secrets.GITHUB_TOKEN }} ${{matrix.PORT}} ${{matrix.ENV_VARS}}
