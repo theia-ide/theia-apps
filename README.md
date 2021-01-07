@@ -5,6 +5,7 @@
 
 ## Eclipse Theia Applications - Docker & Electron
 
+[![Build Status](https://github.com/theia-ide/theia-apps/workflows/ci-cd/badge.svg?branch=master)](https://github.com/theia-ide/theia-apps/actions?query=branch%3Amaster+event%3Apush+event%3Aschedule)
 [![Build Status](https://travis-ci.org/theia-ide/theia-apps.svg?branch=master)](https://travis-ci.org/theia-ide/theia-apps)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-curved)](https://github.com/theia-ide/theia-apps/labels/help%20wanted)
 [![Questions](https://img.shields.io/badge/Questions-blue.svg?style=flat-curved)](https://github.com/theia-ide/theia-apps/issues?utf8=%E2%9C%93&q=label%3Aquestion+)

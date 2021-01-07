@@ -14,7 +14,6 @@ on:
 jobs:
   build:
     name: ${{ matrix.IMAGE_NAME }}@${{ matrix.NPM_TAG }}
-
     runs-on: ubuntu-18.04
 
     strategy:
@@ -32,14 +31,13 @@ jobs:
             "theia-https",
             "theia-php",
             "theia-python",
-            "theia-rust",
           ]
         include:
           - IMAGE_NAME: "theia-https"
             ENV_VARS: "-e token="
             PORT: 10443
 
-          # `swift` and `dart` images use a different node version than other images.
+          # `dart` images use node 12 for building.
           - IMAGE_NAME: "theia-dart"
             NPM_TAG: "latest"
             node_test: 10
@@ -50,6 +48,12 @@ jobs:
             node_test: 10
             node: 12
 
+          - IMAGE_NAME: "theia-rust"
+            NPM_TAG: "next"
+            node_test: 10
+            node: 12.18.3
+
+          # `swift` images use node 12 for building.
           - IMAGE_NAME: "theia-swift"
             NPM_TAG: "latest"
             node_test: 10
@@ -100,3 +104,28 @@ jobs:
         if: github.event_name != 'pull_request' || steps.check_changed.outputs.status == 'continue'
         shell: bash
         run: ./build_container.sh ${{ matrix.NPM_TAG }} ${{ matrix.IMAGE_NAME }} ${{ matrix.node }} ${{ secrets.GITHUB_TOKEN }} ${{matrix.PORT}} ${{matrix.ENV_VARS}}
+
+      - name: Test
+        if: github.event_name != 'pull_request' || steps.check_changed.outputs.status == 'continue'
+        shell: bash
+        run: |
+          google-chrome --version
+          chromedriver --version
+          (cd tests && yarn && yarn test-app-${{ matrix.IMAGE_NAME }})
+
+      - name: Docker login
+        if: github.event_name != 'pull_request'
+        env:
+          DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
+          DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+        run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+
+      - name: Docker deploy
+        if: github.event_name != 'pull_request'
+        uses: nick-invision/retry@v2
+        with:
+          timeout_minutes: 10
+          retry_wait_seconds: 30
+          max_attempts: 3
+          retry_on: error
+          command: docker push "theiaide/${{ matrix.IMAGE_NAME }}"
