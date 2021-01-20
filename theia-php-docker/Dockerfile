@@ -1,4 +1,4 @@
-ARG NODE_VERSION=12.18.3
+ARG NODE_VERSION=12.14.1
 FROM node:${NODE_VERSION}-alpine
 ARG version=latest
 RUN apk add --no-cache make pkgconfig gcc g++ python libx11-dev libxkbfile-dev
