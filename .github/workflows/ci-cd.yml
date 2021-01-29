@@ -15,7 +15,7 @@ jobs:
   build:
     name: ${{ matrix.IMAGE_NAME }}@${{ matrix.NPM_TAG }}
     runs-on: ubuntu-18.04
-    timeout_minutes: 60
+    timeout-minutes: 60
 
     strategy:
       fail-fast: false
