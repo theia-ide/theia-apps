@@ -120,7 +120,7 @@ yarn --cache-folder ./ycache && rm -rf ./ycache && \
 
 FROM common
 
-ARG LLVM=12
+ARG LLVM=13
 ARG CMAKE_VERSION=3.18.1
 
 COPY --from=theia /home/theia /home/theia
