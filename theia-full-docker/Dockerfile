@@ -184,12 +184,11 @@ RUN apt-get update && apt-get -y install openjdk-11-jdk maven gradle
 # C/C++
 # public LLVM PPA, development version of LLVM
 # depending on architecture, install from the public LLVM PPA (Version 13) or distribution (Version 11)
-ARG LLVM=11
+ARG LLVM=13
 
 RUN dpkgArch="$(dpkg --print-architecture)" && \
     case "${dpkgArch##*-}" in \
         amd64) \
-            LLVM=13 && \
             wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - && \
             echo "deb http://apt.llvm.org/groovy/ llvm-toolchain-groovy main" > /etc/apt/sources.list.d/llvm.list && \
             apt-get update && \
