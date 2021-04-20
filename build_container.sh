@@ -24,10 +24,18 @@ shift
 cd "$IMAGE_NAME-docker"
 
 IMAGE="theiaide/$IMAGE_NAME"
-IMAGE_TAG="$IMAGE":$(npm view "@theia/core@$NPM_TAG" version)
-echo $IMAGE_TAG
+IMAGE_TAG="$IMAGE:$NPM_TAG"
+
 docker build --build-arg "version=$NPM_TAG" --build-arg "NODE_VERSION=$NODE_VERSION" --build-arg "GITHUB_TOKEN=$GH_TOKEN" . -t "$IMAGE_TAG" --no-cache
-docker tag "$IMAGE_TAG" "$IMAGE:$NPM_TAG"
+
+# Tag the image with the solid version if it is `latest`.
+# Then, we have 2 tags refer to the same image, i.e: "theiaide/theia:1.12.1" and "theiaide/theia:latest".
+if [ $NPM_TAG = "latest" ]; then
+    IMAGE_SOLID_TAG="$IMAGE":$(npm view "@theia/core@$NPM_TAG" version)
+    docker tag "$IMAGE_TAG" "$IMAGE_SOLID_TAG"
+fi
+
+docker images "$IMAGE"
 
 # Now we allow to pass extra parameters to the docker run command: any extra parameter to build_container.sh is
 # interpreted as a parameter to docker run (it is useful for e.g. passing environment variables or volume mappings)
