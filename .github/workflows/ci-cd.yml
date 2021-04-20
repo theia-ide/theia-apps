@@ -129,4 +129,4 @@ jobs:
           retry_wait_seconds: 30
           max_attempts: 3
           retry_on: error
-          command: docker push "theiaide/${{ matrix.IMAGE_NAME }}:${{ matrix.NPM_TAG}}"
+          command: docker image push --all-tags "theiaide/${{ matrix.IMAGE_NAME }}"
