@@ -21,6 +21,9 @@ RUN yarn --pure-lockfile && \
 
 FROM node:$NODE_VERSION
 
+RUN apt-get -qq update && \
+    apt-get install -y libsecret-1-dev
+
 COPY --from=theia /home/theia /home/theia
 
 WORKDIR /home/theia

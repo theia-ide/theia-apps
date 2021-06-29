@@ -37,6 +37,7 @@ RUN apt-get update \
     && rm Python-$VERSION.tgz
 
 RUN apt-get update \
+    && apt-get install -y libsecret-1-dev \
     && apt-get install -y python-dev python-pip \
     && pip install --upgrade pip --user \
     && apt-get install -y python3-dev python3-pip \

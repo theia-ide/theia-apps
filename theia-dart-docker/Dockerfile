@@ -21,9 +21,8 @@ FROM google/dart
 ARG NODE_VERSION=12
 ENV NODE_VERSION $NODE_VERSION
 
-RUN apt-get update && \
-    apt-get -qq update && \
-    apt-get install -y build-essential curl
+RUN apt-get -qq update && \
+    apt-get install -y build-essential curl libsecret-1-dev
 
 RUN curl -sL https://deb.nodesource.com/setup_$NODE_VERSION.x | bash
 RUN apt-get install -y nodejs
