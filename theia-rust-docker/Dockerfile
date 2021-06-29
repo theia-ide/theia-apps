@@ -34,6 +34,9 @@ RUN . /root/nvm_setup.sh && cd $THEIA_RUST_APP_PATH && yarn --cache-folder $THEI
 
 FROM common
 
+RUN apt-get update -yq \
+    && apt-get install -y libsecret-1-dev
+
 COPY --from=theia /root/theia_rust_app /root/theia_rust_app
 
 # when creating a container a volume is mapped to /root/rust

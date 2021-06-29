@@ -36,11 +36,10 @@ RUN set -ex \
     DD8F2338BAE7501E3DD5AC78C273792F7D83545D \
     A48C2BEE680E841632CD4E44F07496B3EB3C1762 \
     ; do \
-    gpg --batch --keyserver ipv4.pool.sks-keyservers.net --recv-keys "$key" || \
-    gpg --batch --keyserver pool.sks-keyservers.net --recv-keys "$key" || \
+    gpg --batch --keyserver keyserver.ubuntu.com --recv-key "$key" || \
+    gpg --batch --keyserver keys.openpgp.org --recv-key "$key" || \
     gpg --batch --keyserver pgp.mit.edu --recv-keys "$key" || \
-    gpg --batch --keyserver keyserver.pgp.com --recv-keys "$key" || \
-    gpg --batch --keyserver ha.pool.sks-keyservers.net --recv-keys "$key" ; \
+    gpg --batch --keyserver keyserver.pgp.com --recv-keys "$key" ; \
     done
 
 RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
@@ -81,11 +80,10 @@ RUN set -ex \
     && for key in \
     6A010C5166006599AA17F08146C2130DFD2497F5 \
     ; do \
-    gpg --batch --keyserver ipv4.pool.sks-keyservers.net --recv-keys "$key" || \
-    gpg --batch --keyserver pool.sks-keyservers.net --recv-keys "$key" || \
+    gpg --batch --keyserver keyserver.ubuntu.com --recv-key "$key" || \
+    gpg --batch --keyserver keys.openpgp.org --recv-key "$key" || \
     gpg --batch --keyserver pgp.mit.edu --recv-keys "$key" || \
-    gpg --batch --keyserver keyserver.pgp.com --recv-keys "$key" || \
-    gpg --batch --keyserver ha.pool.sks-keyservers.net --recv-keys "$key" ; \
+    gpg --batch --keyserver keyserver.pgp.com --recv-keys "$key" ; \
     done \
     && curl -fSLO --compressed "https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v$YARN_VERSION.tar.gz" \
     && curl -fSLO --compressed "https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v$YARN_VERSION.tar.gz.asc" \
@@ -122,6 +120,10 @@ FROM common
 
 ARG LLVM=13
 ARG CMAKE_VERSION=3.18.1
+
+RUN apt-get update && \
+    apt-get -y install libsecret-1-dev && \
+    rm -rf /var/lib/apt/lists/*
 
 COPY --from=theia /home/theia /home/theia
 WORKDIR /home/theia
