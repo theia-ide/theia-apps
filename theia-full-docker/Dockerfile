@@ -312,6 +312,26 @@ RUN apt-get clean && \
 RUN chmod +x ./plugins/yangster/extension/server/bin/yang-language-server
 
 USER theia
+
+# Haskell Installation
+
+ARG ghcup_version=0.1.14.1
+ARG ghc_version=9.0.1
+ARG haskell_stack_ubuntu_version=1.5.1-1
+
+RUN wget https://downloads.haskell.org/~ghcup/${ghcup_version}/x86_64-linux-ghcup-${ghcup_version}
+RUN mv x86_64-linux-ghcup-${ghcup_version} ghcup && chmod +x ghcup
+RUN ./ghcup install ghc $ghc_version
+RUN ./ghcup set ghc $ghc_version
+RUN ./ghcup install cabal
+# Update the Path to find everything
+ENV PATH="/home/theia/.cabal/bin:/home/theia/.ghcup/bin:${PATH}"
+# Get Haskell Stack
+USER root
+RUN apt-get update && apt-get install haskell-stack=$haskell_stack_ubuntu_version -y
+RUN stack upgrade --binary-only
+
+USER theia
 EXPOSE 3000
 # Configure Theia
 ENV SHELL=/bin/bash \
