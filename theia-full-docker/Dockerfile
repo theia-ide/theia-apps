@@ -16,6 +16,7 @@ RUN apt-get update && \
                        wget \
                        xz-utils \
                        sudo \
+                       libsecret-1-dev \
     && \
     apt-get clean && \
     apt-get autoremove -y && \
@@ -287,7 +288,7 @@ WORKDIR /home/theia
 
 COPY --from=theia --chown=theia:theia /home/theia /home/theia
 
-RUN apt-get update && apt-get -y install libsecret-1-dev
+RUN apt-get update && apt-get -y install libsecret-1-0
 
 RUN chmod g+rw /home && \
     mkdir -p /home/project && \

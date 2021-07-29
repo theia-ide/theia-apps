@@ -1,5 +1,6 @@
 ARG NODE_VERSION=12
 FROM node:$NODE_VERSION as theia-builder
+RUN apt-get -qq update && apt-get install -y libsecret-1-dev
 ARG version=latest
 WORKDIR /home/theia
 ADD $version.package.json ./package.json
@@ -22,7 +23,7 @@ ARG NODE_VERSION=12
 ENV NODE_VERSION $NODE_VERSION
 
 RUN apt-get -qq update && \
-    apt-get install -y build-essential curl libsecret-1-dev
+    apt-get install -y build-essential curl libsecret-1-0
 
 RUN curl -sL https://deb.nodesource.com/setup_$NODE_VERSION.x | bash
 RUN apt-get install -y nodejs
