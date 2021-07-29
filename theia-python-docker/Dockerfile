@@ -1,6 +1,7 @@
 ARG NODE_VERSION=12.18.3
 
 FROM node:${NODE_VERSION}
+RUN apt-get update && apt-get install -y libsecret-1-dev
 ARG version=latest
 WORKDIR /home/theia
 ADD $version.package.json ./package.json
@@ -37,7 +38,7 @@ RUN apt-get update \
     && rm Python-$VERSION.tgz
 
 RUN apt-get update \
-    && apt-get install -y libsecret-1-dev \
+    && apt-get install -y libsecret-1-0 \
     && apt-get install -y python-dev python-pip \
     && pip install --upgrade pip --user \
     && apt-get install -y python3-dev python3-pip \

@@ -9,6 +9,7 @@ RUN vsce package -o ./sourcekit-lsp.vsix
 
 
 FROM node:$NODE_VERSION as theia-builder
+RUN apt-get update && apt-get install -y build-essential libsecret-1-dev
 ARG version=latest
 WORKDIR /home/theia
 ADD $version.package.json ./package.json
@@ -33,7 +34,7 @@ ARG NODE_VERSION=12
 ENV NODE_VERSION $NODE_VERSION
 RUN apt-get update
 RUN apt-get -qq update
-RUN apt-get install -y build-essential libsecret-1-dev
+RUN apt-get install -y build-essential libsecret-1-0
 RUN apt-get install -y curl
 RUN curl -sL https://deb.nodesource.com/setup_$NODE_VERSION.x | bash
 RUN apt-get install -y nodejs

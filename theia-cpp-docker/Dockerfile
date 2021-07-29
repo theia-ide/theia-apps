@@ -61,7 +61,7 @@ RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
     && ln -s /usr/local/bin/node /usr/local/bin/nodejs
 
 FROM common as theia
-
+RUN apt-get update && apt-get -y install libsecret-1-dev
 ARG GITHUB_TOKEN
 # Use "latest" or "next" version for Theia packages
 ARG version=latest
@@ -122,7 +122,7 @@ ARG LLVM=13
 ARG CMAKE_VERSION=3.18.1
 
 RUN apt-get update && \
-    apt-get -y install libsecret-1-dev && \
+    apt-get -y install libsecret-1-0 && \
     rm -rf /var/lib/apt/lists/*
 
 COPY --from=theia /home/theia /home/theia

@@ -1,7 +1,7 @@
 ARG NODE_VERSION=12.18.3
 FROM node:${NODE_VERSION}-alpine
 ARG version=latest
-RUN apk add --no-cache make pkgconfig gcc g++ python libx11-dev libxkbfile-dev
+RUN apk add --no-cache make pkgconfig gcc g++ python libx11-dev libxkbfile-dev libsecret-dev
 WORKDIR /home/theia
 ADD $version.package.json ./package.json
 ARG GITHUB_TOKEN
@@ -24,7 +24,7 @@ RUN chmod g+rw /home && \
     mkdir -p /home/project && \
     chown -R theia:theia /home/theia && \
     chown -R theia:theia /home/project;
-RUN apk add --no-cache git openssh bash libsecret
+RUN apk add --no-cache git openssh bash -dev libsecret
 RUN apk add --no-cache curl php php-cli php-mbstring unzip php-openssl php-phar php-json php-tokenizer php-ctype php7-pecl-yaml php7-pecl-xdebug
 RUN sed -i 's/;zend_extension=xdebug.so/zend_extension=xdebug.so/g' /etc/php7/conf.d/xdebug.ini
 RUN echo $'[XDebug]\n\

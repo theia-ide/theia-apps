@@ -7,7 +7,7 @@ ARG NODE_VERSION=12.18.3
 ENV THEIA_RUST_APP_PATH /root/theia_rust_app
 
 RUN apt-get update -yq \
-    && apt-get install curl gnupg build-essential gcc g++ gdb make python sudo git -yq
+    && apt-get install curl gnupg build-essential gcc g++ gdb make python sudo git -yq libsecret-1-dev
 
 # allow a user to become root in the container
 ADD sudoers /etc/sudoers
@@ -35,7 +35,7 @@ RUN . /root/nvm_setup.sh && cd $THEIA_RUST_APP_PATH && yarn --cache-folder $THEI
 FROM common
 
 RUN apt-get update -yq \
-    && apt-get install -y libsecret-1-dev
+    && apt-get install -y libsecret-1-0
 
 COPY --from=theia /root/theia_rust_app /root/theia_rust_app
 

@@ -1,6 +1,6 @@
 ARG NODE_VERSION=12.18.3
 FROM node:${NODE_VERSION}-alpine
-RUN apk add --no-cache make pkgconfig gcc g++ python libx11-dev libxkbfile-dev
+RUN apk add --no-cache make pkgconfig gcc g++ python libx11-dev libxkbfile-dev libsecret-dev
 ARG version=latest
 WORKDIR /home/theia
 ADD $version.package.json ./package.json
@@ -24,7 +24,7 @@ RUN chmod g+rw /home && \
     mkdir -p /home/project && \
     chown -R theia:theia /home/theia && \
     chown -R theia:theia /home/project;
-RUN apk add --no-cache git openssh bash libsecret-dev
+RUN apk add --no-cache git openssh bash libsecret
 ENV HOME /home/theia
 WORKDIR /home/theia
 COPY --from=0 --chown=theia:theia /home/theia /home/theia
