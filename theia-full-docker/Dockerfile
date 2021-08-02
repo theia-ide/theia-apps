@@ -1,4 +1,4 @@
-FROM ubuntu:18.04 as common
+FROM ubuntu:20.10 as common
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -130,13 +130,20 @@ FROM common
 ## GO
 ENV GO_VERSION=1.15 \
     GOOS=linux \
-    GOARCH=amd64 \
     GOROOT=/usr/local/go \
     GOPATH=/usr/local/go-packages
 ENV PATH=$GOPATH/bin:$GOROOT/bin:$PATH
-
-# Install Go
-RUN curl -fsSL https://storage.googleapis.com/golang/go$GO_VERSION.$GOOS-$GOARCH.tar.gz | tar -C /usr/local -xzv
+RUN GOARCH= && dpkgArch="$(dpkg --print-architecture)" \
+    && case "${dpkgArch##*-}" in \
+    amd64) GOARCH='amd64';; \
+    ppc64el) GOARCH='ppc64le';; \
+    s390x) GOARCH='s390x';; \
+    arm64) GOARCH='arm64';; \
+    armhf) GOARCH='armv6l';; \
+    i386) GOARCH='386';; \
+    *) echo "unsupported architecture"; exit 1 ;; \
+    esac  \
+    && curl -fsSL https://storage.googleapis.com/golang/go$GO_VERSION.$GOOS-$GOARCH.tar.gz | tar -C /usr/local -xzv
 
 # Install VS Code Go tools: https://github.com/Microsoft/vscode-go/blob/058eccf17f1b0eebd607581591828531d768b98e/src/goInstallTools.ts#L19-L45
 RUN go get -u -v github.com/mdempsky/gocode && \
@@ -175,18 +182,46 @@ RUN apt-get update && apt-get -y install openjdk-11-jdk maven gradle
 
 # C/C++
 # public LLVM PPA, development version of LLVM
+# depending on architecture, install from the public LLVM PPA (Version 13) or distribution (Version 11)
 ARG LLVM=13
 
-RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - && \
-    echo "deb http://apt.llvm.org/bionic/ llvm-toolchain-bionic main" > /etc/apt/sources.list.d/llvm.list && \
-    apt-get update && \
-    apt-get install -y \
-                       clang-tools-$LLVM \
-                       clangd-$LLVM \
-                       clang-tidy-$LLVM \
-                       gcc-multilib \
-                       g++-multilib \
-                       gdb && \
+RUN dpkgArch="$(dpkg --print-architecture)" && \
+    case "${dpkgArch##*-}" in \
+        amd64) \
+            wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - && \
+            echo "deb http://apt.llvm.org/groovy/ llvm-toolchain-groovy main" > /etc/apt/sources.list.d/llvm.list && \
+            apt-get update && \
+            apt-get install -y \
+                clang-tools-$LLVM \
+                clangd-$LLVM \
+                clang-tidy-$LLVM \
+                gcc-multilib \
+                g++-multilib \
+                gdb \
+        ;; \
+        arm64) \
+            LLVM=11 &&\
+            apt-get update && \
+            apt-get install -y \
+                clang-tools-$LLVM \
+                clangd-$LLVM \
+                clang-tidy-$LLVM \
+                gcc-multilib-arm-linux-gnueabi \
+                gcc-multilib-arm-linux-gnueabihf \
+                gcc-multilib-i686-linux-gnu \
+                gcc-multilib-s390x-linux-gnu \
+                gcc-multilib-x86-64-linux-gnu \
+                gcc-multilib-x86-64-linux-gnux32 \
+                g++-multilib-arm-linux-gnueabi \
+                g++-multilib-arm-linux-gnueabihf \
+                g++-multilib-i686-linux-gnu \
+                g++-multilib-s390x-linux-gnu \
+                g++-multilib-x86-64-linux-gnu \
+                g++-multilib-x86-64-linux-gnux32 \
+                gdb \
+            ;; \
+        *) echo "unsupported architecture"; exit 1 ;; \
+    esac && \
     ln -s /usr/bin/clang-$LLVM /usr/bin/clang && \
     ln -s /usr/bin/clang++-$LLVM /usr/bin/clang++ && \
     ln -s /usr/bin/clang-cl-$LLVM /usr/bin/clang-cl && \
@@ -195,36 +230,46 @@ RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - && \
     ln -s /usr/bin/clangd-$LLVM /usr/bin/clangd
 
 # Install latest stable CMake
-ARG CMAKE_VERSION=3.18.1
+ARG CMAKE_VERSION=3.19.5
 
-RUN wget "https://github.com/Kitware/CMake/releases/download/v$CMAKE_VERSION/cmake-$CMAKE_VERSION-Linux-x86_64.sh" && \
-    chmod a+x cmake-$CMAKE_VERSION-Linux-x86_64.sh && \
-    ./cmake-$CMAKE_VERSION-Linux-x86_64.sh --prefix=/usr/ --skip-license && \
-    rm cmake-$CMAKE_VERSION-Linux-x86_64.sh
+RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
+    && case "${dpkgArch##*-}" in \
+    amd64) ARCH='x86_64';; \
+    arm64) ARCH='aarch64';; \
+    *) echo "unsupported architecture"; exit 1 ;; \
+    esac && \
+    wget "https://github.com/Kitware/CMake/releases/download/v$CMAKE_VERSION/cmake-$CMAKE_VERSION-Linux-$ARCH.sh" && \
+    chmod a+x cmake-$CMAKE_VERSION-Linux-$ARCH.sh && \
+    ./cmake-$CMAKE_VERSION-Linux-$ARCH.sh --prefix=/usr/ --skip-license && \
+    rm cmake-$CMAKE_VERSION-Linux-$ARCH.sh
 
-# Python 2-3
+# Python 3
 RUN apt-get update \
     && apt-get install -y software-properties-common \
-    && add-apt-repository -y ppa:deadsnakes/ppa \
-    && apt-get install -y python-dev python-pip \
-    && apt-get install -y python3.8 python3-dev python3-pip \
+    && apt-get install -y python3.9 python3-dev python3-pip \
     && apt-get remove -y software-properties-common \
-    && python -m pip install --upgrade pip --user \
     && python3.8 -m pip install --upgrade pip --user \
     && pip3 install python-language-server flake8 autopep8
 
-# .NET Core SDK
-ARG DOTNET_VERSION=3.1
+# .NET Core SDK (Version of SDK Build see https://dotnet.microsoft.com/download/dotnet/3.1 )
+ARG DOTNET_VERSION=3.1.407
 # Disables .NET telemetry
 ENV DOTNET_CLI_TELEMETRY_OPTOUT 1
 # Suppresses .NET welcome message
 ENV DOTNET_SKIP_FIRST_TIME_EXPERIENCE 1
 
-RUN curl -SLO "https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb" \
-    && dpkg -i packages-microsoft-prod.deb \
-    && rm packages-microsoft-prod.deb \
-    && apt-get update \
-    && apt-get install -y dotnet-sdk-$DOTNET_VERSION
+RUN DOTNET_ARCH= && dpkgArch="$(dpkg --print-architecture)" \
+    && case "${dpkgArch##*-}" in \
+    amd64) DOTNET_ARCH='x64';; \
+    arm64) DOTNET_ARCH='arm64';; \
+    armhf) DOTNET_ARCH='arm32';; \
+    *) echo "unsupported architecture"; exit 1 ;; \
+    esac && \
+    curl -SL -o dotnet.tar.gz https://dotnetcli.blob.core.windows.net/dotnet/Sdk/${DOTNET_VERSION}/dotnet-sdk-${DOTNET_VERSION}-linux-${DOTNET_ARCH}.tar.gz \
+    && mkdir -p /usr/share/dotnet \
+    && tar -zxf dotnet.tar.gz -C /usr/share/dotnet \
+    && ln -s /usr/share/dotnet/dotnet /usr/bin/dotnet
+
 
 # PHP
 ARG PHP_VERSION=7.4
@@ -252,7 +297,7 @@ ARG SWIFT_VERSION=5.2.4
 #     gpg --batch --keyserver keys.openpgp.org --recv-key "$key" || \
 
 RUN apt-get update \
-    && apt-get install -y binutils libc6-dev libcurl4 libedit2 libgcc-5-dev libpython2.7 libsqlite3-0 libstdc++-5-dev libxml2 pkg-config tzdata zlib1g-dev \
+    && apt-get install -y binutils libc6-dev libcurl4 libedit2 libgcc-10-dev libpython2.7 libsqlite3-0 libstdc++-10-dev libxml2 pkg-config tzdata zlib1g-dev \
     && curl -SLO https://swift.org/builds/swift-$SWIFT_VERSION-release/ubuntu1804/swift-$SWIFT_VERSION-RELEASE/swift-$SWIFT_VERSION-RELEASE-ubuntu18.04.tar.gz \
     && curl -SLO https://swift.org/builds/swift-$SWIFT_VERSION-release/ubuntu1804/swift-$SWIFT_VERSION-RELEASE/swift-$SWIFT_VERSION-RELEASE-ubuntu18.04.tar.gz.sig \
     && wget -q -O - https://swift.org/keys/all-keys.asc | gpg --import - \
@@ -270,18 +315,22 @@ RUN apt-get update \
     && ln -s /usr/local/swift/usr/bin/sourcekit-lsp /usr/bin
 
 # Dart
-ENV DART_VERSION 2.9.0
-
-RUN \
-  apt-get update && apt-get install --no-install-recommends -y -q gnupg2 curl git ca-certificates apt-transport-https openssh-client && \
-  curl https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
-  curl https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_stable.list > /etc/apt/sources.list.d/dart_stable.list && \
-  curl https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_testing.list > /etc/apt/sources.list.d/dart_testing.list && \
-  curl https://storage.googleapis.com/download.dartlang.org/linux/debian/dart_unstable.list > /etc/apt/sources.list.d/dart_unstable.list && \
-  apt-get update && \
-  apt-get install dart=$DART_VERSION-1
+ENV DART_VERSION 2.12.2
 
 ENV DART_SDK /usr/lib/dart
+
+RUN DART_ARCH= && dpkgArch="$(dpkg --print-architecture)" \
+    && case "${dpkgArch##*-}" in \
+    i386) DART_ARCH='ia32';; \
+    amd64) DART_ARCH='x64';; \
+    armhf) DART_ARCH='arm';; \
+    arm64) DART_ARCH='arm64';; \
+    *) echo "unsupported architecture"; exit 1 ;; \
+    esac && \
+  curl -SLO https://storage.googleapis.com/dart-archive/channels/stable/release/${DART_VERSION}/sdk/dartsdk-linux-${DART_ARCH}-release.zip \
+  && unzip dartsdk-linux-${DART_ARCH}-release.zip -d $DART_SDK
+
+
 ENV PATH $DART_SDK/bin:/theia/.pub-cache/bin:$PATH
 
 WORKDIR /home/theia
