@@ -118,7 +118,7 @@ yarn --cache-folder ./ycache && rm -rf ./ycache && \
 
 FROM common
 
-ARG LLVM=13
+ARG LLVM=14
 ARG CMAKE_VERSION=3.18.1
 
 RUN apt-get update && \
