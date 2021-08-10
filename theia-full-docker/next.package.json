@@ -133,7 +133,7 @@
         "vscode-java-test": "https://github.com/microsoft/vscode-java-test/releases/download/0.22.0/vscjava.vscode-java-test-0.22.0.vsix",
         "vscode-php-intellisense": "https://github.com/felixfbecker/vscode-php-intellisense/releases/download/v2.3.14/php-intellisense.vsix",
         "vscode-php-debug": "https://github.com/felixfbecker/vscode-php-debug/releases/download/v1.13.0/php-debug.vsix",
-        "vscode-python": "https://github.com/microsoft/vscode-python/releases/download/2020.1.58038/ms-python-release.vsix",
+        "vscode-python": "https://open-vsx.org/api/ms-python/python/2020.8.105369/file/ms-python.python-2020.8.105369.vsix",
         "vscode-ruby": "https://github.com/rubyide/vscode-ruby/releases/download/v0.25.0/ruby-0.25.0.vsix",
         "vscode-dart": "https://github.com/Dart-Code/Dart-Code/releases/download/v3.8.1/Dart-Code.dart-code-3.8.1.vsix",
         "vscode-flutter": "https://github.com/Dart-Code/Flutter/releases/download/v3.8.1/Dart-Code.flutter-3.8.1.vsix",
