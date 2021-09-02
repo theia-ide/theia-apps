@@ -85,7 +85,7 @@ function makeConfig(headless) {
 
         // this is a very basic test suite that should work on all our Theia applications. 
         specs: [
-            './main-page/main-page.ui-spec.ts'
+            './**/*spec.ts'
         ],
         // Patterns to exclude.
         exclude: [
@@ -135,7 +135,7 @@ function makeConfig(headless) {
         sync: true,
         //
         // Level of logging verbosity: silent | verbose | command | data | result | error
-        logLevel: 'result',
+        logLevel: 'error',
         //
         // Enables colors for log output.
         coloredLogs: true,
