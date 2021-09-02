@@ -20,97 +20,20 @@ export class TopPanel {
 
     public constructor(protected readonly driver: WebdriverIO.Client<void>) { }
 
+    /**
+     * Determine if the top-panel exists.
+     * @returns `true` if the top-panel exists.
+     */
     exists(): boolean {
         return this.driver.isExisting('div#theia-top-panel');
     }
 
-    openNewTerminal() {
-        this.clickMenuTab('Terminal');
-        this.clickSubMenu('New Terminal');
+    /**
+     * Determine if the menu exists in the top-panel.
+     * @param label the human-readable menu label.
+     */
+    menuExists(label: string): boolean {
+        return this.driver.element('#theia-top-panel').isExisting(`div=${label}`);
     }
 
-    toggleCallHierarchyView() {
-        this.clickMenuTab('View');
-        this.clickSubMenu('Call Hierarchy');
-    }
-
-    toggleFilesView() {
-        this.clickMenuTab('View');
-        this.clickSubMenu('Explorer');
-    }
-
-    toggleScmView() {
-        this.clickMenuTab('View');
-        this.clickSubMenu('Scm');
-    }
-
-    toggleGitHistoryView() {
-        this.clickMenuTab('View');
-        this.clickSubMenu('Git History');
-    }
-
-    toggleOutlineView() {
-        this.clickMenuTab('View');
-        this.clickSubMenu('Outline');
-    }
-
-    toggleOutputView() {
-        this.clickMenuTab('View');
-        this.clickSubMenu('Output');
-    }
-
-    openPluginsView() {
-        this.clickMenuTab('View');
-        this.clickSubMenu('Plugins');
-    }
-
-    openProblemsView() {
-        this.clickMenuTab('View');
-        this.clickSubMenu('Problems');
-    }
-
-    toggleSearchView() {
-        this.clickMenuTab('View');
-        this.clickSubMenu('Search');
-    }
-
-    waitForSubMenu(): void {
-        this.driver.waitForExist('div.p-Widget.p-Menu.p-MenuBar-menu');
-    }
-
-    isSubMenuVisible(): boolean {
-        return this.driver.isExisting('div.p-Widget.p-Menu.p-MenuBar-menu');
-    }
-
-    clickMenuTab(tab: number | string) {
-        if (typeof tab === 'string') {
-            this.driver.element('ul.p-MenuBar-content').click(`div=${tab}`);
-        } else {
-            this.driver.click(`ul.p-MenuBar-content > .p-MenuBar-item:nth-child(${tab})`);
-        }
-    }
-
-    clickSubMenu(subMenuItem: string) {
-        this.driver.element('div.p-Widget.p-Menu.p-MenuBar-menu .p-Menu-content').click(`div=${subMenuItem}`);
-    }
-
-    hoverMenuTab(tabNumber: number) {
-        this.driver.moveToObject(`ul.p-MenuBar-content > .p-MenuBar-item:nth-child(${tabNumber})`);
-    }
-
-    isTabActive(tabNumber: number): boolean {
-        return this.driver.isExisting(`ul.p-MenuBar-content > .p-mod-active.p-MenuBar-item:nth-child(${tabNumber}`);
-    }
-
-    isMenuActive(): boolean {
-        return this.driver.isExisting('#theia\\:menubar.p-mod-active');
-    }
-
-    getxBarTabPosition(tabNumber: number) {
-        return this.driver.getLocation(`ul.p-MenuBar-content > .p-MenuBar-item:nth-child(${tabNumber}`, 'x');
-    }
-
-    getxSubMenuPosition(): number {
-        return this.driver.getLocation('div.p-Widget.p-Menu.p-MenuBar-menu', 'x');
-    }
 }
