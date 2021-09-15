@@ -36,9 +36,7 @@
         "@theia/userstorage": "next",
         "@theia/variable-resolver": "next",
         "@theia/workspace": "next",
-        "@theia/vsx-registry": "next",
-        "@theia/ext-scripts": "*",
-        "@theia/cpp-debug": "next"
+        "@theia/vsx-registry": "next"
     },
     "devDependencies": {
         "@theia/cli": "next"
@@ -46,9 +44,6 @@
     "scripts": {
         "preinstall": "node-gyp install"
     },
-    "workspaces": [
-        "packages/*"
-    ],
     "theiaPluginsDir": "plugins",
     "theiaPlugins": {
         "vscode-builtin-bat": "https://github.com/theia-ide/vscode-builtin-extensions/releases/download/v1.39.1-prel/bat-1.39.1-prel.vsix",
@@ -115,6 +110,8 @@
         "vscode-builtin-xml": "https://github.com/theia-ide/vscode-builtin-extensions/releases/download/v1.39.1-prel/xml-1.39.1-prel.vsix",
         "vscode-builtin-yaml": "https://github.com/theia-ide/vscode-builtin-extensions/releases/download/v1.39.1-prel/yaml-1.39.1-prel.vsix",
         "vscode-editorconfig": "https://github.com/theia-ide/editorconfig-vscode/releases/download/v0.14.4/EditorConfig-0.14.4.vsix",
-        "plantuml": "https://open-vsx.org/api/jebbs/plantuml/2.14.0/file/jebbs.plantuml-2.14.0.vsix"
+        "plantuml": "https://open-vsx.org/api/jebbs/plantuml/2.14.0/file/jebbs.plantuml-2.14.0.vsix",
+        "vscode-clangd": "https://open-vsx.org/api/llvm-vs-code-extensions/vscode-clangd/0.1.11/file/llvm-vs-code-extensions.vscode-clangd-0.1.11.vsix",
+        "cdt-gdb-vscode": "https://open-vsx.org/api/eclipse-cdt/cdt-gdb-vscode/0.0.92/file/eclipse-cdt.cdt-gdb-vscode-0.0.92.vsix"
     }
 }
