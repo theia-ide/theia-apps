@@ -17,6 +17,10 @@ Collection of example cloud & desktop applications built using the [Theia](https
 
 <br />
 
+__Note: This repository is soon to be considered deprecated and will eventually be archived. [Theia Blueprint](https://github.com/eclipse-theia/theia-blueprint) is a more polished example application based on the Eclipse Theia framework, that might be of interest. For more details, see issue [#496](https://github.com/theia-ide/theia-apps/issues/496).__
+
+<br />
+
 ### Outline
 
 - [Overview](#overview)
