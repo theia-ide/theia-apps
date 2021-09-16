@@ -25,45 +25,8 @@ jobs:
         NPM_TAG: ["latest", "next"]
         IMAGE_NAME:
           [
-            "theia",
-            "theia-cpp",
             "theia-full",
-            "theia-go",
-            "theia-https",
-            "theia-php",
-            "theia-python",
           ]
-        include:
-          - IMAGE_NAME: "theia-https"
-            ENV_VARS: "-e token="
-            PORT: 10443
-
-          # `dart` images use node 12 for building.
-          - IMAGE_NAME: "theia-dart"
-            NPM_TAG: "latest"
-            node_test: 10
-            node: 12
-
-          - IMAGE_NAME: "theia-dart"
-            NPM_TAG: "next"
-            node_test: 10
-            node: 12
-
-          - IMAGE_NAME: "theia-rust"
-            NPM_TAG: "next"
-            node_test: 10
-            node: 12.18.3
-
-          # `swift` images use node 12 for building.
-          - IMAGE_NAME: "theia-swift"
-            NPM_TAG: "latest"
-            node_test: 10
-            node: 12
-
-          - IMAGE_NAME: "theia-swift"
-            NPM_TAG: "next"
-            node_test: 10
-            node: 12
 
     steps:
       - name: Checkout
@@ -113,20 +76,3 @@ jobs:
           google-chrome --version
           chromedriver --version
           (cd tests && yarn && yarn test-app-${{ matrix.IMAGE_NAME }})
-
-      - name: Login to Docker Hub
-        uses: docker/login-action@v1
-        if: github.event_name != 'pull_request'
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Docker deploy
-        if: github.event_name != 'pull_request'
-        uses: nick-invision/retry@v2
-        with:
-          timeout_minutes: 10
-          retry_wait_seconds: 30
-          max_attempts: 3
-          retry_on: error
-          command: docker image push --all-tags "theiaide/${{ matrix.IMAGE_NAME }}"
