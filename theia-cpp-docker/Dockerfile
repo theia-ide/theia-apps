@@ -130,6 +130,12 @@ WORKDIR /home/theia
 
 # C/C++ Developer tools
 
+# gcc 10 repository
+RUN apt-get update && \
+    apt-get install -y software-properties-common && \
+    add-apt-repository ppa:ubuntu-toolchain-r/test && \
+    apt-get remove -y software-properties-common
+
 # Install clangd and clang-tidy from the public LLVM PPA (nightly build / development version)
 # And also the GDB debugger from the Ubuntu repos
 RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add - && \
