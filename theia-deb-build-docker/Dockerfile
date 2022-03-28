@@ -1,7 +1,7 @@
 FROM ubuntu:bionic
 # install development tools
 RUN apt-get update && \
-    apt-get install -y curl sudo build-essential jq vim && \
+    apt-get install -y curl sudo build-essential jq vim pkg-config libsecret-1-dev && \
     curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash - && \
     apt-get install -y nodejs && \
     npm install -g yarn
