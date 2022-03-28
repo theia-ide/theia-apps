@@ -27,7 +27,7 @@ RUN npm run build-deb
 # transfer debian package to a new clean image and install theia
 FROM ubuntu:bionic
 COPY --from=0 /theia-app/theia-example_0.0.1_all.deb /
-RUN apt-get update && apt-get install -y curl sudo && \
+RUN apt-get update && apt-get install -y curl sudo libsecret-1-dev && \
     curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash - && \
     apt-get install -y ./theia-example_0.0.1_all.deb && \
     rm theia-example_0.0.1_all.deb
