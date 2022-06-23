@@ -1,6 +1,6 @@
 ARG NODE_VERSION=12.22.12
 FROM node:${NODE_VERSION}-alpine
-RUN apk add --no-cache make pkgconfig gcc g++ python libx11-dev libxkbfile-dev libsecret-dev
+RUN apk add --no-cache make pkgconfig gcc g++ python3 libx11-dev libxkbfile-dev libsecret-dev
 ARG version=latest
 WORKDIR /home/theia
 ADD $version.package.json ./package.json
